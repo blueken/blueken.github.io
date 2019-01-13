@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo博客搭建 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TLDR; 使用hexo 项目在本地 hexo new xxx 创建文章 hexo server 本地启服务看效果 hexo generate -w 本地即时生成静态文件   静态文件在github hexo deploy 上传静态文件到 github   ecs 上运行静态网站 git pull (crontab) http-server -p 8080s    详细说明本地硬盘安装 hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客搭建">
+<meta property="og:url" content="http://yoursite.com/2019/01/13/Hexo博客搭建/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TLDR; 使用hexo 项目在本地 hexo new xxx 创建文章 hexo server 本地启服务看效果 hexo generate -w 本地即时生成静态文件   静态文件在github hexo deploy 上传静态文件到 github   ecs 上运行静态网站 git pull (crontab) http-server -p 8080s    详细说明本地硬盘安装 hexo">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-13T12:12:15.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo博客搭建">
+<meta name="twitter:description" content="TLDR; 使用hexo 项目在本地 hexo new xxx 创建文章 hexo server 本地启服务看效果 hexo generate -w 本地即时生成静态文件   静态文件在github hexo deploy 上传静态文件到 github   ecs 上运行静态网站 git pull (crontab) http-server -p 8080s    详细说明本地硬盘安装 hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Hexo博客搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/Hexo博客搭建/" class="article-date">
+  <time datetime="2019-01-13T03:39:14.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo博客搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
+<li>使用hexo</li>
+<li>项目在本地<ul>
+<li>hexo new xxx 创建文章</li>
+<li>hexo server 本地启服务看效果</li>
+<li>hexo generate -w 本地即时生成静态文件</li>
+</ul>
+</li>
+<li>静态文件在github<ul>
+<li>hexo deploy 上传静态文件到 github</li>
+</ul>
+</li>
+<li>ecs 上运行静态网站<ul>
+<li>git pull (crontab)</li>
+<li>http-server -p 8080s</li>
+</ul>
+</li>
+</ul>
+<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="本地硬盘安装-hexo"><a href="#本地硬盘安装-hexo" class="headerlink" title="本地硬盘安装 hexo"></a>本地硬盘安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a></h3><ul>
+<li>npm install hexo-cli -g</li>
+<li>hexo init blog</li>
+<li>cd blog</li>
+<li>npm install</li>
+<li>hexo server</li>
+</ul>
+<h3 id="本地硬盘配置-deploy"><a href="#本地硬盘配置-deploy" class="headerlink" title="本地硬盘配置 deploy"></a>本地硬盘配置 <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">deploy</a></h3><ul>
+<li>npm install hexo-deployer-git –save</li>
+<li>修改_config.yml文件:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:blueken/your.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ECS-装-node、http-server、git"><a href="#ECS-装-node、http-server、git" class="headerlink" title="ECS 装 node、http-server、git"></a>ECS 装 node、http-server、git</h3><ul>
+<li>yum install -y nodejs</li>
+<li>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li>
+<li>npm install -g http-server</li>
+<li>yum install -y git</li>
+<li>mkdir blog &amp; cd $_</li>
+<li>git glone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:blueken/your_blog.git</li>
+<li>cd your_blog_folder</li>
+<li>nohup http-server -p 8080 &amp;</li>
+<li><a href="http://47.99.246.178:8080/" target="_blank" rel="noopener">http://47.99.246.178:8080/</a></li>
+</ul>
+<h3 id="可能遇到问题"><a href="#可能遇到问题" class="headerlink" title="可能遇到问题"></a>可能遇到问题</h3><ol>
+<li><p>问题： </p>
+<p> git clone 报 Permission denied (publickey).</p>
+<p> 解决办法 ：</p>
+<p> <a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">https://help.github.com/articles/error-permission-denied-publickey/</a></p>
+</li>
+<li><p>问题： </p>
+<p> http-server 运行后访问页面报 This site can’t be reached</p>
+<p> 解决办法 ：</p>
+<p> 确保 ECS 对应端口处于打开状态。以打开端口 4000 为例： </p>
+<p> <a href="https://ecs.console.aliyun.com" target="_blank" rel="noopener">https://ecs.console.aliyun.com</a></p>
+<p> 左侧列表-网络和安全-安全组-找到对应的实例-操作-配置规则-入方向-添加安全组规则-端口范围写4000，授权对象写0.0.0.0/0</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjquv1fj800016ejh1y1tkdxa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/13/SSH连接阿里云ECS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SSH连接阿里云ECS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/FirstPost/">FirstPost</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

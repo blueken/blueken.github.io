@@ -5,15 +5,19 @@
   
 
   
-  <title>Hexo</title>
+  <title>SSH连接阿里云ECS | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="TLDR; 登录 console.aliyun.com -&amp;gt; 云服务器ECS -&amp;gt; 网络和安全 -&amp;gt; 密钥对 -&amp;gt; 创建密钥对 -&amp;gt; 绑定密钥对 -&amp;gt; 下载密钥对 下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem root@47.99.***.178 为了安全不使用 root 登录ssh -i ~/.ssh/bob_al">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH连接阿里云ECS">
+<meta property="og:url" content="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TLDR; 登录 console.aliyun.com -&amp;gt; 云服务器ECS -&amp;gt; 网络和安全 -&amp;gt; 密钥对 -&amp;gt; 创建密钥对 -&amp;gt; 绑定密钥对 -&amp;gt; 下载密钥对 下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem root@47.99.***.178 为了安全不使用 root 登录ssh -i ~/.ssh/bob_al">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-13T04:16:10.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="SSH连接阿里云ECS">
+<meta name="twitter:description" content="TLDR; 登录 console.aliyun.com -&amp;gt; 云服务器ECS -&amp;gt; 网络和安全 -&amp;gt; 密钥对 -&amp;gt; 创建密钥对 -&amp;gt; 绑定密钥对 -&amp;gt; 下载密钥对 下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem root@47.99.***.178 为了安全不使用 root 登录ssh -i ~/.ssh/bob_al">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,100 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Hexo博客搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/13/Hexo博客搭建/" class="article-date">
-  <time datetime="2019-01-13T03:39:14.000Z" itemprop="datePublished">2019-01-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
-<li>使用hexo</li>
-<li>项目在本地<ul>
-<li>hexo new xxx 创建文章</li>
-<li>hexo server 本地启服务看效果</li>
-<li>hexo generate -w 本地即时生成静态文件</li>
-</ul>
-</li>
-<li>静态文件在github<ul>
-<li>hexo deploy 上传静态文件到 github</li>
-</ul>
-</li>
-<li>ecs 上运行静态网站<ul>
-<li>git pull (crontab)</li>
-<li>http-server -p 8080s</li>
-</ul>
-</li>
-</ul>
-<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="本地硬盘安装-hexo"><a href="#本地硬盘安装-hexo" class="headerlink" title="本地硬盘安装 hexo"></a>本地硬盘安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a></h3><ul>
-<li>npm install hexo-cli -g</li>
-<li>hexo init blog</li>
-<li>cd blog</li>
-<li>npm install</li>
-<li>hexo server</li>
-</ul>
-<h3 id="本地硬盘配置-deploy"><a href="#本地硬盘配置-deploy" class="headerlink" title="本地硬盘配置 deploy"></a>本地硬盘配置 <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">deploy</a></h3><ul>
-<li>npm install hexo-deployer-git –save</li>
-<li>修改_config.yml文件:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:blueken/your.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="ECS-装-node、http-server、git"><a href="#ECS-装-node、http-server、git" class="headerlink" title="ECS 装 node、http-server、git"></a>ECS 装 node、http-server、git</h3><ul>
-<li>yum install -y nodejs</li>
-<li>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li>
-<li>npm install -g http-server</li>
-<li>yum install -y git</li>
-<li>mkdir blog &amp; cd $_</li>
-<li>git glone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:blueken/your_blog.git</li>
-<li>cd your_blog_folder</li>
-<li>nohup http-server -p 8080 &amp;</li>
-<li><a href="http://47.99.246.178:8080/" target="_blank" rel="noopener">http://47.99.246.178:8080/</a></li>
-</ul>
-<h3 id="可能遇到问题"><a href="#可能遇到问题" class="headerlink" title="可能遇到问题"></a>可能遇到问题</h3><ol>
-<li><p>问题： </p>
-<p> git clone 报 Permission denied (publickey).</p>
-<p> 解决办法 ：</p>
-<p> <a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">https://help.github.com/articles/error-permission-denied-publickey/</a></p>
-</li>
-<li><p>问题： </p>
-<p> http-server 运行后访问页面报 This site can’t be reached</p>
-<p> 解决办法 ：</p>
-<p> 确保 ECS 对应端口处于打开状态。以打开端口 4000 为例： </p>
-<p> <a href="https://ecs.console.aliyun.com" target="_blank" rel="noopener">https://ecs.console.aliyun.com</a></p>
-<p> 左侧列表-网络和安全-安全组-找到对应的实例-操作-配置规则-入方向-添加安全组规则-端口范围写4000，授权对象写0.0.0.0/0</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjquv1fj800016ejh1y1tkdxa" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SSH连接阿里云ECS" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-SSH连接阿里云ECS" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/13/SSH连接阿里云ECS/" class="article-date">
   <time datetime="2019-01-13T03:05:08.000Z" itemprop="datePublished">2019-01-13</time>
@@ -166,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
+    <h1 class="article-title" itemprop="name">
+      SSH连接阿里云ECS
     </h1>
   
 
@@ -207,94 +118,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-FirstPost" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/FirstPost/" class="article-date">
-  <time datetime="2019-01-09T13:11:40.000Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2019/01/13/Hexo博客搭建/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/FirstPost/">FirstPost</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p># </p>
-<p>2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjquv1fj400006ejhfykad513" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/hello-world/" class="article-date">
-  <time datetime="2019-01-09T12:45:39.893Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          Hexo博客搭建
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2019/01/09/FirstPost/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">FirstPost</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjquv1fjb00026ejhpgkzuiah" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
