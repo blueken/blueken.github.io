@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。 别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 serverless-finch 来实现前端资源部署到 S3 的功能。 操作步骤; 创建项目 1serverless create --template hello-world --">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-14T12:14:50.793Z">
+<meta property="og:updated_time" content="2019-01-14T12:16:42.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端 Serverless">
 <meta name="twitter:description" content="上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。 别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 serverless-finch 来实现前端资源部署到 S3 的功能。 操作步骤; 创建项目 1serverless create --template hello-world --">
@@ -106,7 +106,11 @@
 <li><p>部署</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">Serverless: Uploading client files to bucket...</span><br><span class="line"></span><br><span class="line">Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>浏览器访问</p>
+</li>
 </ol>
+<p><a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/</a><br>你就可以看到index.html的内容啦</p>
+<p><a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/something-not-exist" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/something-not-exist</a><br>你就可以看到error.html的内容啦</p>
 <h2 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h2><h3 id="自定义部署目录（不要client-dist）"><a href="#自定义部署目录（不要client-dist）" class="headerlink" title="自定义部署目录（不要client/dist）"></a>自定义部署目录（不要client/dist）</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    distributionFolder: location/of/files</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
 <h3 id="自定义index-error-文件名"><a href="#自定义index-error-文件名" class="headerlink" title="自定义index, error 文件名"></a>自定义index, error 文件名</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    indexDocument: custom-index.html</span><br><span class="line">    errorDocument: custom-error.html</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
 <h3 id="更多自定义"><a href="#更多自定义" class="headerlink" title="更多自定义"></a>更多自定义</h3><p><a href="https://github.com/fernando-mc/serverless-finch#configuration-parameters" target="_blank" rel="noopener">点击github</a></p>
@@ -145,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqwakd4f00045ycpkf3c5iam" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqwamqwb00048bcphdc05cc9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
