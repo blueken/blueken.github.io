@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="TLDR; 登录 console.aliyun.com -&amp;gt; 云服务器ECS -&amp;gt; 网络和安全 -&amp;gt; 密钥对 -&amp;gt; 创建密钥对 -&amp;gt; 绑定密钥对 -&amp;gt; 下载密钥对 下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem root@47.99.***.178 为了安全不使用 root 登录ssh -i ~/.ssh/bob_al">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-13T04:16:10.358Z">
+<meta property="og:updated_time" content="2019-01-13T12:16:45.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH连接阿里云ECS">
 <meta name="twitter:description" content="TLDR; 登录 console.aliyun.com -&amp;gt; 云服务器ECS -&amp;gt; 网络和安全 -&amp;gt; 密钥对 -&amp;gt; 创建密钥对 -&amp;gt; 绑定密钥对 -&amp;gt; 下载密钥对 下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem root@47.99.***.178 为了安全不使用 root 登录ssh -i ~/.ssh/bob_al">
@@ -99,20 +99,28 @@
 </li>
 <li><p>ssh -i aliyun.pem root@你的服务器的公网ip地址这个命令能让你连上你的阿里云服务器地址，但是你是不是觉得很麻烦，每次都得到私钥所在的目录，执行这个命令。这里有个更好的方法：将私钥aliyun.pem文件，复制到你的home文件夹下的.ssh文件夹下，.ssh文件夹的目录是~/.ssh，然后将aliyun.pem改名为id_rsa,注意没有任何后缀。然后你就可以在任何地方执行下面这个命令了：ssh root@你的服务器的公网ip地址，这条命令不管在哪执行都会让你连上你的服务器</p>
 </li>
-<li>干什么都在ROOT用户下做的话，我觉得你的系统可能撑不过一个月就挂了，又要重装系统。为了安全起见，还是新建一个普通用户好，连上服务器后，执行命令：adduser xxx，即可新建一个用户，xxx代表你的用户名</li>
-<li>建完普通用户后，你肯定想从本地直接ssh连接你的服务器的上普通用户了吧。首先在本地生成一对密钥对,执行ssh-keygen命令，它会默认在~/.ssh文件夹下生成一对密钥对id_rsa id_rsa.pub， id_rsa是私钥，id_rsa.pub是公钥。但是你会发现他生成的id_rsa文件和前面你改名的文件重复了，Ubuntu默认会覆盖你前边改名的文件，所以在生成的时候你要手动输入一个生成的文件名，前边的目录最好不要改，只改他提示的最后的文件名，然后一路回车就行了，假如你输入的文件名是id_rsa1，那就会在你的.ssh文件夹下生成id_rsa1 和 id_rsa1.pub两个文件</li>
-<li>接下来要把你刚生成的公钥上传到你新建的用户目录下去，在你的本地的.ssh文件夹下，执行命令：scp -p $aliyun_perm_path id_rsa1.pub root@你的服务器的公网ip地址:，注意最后面多了一个冒号</li>
-<li>然后root用户登录你的服务器，你刚才上传的公钥文件就在现在你在的目录下，执行ls就可看到，然后在你的普通用户的目录下新建一个.ssh文件夹，接着将这个公钥文件复制到你新建的用户的目录下的.ssh文件夹下，并更名为authorized_keys，然后退出登录服务器，回到本地.ssh文件夹下</li>
-<li>现在你可以连接你的服务器的普通用户了，执行命令：ssh -i id_rsa1 xxx@你的服务器的公网ip地址，就可以登陆啦，xxx为你的普通用户名。注意：不管你用什么用户，ip地址是不会变的</li>
-<li>像我上面说的你要是觉得每次都要到.ssh文件夹下输入命令，并且要指定文件名麻烦的话，把你前面改名的id_rsa改名为root或其好记的名字，然后把你的id_rsa1改名为id_rsa，这样你可以在任何地方都ssh xxx@你的服务器的公网ip地址，登陆你的服务器的普通用户了，xxx为你的普通用户名</li>
-<li>这个时候如果你要登录root用户的话，那就只能到.ssh文件夹下ssh -i root root@你的服务器的公网ip地址，第一个root为密钥，是由先前的id_rsa文件更名过来的，第二个是你的root用户名。因为登录root用户的次数比较少，我觉得上面的方法还是比较靠谱的，你觉得呢</li>
-<li>其实还有更懒得方法，当你把上面的都设置到之后，在你的.ssh文件夹下新建一个文件，比如叫aliyun，然后执行命令：echo “ssh xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，然后赋予执行权限：chmod 700 aliyun，然后在.bashrc文件中添加export PATH=”/home/xxx/.ssh/:$PATH”，然后另开一个终端，输入：aliyun， 你就会发现你已经连上服务器啦。但是这个方法仅适用与你的服务器上的用户的密钥在本地恰好是id_rsa，如果不是的话， 则需要修改一下前面写入文件的内容：echo “ssh -i ~/.ssh/私钥 xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，这样就可以运行啦，注意：一定要赋予文件执行权限</li>
+<li><p>干什么都在ROOT用户下做的话，我觉得你的系统可能撑不过一个月就挂了，又要重装系统。为了安全起见，还是新建一个普通用户好，连上服务器后，执行命令：adduser xxx，即可新建一个用户，xxx代表你的用户名</p>
+</li>
+<li><p>建完普通用户后，你肯定想从本地直接ssh连接你的服务器的上普通用户了吧。首先在本地生成一对密钥对,执行ssh-keygen命令，它会默认在~/.ssh文件夹下生成一对密钥对id_rsa id_rsa.pub， id_rsa是私钥，id_rsa.pub是公钥。但是你会发现他生成的id_rsa文件和前面你改名的文件重复了，Ubuntu默认会覆盖你前边改名的文件，所以在生成的时候你要手动输入一个生成的文件名，前边的目录最好不要改，只改他提示的最后的文件名，然后一路回车就行了，假如你输入的文件名是id_rsa1，那就会在你的.ssh文件夹下生成id_rsa1 和 id_rsa1.pub两个文件</p>
+</li>
+<li><p>接下来要把你刚生成的公钥上传到你新建的用户目录下去，在你的本地的.ssh文件夹下，执行命令：scp -p $aliyun_perm_path id_rsa1.pub root@你的服务器的公网ip地址:，注意最后面多了一个冒号</p>
+</li>
+<li><p>然后root用户登录你的服务器，你刚才上传的公钥文件就在现在你在的目录下，执行ls就可看到，然后在你的普通用户的目录下新建一个.ssh文件夹，接着将这个公钥文件复制到你新建的用户的目录下的.ssh文件夹下，并更名为authorized_keys，然后退出登录服务器，回到本地.ssh文件夹下</p>
+</li>
+<li><p>现在你可以连接你的服务器的普通用户了，执行命令：ssh -i id_rsa1 xxx@你的服务器的公网ip地址，就可以登陆啦，xxx为你的普通用户名。注意：不管你用什么用户，ip地址是不会变的</p>
+</li>
+<li><p>像我上面说的你要是觉得每次都要到.ssh文件夹下输入命令，并且要指定文件名麻烦的话，把你前面改名的id_rsa改名为root或其好记的名字，然后把你的id_rsa1改名为id_rsa，这样你可以在任何地方都ssh xxx@你的服务器的公网ip地址，登陆你的服务器的普通用户了，xxx为你的普通用户名</p>
+</li>
+<li><p>这个时候如果你要登录root用户的话，那就只能到.ssh文件夹下ssh -i root root@你的服务器的公网ip地址，第一个root为密钥，是由先前的id_rsa文件更名过来的，第二个是你的root用户名。因为登录root用户的次数比较少，我觉得上面的方法还是比较靠谱的，你觉得呢</p>
+</li>
+<li><p>其实还有更懒得方法，当你把上面的都设置到之后，在你的.ssh文件夹下新建一个文件，比如叫aliyun，然后执行命令：echo “ssh xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，然后赋予执行权限：chmod 700 aliyun，然后在.bashrc文件中添加export PATH=”/home/xxx/.ssh/:$PATH”，然后另开一个终端，输入：aliyun， 你就会发现你已经连上服务器啦。但是这个方法仅适用与你的服务器上的用户的密钥在本地恰好是id_rsa，如果不是的话， 则需要修改一下前面写入文件的内容：echo “ssh -i ~/.ssh/私钥 xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，这样就可以运行啦，注意：一定要赋予文件执行权限</p>
+</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjquv1fjd00036ejhfkjtuzgo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjqw2z3560003nscpqn2s5cjm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,6 +176,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">the-good-and-the-bad-of-serverless-architecture</a>
+          </li>
         
           <li>
             <a href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
