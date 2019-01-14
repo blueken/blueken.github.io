@@ -101,7 +101,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd $your_project_folder</span><br><span class="line">mkdir -p client/dist</span><br><span class="line">touch client/dist/index.html client/dist/error.html</span><br><span class="line">echo &quot;Go Serverless&quot; &gt;&gt; client/dist/index.html</span><br><span class="line">echo &quot;Sorry! This is an error page&quot; &gt;&gt; client/dist/error.html</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>部署</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">Serverless: Uploading client files to bucket...</span><br><span class="line"></span><br><span class="line">Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h2><h3 id="自定义部署目录（不要client-dist）"><a href="#自定义部署目录（不要client-dist）" class="headerlink" title="自定义部署目录（不要client/dist）"></a>自定义部署目录（不要client/dist）</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    distributionFolder: location/of/files</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
@@ -115,14 +115,16 @@
 <h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>serverless client deploy显示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure></p>
 <p>但是浏览器打开 <a href="http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</a></p>
 <p>却显示：</p>
+<blockquote>
 <p>400 Bad Request</p>
 <ul>
 <li>Code: IncorrectEndpoint</li>
-<li>Message: The specified bucket exists in another region. Please direct requests to the specified endpoint.</li>
-<li>Endpoint: front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</li>
+<li>Message: The specified bucket exists &gt;in another region. Please direct &gt;requests to the specified endpoint.</li>
+<li>Endpoint: &gt;front-end-bob-alan-green.s3-website-ap-s&gt;outheast-1.amazonaws.com</li>
 <li>RequestId: 66B0FBF5ACB93057</li>
-<li>HostId: QQn2FlYi2nET4H9ddJ3O+GsGzB+GW5kBAa/+6IGs/o5uCxnIGjyuI+LXeXS3Wbx2zptWwX6DTO4=</li>
+<li>HostId: QQn2FlYi2nET4H9ddJ3O+GsGzB&gt;+GW5kBAa/+6IGs/o5uCxnIGjyuI&gt;+LXeXS3Wbx2zptWwX6DTO4=</li>
 </ul>
+</blockquote>
 <p>解决方案：</p>
 <p>因为默念发的是 us-east region 而创建的bucket 实际在 southeast 区，所以按提示访问对应的region即可<a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a></p>
 <h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p>访问对应的区 <a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a> 浏览器显示：  403 Forbidden</p>
@@ -140,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqwa6t640004u1cp9ks3lky5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqwakd4f00045ycpkf3c5iam" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -193,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjqwa6t6a0007u1cp6ld1kgq8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjqwakd4k00075ycphep6kzon" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -254,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjqwa6t650005u1cpzob6ew7z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjqwakd4g00055ycpd1q8oaod" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -347,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjqwa6t5y0001u1cpos4bp1h6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjqwakd4b00015ycp0ytdk1z6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjqwa6t620003u1cpljzm9n8a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjqwakd4c00025ycpbx39aei5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -451,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjqwa6t5u0000u1cpybuk9cz2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjqwakd4700005ycp1xoox7wj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -496,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjqwa6t610002u1cpv9vf73pv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjqwakd4e00035ycpicdjm59x" class="article-share-link">Share</a>
       
       
     </footer>
