@@ -62,6 +62,120 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-serverless-front-end" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/16/serverless-front-end/" class="article-date">
+  <time datetime="2019-01-16T11:26:12.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/16/serverless-front-end/">前端 Serverless</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。</p>
+<p>别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 <a href="https://github.com/fernando-mc/serverless-finch" target="_blank" rel="noopener">serverless-finch</a> 来实现前端资源部署到 S3 的功能。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤;"></a>操作步骤;</h2><ol start="0">
+<li><p>创建项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless create --template hello-world --path h-sls</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 serverless-finch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd h-sls</span><br><span class="line">npm install --save serverless-finch</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.通过serverless.yml配置S3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-finch</span><br><span class="line"></span><br><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    bucketName: your-unique-s3-bucketname</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>添加index.html &amp; error.html<br>插件默认目录为 client/dis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd $your_project_folder</span><br><span class="line">mkdir -p client/dist</span><br><span class="line">touch client/dist/index.html client/dist/error.html</span><br><span class="line">echo &quot;Go Serverless&quot; &gt;&gt; client/dist/index.html</span><br><span class="line">echo &quot;Sorry! This is an error page&quot; &gt;&gt; client/dist/error.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h2><h3 id="自定义部署目录（不要client-dist）"><a href="#自定义部署目录（不要client-dist）" class="headerlink" title="自定义部署目录（不要client/dist）"></a>自定义部署目录（不要client/dist）</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    distributionFolder: location/of/files</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义index-error-文件名"><a href="#自定义index-error-文件名" class="headerlink" title="自定义index, error 文件名"></a>自定义index, error 文件名</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    indexDocument: custom-index.html</span><br><span class="line">    errorDocument: custom-error.html</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="更多自定义"><a href="#更多自定义" class="headerlink" title="更多自定义"></a>更多自定义</h3><p><a href="https://github.com/fernando-mc/serverless-finch#configuration-parameters" target="_blank" rel="noopener">点击github</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqw9oh2x0001e9cpn4gt58ba" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-小酌Serverless" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/15/小酌Serverless/" class="article-date">
+  <time datetime="2019-01-15T08:59:53.000Z" itemprop="datePublished">2019-01-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/15/小酌Serverless/">小酌Serverless</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  Serverless 的概念很不错，但真的动手实现一个 Serverless 架构的服务是不是有点没头绪？<br>  不怕，你可以站在巨人的肩膀上。本文基于 <a href="https://www.npmjs.com/package/serverless" target="_blank" rel="noopener">Serverless Framework</a> 和 AWS 来实现你的 Serverless Hello world!</p>
+<h2 id="首先安装"><a href="#首先安装" class="headerlink" title="首先安装"></a>首先安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g serverless</span><br></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless config credentials --provider aws --key AKIAIUF3B****DAVCDTA --secret YAh****FhmWNwlNaIESt6l6Zo5n8HLTP9lLDbktA</span><br></pre></td></tr></table></figure>
+<h2 id="用模板生成"><a href="#用模板生成" class="headerlink" title="用模板生成"></a>用模板生成</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless create --template aws-nodejs --path my-service</span><br></pre></td></tr></table></figure>
+<h2 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">serverless deploy -v</span><br><span class="line"></span><br><span class="line">➜  </span><br><span class="line">Serverless: Stack update finished...</span><br><span class="line">Service Information</span><br><span class="line">service: my-service</span><br><span class="line">stage: dev</span><br><span class="line">region: us-east-1</span><br><span class="line">stack: my-service-dev</span><br><span class="line">api keys:</span><br><span class="line">  None</span><br><span class="line">endpoints:</span><br><span class="line">  GET - https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</span><br><span class="line">functions:</span><br><span class="line">  hello: my-service-dev-hello</span><br><span class="line">layers:</span><br><span class="line">  None</span><br></pre></td></tr></table></figure>
+<h2 id="访问-EndPoint"><a href="#访问-EndPoint" class="headerlink" title="访问 EndPoint"></a>访问 EndPoint</h2><p>方式一：直接浏览器</p>
+<p><a href="https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob" target="_blank" rel="noopener">https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</a></p>
+<p>方式二： CLI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless invoke -f hello -l</span><br></pre></td></tr></table></figure></p>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>每次都要deploy才能访问太麻烦怎么办？ <a href="https://www.npmjs.com/package/serverless-offline" target="_blank" rel="noopener">serverless-offline</a> 来救场！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install serverless-offline --save-dev</span><br><span class="line"></span><br><span class="line">serverless offline start</span><br></pre></td></tr></table></figure></p>
+<h2 id="AWS-设置问题？"><a href="#AWS-设置问题？" class="headerlink" title="AWS 设置问题？"></a>AWS 设置问题？</h2><p><a href="https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44" target="_blank" rel="noopener">点击此处</a></p>
+<h2 id="Serverless-deploy-失败？"><a href="#Serverless-deploy-失败？" class="headerlink" title="Serverless deploy 失败？"></a>Serverless deploy 失败？</h2><p>my-service serverless deploy -v<br>Serverless: Packaging service…<br>Serverless: Excluding development dependencies…</p>
+<p>  Serverless Error —————————————</p>
+<p>  ServerlessError: The AWS Access Key Id needs a subscription for the service</p>
+<h3 id="解决办法：-绑定信用卡"><a href="#解决办法：-绑定信用卡" class="headerlink" title="解决办法： 绑定信用卡"></a>解决办法： 绑定信用卡</h3><p>Resolve “You are not subscribed to this service” or “The AWS Access Key Id needs a subscription for the service” errors<br>If you’re using an account that was created in or after 2011, then update your account status （<a href="https://portal.aws.amazon.com/billing/signup?type=resubscribe#/resubscribed）" target="_blank" rel="noopener">https://portal.aws.amazon.com/billing/signup?type=resubscribe#/resubscribed）</a>.
+  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjqw9oh350005e9cpoefujq5h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-the-good-and-the-bad-of-serverless-architecture" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" class="article-date">
@@ -76,7 +190,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">the-good-and-the-bad-of-serverless-architecture</a>
+      <a class="article-title" href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">Serverless 架构的优劣</a>
     </h1>
   
 
@@ -111,9 +225,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjqw2z34z0000nscpiisz7srr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjqw9oh380008e9cpuqtgu00e" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
     </footer>
   </div>
   
@@ -202,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjqw2z3570004nscp6dbno7fa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjqw9oh360006e9cpnx8berel" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjqw2z3560003nscpqn2s5cjm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjqw9oh2z0002e9cpj3b088xg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -306,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjqw2z3530001nscpxm5i2p7c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjqw9oh2s0000e9cpc7nfehgi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -351,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjqw2z3550002nscp60f2agaw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjqw9oh330004e9cpf74a0k34" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,9 +487,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -392,7 +522,15 @@
       <ul>
         
           <li>
-            <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">the-good-and-the-bad-of-serverless-architecture</a>
+            <a href="/2019/01/16/serverless-front-end/">前端 Serverless</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/小酌Serverless/">小酌Serverless</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">Serverless 架构的优劣</a>
           </li>
         
           <li>
@@ -401,14 +539,6 @@
         
           <li>
             <a href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/09/FirstPost/">FirstPost</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/09/hello-world/">Hello World</a>
           </li>
         
       </ul>
