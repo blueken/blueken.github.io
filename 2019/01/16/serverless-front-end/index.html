@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。 别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 serverless-finch 来实现前端资源部署到 S3 的功能。 操作步骤; 创建项目 1serverless create --template hello-world --">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-14T11:49:46.565Z">
+<meta property="og:updated_time" content="2019-01-14T12:02:10.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端 Serverless">
 <meta name="twitter:description" content="上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。 别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 serverless-finch 来实现前端资源部署到 S3 的功能。 操作步骤; 创建项目 1serverless create --template hello-world --">
@@ -110,11 +110,40 @@
 <h2 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h2><h3 id="自定义部署目录（不要client-dist）"><a href="#自定义部署目录（不要client-dist）" class="headerlink" title="自定义部署目录（不要client/dist）"></a>自定义部署目录（不要client/dist）</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    distributionFolder: location/of/files</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
 <h3 id="自定义index-error-文件名"><a href="#自定义index-error-文件名" class="headerlink" title="自定义index, error 文件名"></a>自定义index, error 文件名</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    indexDocument: custom-index.html</span><br><span class="line">    errorDocument: custom-error.html</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
 <h3 id="更多自定义"><a href="#更多自定义" class="headerlink" title="更多自定义"></a>更多自定义</h3><p><a href="https://github.com/fernando-mc/serverless-finch#configuration-parameters" target="_blank" rel="noopener">点击github</a></p>
+<h2 id="遇到问题？"><a href="#遇到问题？" class="headerlink" title="遇到问题？"></a>遇到问题？</h2><p>也许你会遇到以下问题</p>
+<hr>
+<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy </span><br><span class="line"></span><br><span class="line">  ServerlessError: Access Denied</span><br></pre></td></tr></table></figure>
+<p><strong> 解决办法：</strong><br><a href="https://console.aws.amazon.com/s3" target="_blank" rel="noopener">https://console.aws.amazon.com/s3</a> -&gt;<br>点击你欲部署的bucket-&gt;permissions-&gt;public access settings-&gt;edit-&gt;uncheck Block new public bucket policies (Recommended)</p>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-bucket.html" target="_blank" rel="noopener">方案来源参考</a></p>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>serverless client deploy显示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure></p>
+<p>但是浏览器打开 <a href="http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</a></p>
+<p>却显示：</p>
+<p>400 Bad Request</p>
+<ul>
+<li>Code: IncorrectEndpoint</li>
+<li>Message: The specified bucket exists in another region. Please direct requests to the specified endpoint.</li>
+<li>Endpoint: front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</li>
+<li>RequestId: 66B0FBF5ACB93057</li>
+<li>HostId: QQn2FlYi2nET4H9ddJ3O+GsGzB+GW5kBAa/+6IGs/o5uCxnIGjyuI+LXeXS3Wbx2zptWwX6DTO4=</li>
+</ul>
+<p>解决方案：</p>
+<p>因为默念发的是 us-east region 而创建的bucket 实际在 southeast 区，所以按提示访问对应的region即可<a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a></p>
+<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p>访问对应的区 <a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a> 浏览器显示：  403 Forbidden</p>
+<ul>
+<li>Code: AccessDenied</li>
+<li>Message: Access Denied</li>
+<li>RequestId: 7D7D0F61E7337BB0</li>
+<li>HostId: NWuTC94hqPbQJYg2lsLjrCyvAlHGfoG+GWdI9swItzqg4fqPOCWkIXbmPT0XmIGAgaon4H600nw=<br>An Error Occurred While Attempting to Retrieve a Custom Error Document</li>
+<li>Code: AccessDenied</li>
+<li>Message: Access Denied</li>
+</ul>
+<p>解决办法：</p>
+<p><a href="https://console.aws.amazon.com/s3/home-&gt;点击对应的bucket" target="_blank" rel="noopener">https://console.aws.amazon.com/s3/home-&gt;点击对应的bucket</a> -&gt;permissions-&gt;public access settings-&gt;edit-&gt;uncheck Block new public bucket policies (Recommended)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqw9oh2x0001e9cpn4gt58ba" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqwa6t640004u1cp9ks3lky5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
