@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>hello Mongoose | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是 MongooseMongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。 说人话 其实就是 MongoDB NodeJS 版本的 ORM Getting Started mkdir h-mongoose &amp;amp;&amp;amp; cd $_         npm init -y &amp;amp;&amp;amp; npm install mongoose –save vi app.">
+<meta name="keywords" content="nosql,database,mongodb,mongoose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hello Mongoose">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/hello-mongoose/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="什么是 MongooseMongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。 说人话 其实就是 MongoDB NodeJS 版本的 ORM Getting Started mkdir h-mongoose &amp;amp;&amp;amp; cd $_         npm init -y &amp;amp;&amp;amp; npm install mongoose –save vi app.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-22T09:44:33.312Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hello Mongoose">
+<meta name="twitter:description" content="什么是 MongooseMongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。 说人话 其实就是 MongoDB NodeJS 版本的 ORM Getting Started mkdir h-mongoose &amp;amp;&amp;amp; cd $_         npm init -y &amp;amp;&amp;amp; npm install mongoose –save vi app.">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hello-mongoose" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/17/hello-mongoose/" class="article-date">
+  <time datetime="2019-01-17T11:55:02.000Z" itemprop="datePublished">2019-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hello Mongoose
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是-Mongoose"><a href="#什么是-Mongoose" class="headerlink" title="什么是 Mongoose"></a>什么是 Mongoose</h2><p>Mongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。</p>
+<p>说人话</p>
+<p>其实就是 MongoDB NodeJS 版本的 ORM</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><ol>
+<li>mkdir h-mongoose &amp;&amp; cd $_        </li>
+<li>npm init -y &amp;&amp; npm install mongoose –save</li>
+<li><p>vi app.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const URL = &apos;mongodb://admin:&lt;PASSWOD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line">mongoose.connect(URL, &#123; useNewUrlParser: true &#125;)</span><br><span class="line"></span><br><span class="line">const db = mongoose.connection;</span><br><span class="line">db.on(&apos;error&apos;, console.error.bind(console, &apos;connection error:&apos;));</span><br><span class="line">db.once(&apos;open&apos;, function() &#123;</span><br><span class="line">  // we&apos;re connected!</span><br><span class="line">  console.log(&apos;connected :)&apos;);</span><br><span class="line"></span><br><span class="line">  const kittySchema = new mongoose.Schema(&#123;</span><br><span class="line">    name: String</span><br><span class="line">  &#125;)</span><br><span class="line">  const Kitty = mongoose.model(&apos;Kitty&apos;, kittySchema)</span><br><span class="line">  const huahu = new Kitty(&#123;</span><br><span class="line">    name: &apos;Huahu&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">  huahu.save(function(err, huahu)&#123;</span><br><span class="line">    if (err) return console.error(err);</span><br><span class="line">    console.log(&apos;saved! &apos;, huahu.name)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node app.js</p>
+<blockquote>
+<p> connected :)</p>
+<p> saved!  Huahu</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><a href="https://cloud.mongodb.com/v2" target="_blank" rel="noopener">https://cloud.mongodb.com/v2</a> -&gt; Clustrrs Overview -&gt; COLLECTIONS -&gt; 可以看到  test.kitties 有三条插入的记录</li>
+</ol>
+<h2 id="MongoDB-Atlas-连接问题"><a href="#MongoDB-Atlas-连接问题" class="headerlink" title="MongoDB Atlas 连接问题"></a>MongoDB Atlas 连接问题</h2><p>Q: 如果连接数据库遇到以下问题</p>
+<blockquote>
+<p>➜  h-mongoose node app.js<br>(node:92612) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.<br>connection error: { MongoNetworkError: connection 4 to cluster0-shard-00-01-jzszt.mongodb.net:27017 closed<br>    at TLSSocket.<anonymous> (/Users/bob/Documents/learn/h-mongoose/node_modules/mongodb-core/lib/connection/connection.js:276:9)<br>    at Object.onceWrapper (events.js:315:30)<br>    at emitOne (events.js:121:20)<br>    at TLSSocket.emit (events.js:211:7)<br>    at _handle.close (net.js:557:12)<br>    at TCP.done [as _onclose] (_tls_wrap.js:356:7)<br>  name: ‘MongoNetworkError’,<br>  errorLabels: [ ‘TransientTransactionError’ ],<br>  [Symbol(mongoErrorContextSymbol)]: {} }</anonymous></p>
+</blockquote>
+<p>A: 请在atlas 添加你本机的白名单</p>
+<p>cloud.mongodb.com/v2 -&gt; clusters -&gt; security -&gt; IP Whitelist -&gt; Add IP ADDRESS -&gt; 你的ip地址，百度搜索IP可见 -&gt; Confirm</p>
+<h2 id="更多-Mongoose-内容"><a href="#更多-Mongoose-内容" class="headerlink" title="更多 Mongoose 内容"></a>更多 Mongoose 内容</h2><p><a href="https://mongoosejs.com/docs/index.html" target="_blank" rel="noopener">https://mongoosejs.com/docs/index.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjr7kpcdm000065cpfhb6o96g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/18/猪坚强的胎动/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          猪坚强的胎动
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/16/hello-mongodb/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">你好Mongodb</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

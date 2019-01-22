@@ -62,6 +62,614 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fetal-movement-deploy" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/24/fetal-movement-deploy/" class="article-date">
+  <time datetime="2019-01-24T11:35:54.000Z" itemprop="datePublished">2019-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用 serverless Framework 将前后端分别上线</p>
+<h2 id="后端-deploy"><a href="#后端-deploy" class="headerlink" title="后端 deploy"></a>后端 deploy</h2><blockquote>
+<p>➜  piglet-back git:(master) serverless deploy</p>
+<p>Serverless: Stack update finished…</p>
+<p>service: piglet-back</p>
+<p>stage: dev</p>
+<p>region: us-east-1</p>
+<p>stack: piglet-back-dev</p>
+<p>endpoints:<br>  GET - &gt; <a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms</a></p>
+<p>  POST - &gt; <a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms</a></p>
+<p>functions:</p>
+<p>  getAll: piglet-back-dev-getAll</p>
+<p>  addOne: piglet-back-dev-addOne</p>
+</blockquote>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><blockquote>
+<p>vi FChart.js </p>
+<p>vi Form.js</p>
+<p>将 API 相关接口从 localhost:3000/fms改为</p>
+<p>const URL = ‘<a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjr7knqx400043ncp6zjhuewy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fetal-movement-join" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/23/fetal-movement-join/" class="article-date">
+  <time datetime="2019-01-23T11:55:02.000Z" itemprop="datePublished">2019-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>前端，后端 独立应用已经 ready, 接下来进行数据接入. Gatsby 有自己的数据接入层（GraphQL），考虑到应用本身比较 tiny ，我们放弃使用数据接入层，使用 axios 来直接调用 serverless api</p>
+<h3 id="安装-axios"><a href="#安装-axios" class="headerlink" title="安装 axios"></a>安装 axios</h3><blockquote>
+<p>npm i -S axios</p>
+</blockquote>
+<h3 id="图表拉取数据"><a href="#图表拉取数据" class="headerlink" title="图表拉取数据"></a>图表拉取数据</h3><blockquote>
+<p>vi src/components/FCharts.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123;LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend&#125; from &apos;recharts&apos;</span><br><span class="line"></span><br><span class="line">class FChart extends React.Component &#123;</span><br><span class="line">  state = &#123;&#125;</span><br><span class="line">  async componentDidMount () &#123;</span><br><span class="line">    const axios = require(&apos;axios&apos;)</span><br><span class="line">    const URL = &apos;http://localhost:3000/fms&apos;</span><br><span class="line">  </span><br><span class="line">    const resp = await axios.get(URL)</span><br><span class="line">    const &#123; fms &#125; = resp.data.data</span><br><span class="line">  </span><br><span class="line">    const data = fms.map(v =&gt; &#123; </span><br><span class="line">      return &#123;name: `$&#123;v.date&#125;$&#123;v.time&#125;`, 胎动: v.count&#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    this.setState(&#123;data&#125;)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  render () &#123;</span><br><span class="line">    const &#123; data &#125; = this.state</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;LineChart width=&#123;600&#125; height=&#123;300&#125; data=&#123;data&#125; margin=&#123;&#123;top: 20, right: 50, left: 20, bottom: 5&#125;&#125;&gt;</span><br><span class="line">         &lt;CartesianGrid strokeDasharray=&quot;3 3&quot;/&gt;</span><br><span class="line">         &lt;XAxis dataKey=&quot;name&quot;/&gt;</span><br><span class="line">         &lt;YAxis/&gt;</span><br><span class="line">         &lt;Tooltip/&gt;</span><br><span class="line">         &lt;Legend /&gt;</span><br><span class="line">         &lt;ReferenceLine y=&#123;5&#125; label=&quot;警界线&quot; stroke=&quot;red&quot;/&gt;</span><br><span class="line">         &lt;Line type=&quot;monotone&quot; dataKey=&quot;胎动&quot; stroke=&quot;#82ca9d&quot; /&gt;</span><br><span class="line">        &lt;/LineChart&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FChart</span><br></pre></td></tr></table></figure>
+<h3 id="表格提交数据"><a href="#表格提交数据" class="headerlink" title="表格提交数据"></a>表格提交数据</h3><blockquote>
+<p>vi src/components/Form.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123; DatePicker, Select, Slider, Button &#125; from &apos;antd&apos;</span><br><span class="line">import &apos;antd/dist/antd.css&apos;</span><br><span class="line">import axios from &apos;axios&apos;</span><br><span class="line"></span><br><span class="line">const Form = () =&gt; &#123;</span><br><span class="line">  const now = new Date()</span><br><span class="line">  const y = now.getFullYear()</span><br><span class="line">  const m = now.getMonth() + 1</span><br><span class="line">  const d = now.getDate()</span><br><span class="line">  let data = &#123;</span><br><span class="line">    date: `$&#123;y&#125;-$&#123;m&#125;-$&#123;d&#125;`,</span><br><span class="line">    time: &apos;早&apos;,</span><br><span class="line">    count: 8</span><br><span class="line">  &#125;</span><br><span class="line">  const Option = Select.Option</span><br><span class="line">  const onDateChange = (date, dateString) =&gt; &#123;</span><br><span class="line">    console.log(date, dateString);</span><br><span class="line">    data.date = dateString</span><br><span class="line">  &#125;</span><br><span class="line">  const onSelectChange = (value) =&gt; &#123;</span><br><span class="line">    console.log(`selected $&#123;value&#125;`);</span><br><span class="line">    data.time = value</span><br><span class="line">  &#125;</span><br><span class="line">  const onSliderChange = (value) =&gt; &#123;</span><br><span class="line">    console.log(`slider: $&#123;value&#125;`);</span><br><span class="line">    data.count = value</span><br><span class="line">  &#125;</span><br><span class="line">  const onSubmit = async () =&gt; &#123;</span><br><span class="line">    const URL = &apos;http://localhost:3000/fms&apos;</span><br><span class="line">    const resp = await axios.post(URL, data)</span><br><span class="line">    console.log(resp.data.code)</span><br><span class="line">    if (resp.data.code === 0) &#123;</span><br><span class="line">      document.location.reload()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;DatePicker onChange=&#123;onDateChange&#125; /&gt;</span><br><span class="line">      &lt;Select defaultValue=&quot;早&quot; style=&#123;&#123; width: 120 &#125;&#125; onChange=&#123;onSelectChange&#125;&gt;</span><br><span class="line">        &lt;Option value=&quot;早&quot;&gt;早晨&lt;/Option&gt;</span><br><span class="line">        &lt;Option value=&quot;午&quot;&gt;中午&lt;/Option&gt;</span><br><span class="line">        &lt;Option value=&quot;晚&quot;&gt;晚上&lt;/Option&gt;</span><br><span class="line">      &lt;/Select&gt;</span><br><span class="line">      &lt;Slider min=&#123;0&#125; max=&#123;12&#125; defaultValue=&#123;8&#125;  style=&#123;&#123; width: 300, display: &apos;inline-block&apos; &#125;&#125; onChange=&#123;onSliderChange&#125;/&gt;</span><br><span class="line">      &lt;Button type=&quot;primary&quot; onClick=&#123;onSubmit&#125;&gt;记录&lt;/Button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Form</span><br></pre></td></tr></table></figure>
+<h3 id="addOne-接口使用真实数据"><a href="#addOne-接口使用真实数据" class="headerlink" title="addOne 接口使用真实数据"></a>addOne 接口使用真实数据</h3><blockquote>
+<p>vi handler.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">   try &#123;</span><br><span class="line">     const db = await connectToDatabase()</span><br><span class="line">-    const fm = await FmModel.create(&#123;&#125;)</span><br><span class="line">+    const fm = await FmModel.create(JSON.parse(event.body))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3><blockquote>
+<p>piglet-back git:(master) ✗ serverless offline start </p>
+<p>piglet-front git:(master) ✗ gatsby develop</p>
+<p>visit <a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a></p>
+</blockquote>
+<h3 id="遇到一些问题？"><a href="#遇到一些问题？" class="headerlink" title="遇到一些问题？"></a>遇到一些问题？</h3><blockquote>
+<p>Q1: 请求接口时后台报错：[ ‘OverwriteModelError: Cannot overwrite <code>FmModel</code> model once compiled.’,</p>
+</blockquote>
+<p>A1: serverless offline start 增加 –useSeparateProcesses 或者  –skipCacheInvalidation</p>
+<p>参考： <a href="https://github.com/dherault/serverless-offline/issues/258" target="_blank" rel="noopener">https://github.com/dherault/serverless-offline/issues/258</a></p>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><h3 id="gatsby-node-js"><a href="#gatsby-node-js" class="headerlink" title="gatsby-node.js"></a>gatsby-node.js</h3><p>创建后端路由</p>
+<blockquote>
+<p>vi gatsby-node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports.createPages = async (&#123;actions: &#123;createPage&#125;&#125;) =&gt; &#123;</span><br><span class="line">  const bob = &#123;name: &apos;bobalan&apos;&#125;</span><br><span class="line">  createPage(&#123;</span><br><span class="line">    path: &apos;/xxx&apos;,</span><br><span class="line">    component: require.resolve(&apos;./src/components/XXX&apos;),</span><br><span class="line">    context: &#123;bob&#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>touch src/components/XXX.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">const XXX = (&#123;pageContext: &#123;bob&#125;&#125;) =&gt; &#123;</span><br><span class="line">  return &lt;h1&gt; XXX: &#123;bob.name&#125; &lt;/h1&gt;</span><br><span class="line">&#125;</span><br><span class="line">export default XXX</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>gatsby develop</p>
+<p>visit <a href="http://localhost:8000/xxx" target="_blank" rel="noopener">http://localhost:8000/xxx</a></p>
+<p>浏览器中显示： XXX: bobalan</p>
+</blockquote>
+<h3 id="gatsby-browser-js"><a href="#gatsby-browser-js" class="headerlink" title="gatsby-browser.js"></a>gatsby-browser.js</h3><p>可以用来处理全局样式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &quot;./src/styles/global.css&quot;</span><br><span class="line"></span><br><span class="line">// or:</span><br><span class="line">// require(&apos;./src/styles/global.css&apos;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="gatsby-config-js"><a href="#gatsby-config-js" class="headerlink" title="gatsby-config.js"></a>gatsby-config.js</h3><p>gatsy 配置文件，包括数据和插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  siteMetadata: &#123;</span><br><span class="line">    title: &quot;Gatsby Default Starter&quot;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="gatsby-ssr-js"><a href="#gatsby-ssr-js" class="headerlink" title="gatsby-ssr.js"></a>gatsby-ssr.js</h3><p>gatsy 配置ssr</p>
+<h3 id="番外篇-前后端路由同名优先级？"><a href="#番外篇-前后端路由同名优先级？" class="headerlink" title="番外篇: 前后端路由同名优先级？"></a>番外篇: 前后端路由同名优先级？</h3><p>根据推断有准确后端路由的会渲染对应的组件，只有没有命中后端路由，才会交给前端路由。让我们来实际测试一下。</p>
+<p>Gatsby starter 应用中默认有一个 src/pages/page-2的前端路由，让我们把后端路由也改在 page-2</p>
+<blockquote>
+<p>vi gatsby-node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports.createPages = async (&#123;actions: &#123;createPage&#125;&#125;) =&gt; &#123;</span><br><span class="line">  const bob = &#123;name: &apos;bobalan&apos;&#125;</span><br><span class="line">  createPage(&#123;</span><br><span class="line">    path: &apos;/page-2&apos;,</span><br><span class="line">    component: require.resolve(&apos;./src/components/XXX&apos;),</span><br><span class="line">    context: &#123;bob&#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>gatsby develop</p>
+<p>visit <a href="http://localhost:8000/page-2" target="_blank" rel="noopener">http://localhost:8000/page-2</a></p>
+<p>浏览器中显示： XXX: bobalan </p>
+<p>验证我们的推测正确</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjr7knqx700073ncp6ht1ddsl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fetal-movement-backend" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/22/fetal-movement-backend/" class="article-date">
+  <time datetime="2019-01-22T11:37:35.000Z" itemprop="datePublished">2019-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>今天我们来使用 Serverless Framwork + MongoDB Atlas 来构建后端 serverless 服务</p>
+<h2 id="后端项目搭建"><a href="#后端项目搭建" class="headerlink" title="后端项目搭建"></a>后端项目搭建</h2><p>前端我们已经在 strong-piglet 下完成了前端网站 piglet-front 的工作</p>
+<blockquote>
+<p>➜  strong-piglet tree -L 1</p>
+<p>.<br>└── piglet-front</p>
+</blockquote>
+<p>接下来创建后端工作目录 piglet-back</p>
+<blockquote>
+<p>serverless create –template aws-nodejs –path piglet-back &amp;&amp; cd piglet-back</p>
+<p>vi serverless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">provider:</span><br><span class="line">  name: aws</span><br><span class="line">  runtime: nodejs8.10</span><br><span class="line"></span><br><span class="line">functions:</span><br><span class="line">  getAll:</span><br><span class="line">    handler: handler.getAll</span><br><span class="line">    events:</span><br><span class="line">      - http:</span><br><span class="line">          path: fms</span><br><span class="line">          method: get</span><br><span class="line">  addOne:</span><br><span class="line">    handler: handler.addOne</span><br><span class="line">    events:</span><br><span class="line">      - http:</span><br><span class="line">          path: fms</span><br><span class="line">          method: post</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>vi handler.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    body: JSON.stringify(&#123;</span><br><span class="line">      code: 0,</span><br><span class="line">      data: &#123;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      message: &apos;add done&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports.getAll = async (event, context) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    body: JSON.stringify(&#123;</span><br><span class="line">      code: 0,</span><br><span class="line">      data: &#123;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      message: &apos;get all done&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h2><p>上面的例子并没有任何实质性的逻辑，为了增加信息。我们先本地运行一下</p>
+<blockquote>
+<p>npm i -S serverless-offline</p>
+<p>vi serverless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-offline</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>serverless offline start –skipCacheInvalidation</p>
+<p>访问 <a href="http://localhost:3000/fms" target="_blank" rel="noopener">http://localhost:3000/fms</a> 可以看到 message: ‘get all done’</p>
+</blockquote>
+<h2 id="来点真材实料"><a href="#来点真材实料" class="headerlink" title="来点真材实料"></a>来点真材实料</h2><p>接下来为两个函数添加实际内容, 我喜欢自顶向下的方式</p>
+<blockquote>
+<p>vi handler.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">const connectToDatabase = require(&apos;./connectToDatabase&apos;)</span><br><span class="line">const FmModel = require(&apos;./FmModel&apos;)</span><br><span class="line"></span><br><span class="line">module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const db = await connectToDatabase()</span><br><span class="line">    const fm = await FmModel.create(&#123;</span><br><span class="line">      date: &apos;1-18&apos;,</span><br><span class="line">      time: &apos;早&apos;,</span><br><span class="line">      count: 11</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    return &#123;</span><br><span class="line">      statusCode: 200,</span><br><span class="line">      body: JSON.stringify(&#123;</span><br><span class="line">        code: 0,</span><br><span class="line">        data: &#123;</span><br><span class="line">          fm</span><br><span class="line">        &#125;,</span><br><span class="line">        message: &apos;add one fetal movement succesfully&apos;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    console.error(&apos;db connect error:&apos;, error);</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports.getAll = async (event, context) =&gt; &#123;</span><br><span class="line">  const db = await connectToDatabase()</span><br><span class="line">  const fms = await FmModel.find()</span><br><span class="line">  </span><br><span class="line">  return &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    body: JSON.stringify(&#123;</span><br><span class="line">      code: 0,</span><br><span class="line">      data: &#123;</span><br><span class="line">        fms</span><br><span class="line">      &#125;,</span><br><span class="line">      message: &apos;get all done&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>touch connectToDatabase.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const DB_URL = &apos;mongodb://admin:adminnimda@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line"></span><br><span class="line">module.exports = connectToDatabase = () =&gt; &#123;</span><br><span class="line">  const db = mongoose.connect(DB_URL)</span><br><span class="line">  const connection = mongoose.connection</span><br><span class="line">  connection.once(&apos;open&apos;, function () &#123;</span><br><span class="line">    console.log(&apos;=====mongodb connect sucessfully=====&apos;);</span><br><span class="line">    </span><br><span class="line">  &#125;)</span><br><span class="line">  connection.on(&apos;error&apos;, function (error) &#123;</span><br><span class="line">    console.error(&apos;=====mongodb connect failed=====&apos;, error);</span><br><span class="line">    </span><br><span class="line">  &#125;)</span><br><span class="line">  return db</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>touch FmModel.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const FmSchema = new mongoose.Schema(&#123;</span><br><span class="line">  date: String,</span><br><span class="line">  time: String,</span><br><span class="line">  count: Number</span><br><span class="line">&#125;)</span><br><span class="line">const FmModel = mongoose.model(&apos;FmModel&apos;, FmSchema)</span><br><span class="line">module.exports = FmModel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>curl -X POST localhost:3000/fms</p>
+<p>{“code”:0,”data”:{“fm”:{“_id”:”5c4297781cff08791b6e0826”,”date”:”1-18”,”time”:”早”,”count”:11,”__v”:0}},”message”:”add one fetal movement succesfully”}%  </p>
+</blockquote>
+<p>好了，数据已经成功写入 mongoDB , 收工！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjr7knqws00003ncpnf3ustwc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fetal-movement-ui-optimization" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/21/fetal-movement-ui-optimization/" class="article-date">
+  <time datetime="2019-01-21T11:37:35.000Z" itemprop="datePublished">2019-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>今天使用 <a href="https://ant.design/index-cn" target="_blank" rel="noopener">AntD</a>、<a href="http://recharts.org/en-US/examples/LineChartWithReferenceLines" target="_blank" rel="noopener">Recharts</a> 为网站润色</p>
+<h2 id="图表润色"><a href="#图表润色" class="headerlink" title="图表润色"></a>图表润色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S recharts</span><br></pre></td></tr></table></figure>
+<p>修改 FChart.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123;LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend&#125; from &apos;recharts&apos;</span><br><span class="line"></span><br><span class="line">const FChart = () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">  const data = [</span><br><span class="line">    &#123;name: &apos;1月11号早&apos;, 胎动: 10&#125;,</span><br><span class="line">    &#123;name: &apos;1月11号中&apos;, 胎动: 11&#125;,</span><br><span class="line">    &#123;name: &apos;1月11号晚&apos;, 胎动: 9&#125;,</span><br><span class="line">    &#123;name: &apos;1月12号早&apos;, 胎动: 8&#125;,</span><br><span class="line">    &#123;name: &apos;1月12号晚&apos;, 胎动: 10&#125;,</span><br><span class="line">    &#123;name: &apos;1月13号早&apos;, 胎动: 12&#125;,</span><br><span class="line">    &#123;name: &apos;1月13号中&apos;, 胎动: 5&#125;,</span><br><span class="line">  ];</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;LineChart width=&#123;600&#125; height=&#123;300&#125; data=&#123;data&#125; margin=&#123;&#123;top: 20, right: 50, left: 20, bottom: 5&#125;&#125;&gt;</span><br><span class="line">       &lt;CartesianGrid strokeDasharray=&quot;3 3&quot;/&gt;</span><br><span class="line">       &lt;XAxis dataKey=&quot;name&quot;/&gt;</span><br><span class="line">       &lt;YAxis/&gt;</span><br><span class="line">       &lt;Tooltip/&gt;</span><br><span class="line">       &lt;Legend /&gt;</span><br><span class="line">       &lt;ReferenceLine y=&#123;5&#125; label=&quot;警界线&quot; stroke=&quot;red&quot;/&gt;</span><br><span class="line">       &lt;Line type=&quot;monotone&quot; dataKey=&quot;胎动&quot; stroke=&quot;#82ca9d&quot; /&gt;</span><br><span class="line">      &lt;/LineChart&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FChart</span><br></pre></td></tr></table></figure>
+<h2 id="表单润色"><a href="#表单润色" class="headerlink" title="表单润色"></a>表单润色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S antd</span><br></pre></td></tr></table></figure>
+<p>修改 Form.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123; DatePicker, Select, Slider, Button &#125; from &apos;antd&apos;</span><br><span class="line">import &apos;antd/dist/antd.css&apos;</span><br><span class="line"></span><br><span class="line">const Form = () =&gt; &#123;</span><br><span class="line">  const Option = Select.Option</span><br><span class="line">  const onDateChange = (date, dateString) =&gt; &#123;</span><br><span class="line">    console.log(date, dateString);</span><br><span class="line">  &#125;</span><br><span class="line">  const onSelectChange = (value) =&gt; &#123;</span><br><span class="line">    console.log(`selected $&#123;value&#125;`);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;DatePicker onChange=&#123;onDateChange&#125; /&gt;</span><br><span class="line">      &lt;Select defaultValue=&quot;早&quot; style=&#123;&#123; width: 120 &#125;&#125; onChange=&#123;onSelectChange&#125;&gt;</span><br><span class="line">        &lt;Option value=&quot;早&quot;&gt;早晨&lt;/Option&gt;</span><br><span class="line">        &lt;Option value=&quot;午&quot;&gt;中午&lt;/Option&gt;</span><br><span class="line">        &lt;Option value=&quot;晚&quot;&gt;晚上&lt;/Option&gt;</span><br><span class="line">      &lt;/Select&gt;</span><br><span class="line">      &lt;Slider min=&#123;0&#125; max=&#123;12&#125; defaultValue=&#123;8&#125;  style=&#123;&#123; width: 300, display: &apos;inline-block&apos; &#125;&#125;/&gt;</span><br><span class="line">      &lt;Button type=&quot;primary&quot;&gt;记录&lt;/Button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Form</span><br></pre></td></tr></table></figure>
+<h2 id="细节问题"><a href="#细节问题" class="headerlink" title="细节问题"></a>细节问题</h2><p>还有一些细节问题 诸如</p>
+<ol>
+<li>按钮没有显示主色</li>
+<li>按钮没有换行</li>
+<li>滑块没有垂直居中</li>
+<li>日历里的字体太大</li>
+</ol>
+<p>等等小问题暂且不修，收工</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjr7knqx800083ncp7cspc1s5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fetal-movement-ui" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/20/fetal-movement-ui/" class="article-date">
+  <time datetime="2019-01-20T11:03:34.000Z" itemprop="datePublished">2019-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设计篇"><a href="#设计篇" class="headerlink" title="设计篇"></a>设计篇</h2><p>本人不是设计出身，只能白板徒手出稿了，见笑</p>
+<h2 id="配色"><a href="#配色" class="headerlink" title="配色"></a>配色</h2><p>本人不是设计出身，只能借用大师的一个 <a href="https://www.smashingmagazine.com/2016/04/web-developer-guide-color/" target="_blank" rel="noopener">demo</a> 设计了 </p>
+<p>基色 #30CBE8</p>
+<p>强调色 #FF4430</p>
+<p>深灰 #3A4A4D</p>
+<p>浅灰 #F9FBFB</p>
+<p>白色 #FFFFFF</p>
+<h2 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h2><p>components下新加两个组件</p>
+<p>FChart.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">const FChart = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      Here is a beautiful chart</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FChart</span><br></pre></td></tr></table></figure>
+<p>Form.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">const Form = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      datepicker, options, slider, ok</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Form</span><br></pre></td></tr></table></figure>
+<p>index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">import FChart from &apos;../components/FChart&apos;</span><br><span class="line">import Form from &apos;../components/Form&apos;</span><br><span class="line"></span><br><span class="line">const IndexPage = () =&gt; (</span><br><span class="line">  &lt;Layout&gt;</span><br><span class="line">    &lt;SEO title=&quot;Home&quot; keywords=&#123;[`gatsby`, `application`, `react`]&#125; /&gt;</span><br><span class="line">    &lt;FChart /&gt;</span><br><span class="line">    &lt;Form /&gt;</span><br><span class="line">  &lt;/Layout&gt;</span><br><span class="line">)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>components/header.js 里换成我们的主色 #30CBE8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">const Header = (&#123; siteTitle &#125;) =&gt; (</span><br><span class="line">  &lt;div</span><br><span class="line">    style=&#123;&#123;</span><br><span class="line">      background: `#30CBE8`,</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>好了，今天就这么多了，收工！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjr7knqxc000c3ncpdh0smafz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-小猪胎动前端篇" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/19/小猪胎动前端篇/" class="article-date">
+  <time datetime="2019-01-19T14:30:06.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/19/小猪胎动前端篇/">小猪胎动前端篇之网站搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="创建应用整体目录（包含前后端）"><a href="#创建应用整体目录（包含前后端）" class="headerlink" title="创建应用整体目录（包含前后端）"></a>创建应用整体目录（包含前后端）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir strong-piglet &amp;&amp; cd $_</span><br></pre></td></tr></table></figure>
+<h3 id="安装了不起的盖次比"><a href="#安装了不起的盖次比" class="headerlink" title="安装了不起的盖次比"></a>安装了不起的盖次比</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global gatsby-cli</span><br></pre></td></tr></table></figure>
+<h3 id="使用盖次比创建项目并本地运行"><a href="#使用盖次比创建项目并本地运行" class="headerlink" title="使用盖次比创建项目并本地运行"></a>使用盖次比创建项目并本地运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gatsby new piglet-front --verbose </span><br><span class="line"></span><br><span class="line">cd piglet-front </span><br><span class="line"></span><br><span class="line">gatsby develop</span><br><span class="line"></span><br><span class="line">visit http://localhost:8000/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>遇到过 gatsby new 一直 waiting…无法完成的情况，换了公司的网络好了。原因不明</p>
+</blockquote>
+<h3 id="盖次比build-production-amp-amp-本地serve-跑production"><a href="#盖次比build-production-amp-amp-本地serve-跑production" class="headerlink" title="盖次比build production &amp;&amp; 本地serve 跑production"></a>盖次比build production &amp;&amp; 本地serve 跑production</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gatsby build</span><br><span class="line">gatsby serve</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjr7knqxo000r3ncpux1sjucn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-猪坚强的胎动" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/18/猪坚强的胎动/" class="article-date">
+  <time datetime="2019-01-18T12:27:13.000Z" itemprop="datePublished">2019-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/18/猪坚强的胎动/">猪坚强的胎动</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="猪坚强是谁？"><a href="#猪坚强是谁？" class="headerlink" title="猪坚强是谁？"></a>猪坚强是谁？</h2><p>  老婆怀孕28周了，按照医生的说法，从本周开始要正式数胎动了，以便观察胎儿的健康情况。</p>
+<p>  所以猪坚强是还未出生的小盆友，这是她妈妈给他起的非正式名字。</p>
+<h2 id="胎动记录"><a href="#胎动记录" class="headerlink" title="胎动记录"></a>胎动记录</h2><p>  老婆每天会记录3次胎动，微信发给我，我记在 Magic2 的 WPS Office 里。最近对 Serverless 比较感兴趣，索兴用 Serverless 来实现一个简单的 WebApp</p>
+<h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><ul>
+<li>UI: AntDesign + Recharts</li>
+<li><p>前端： GatsBy + Serverless + Finch + S3 </p>
+<blockquote>
+<p>如果不在乎上传第三方平台的话，大力推荐 <a href="https://surge.sh/" target="_blank" rel="noopener">Surge</a> = ServerlessFramework + Finch Plugin + S3。有工具，送域名，还送 https ，童叟无欺！</p>
+</blockquote>
+</li>
+<li>后端:  NodeJs + Serverless + AWS Lambda</li>
+<li><p>数据库：MongoDB + Mongoose + MongoDB Atlas</p>
+<p>开工大吉</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjr7knqxm000p3ncpmudi3lli" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-mongoose" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/17/hello-mongoose/" class="article-date">
+  <time datetime="2019-01-17T11:55:02.000Z" itemprop="datePublished">2019-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/17/hello-mongoose/">hello Mongoose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是-Mongoose"><a href="#什么是-Mongoose" class="headerlink" title="什么是 Mongoose"></a>什么是 Mongoose</h2><p>Mongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。</p>
+<p>说人话</p>
+<p>其实就是 MongoDB NodeJS 版本的 ORM</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><ol>
+<li>mkdir h-mongoose &amp;&amp; cd $_        </li>
+<li>npm init -y &amp;&amp; npm install mongoose –save</li>
+<li><p>vi app.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const URL = &apos;mongodb://admin:&lt;PASSWOD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line">mongoose.connect(URL, &#123; useNewUrlParser: true &#125;)</span><br><span class="line"></span><br><span class="line">const db = mongoose.connection;</span><br><span class="line">db.on(&apos;error&apos;, console.error.bind(console, &apos;connection error:&apos;));</span><br><span class="line">db.once(&apos;open&apos;, function() &#123;</span><br><span class="line">  // we&apos;re connected!</span><br><span class="line">  console.log(&apos;connected :)&apos;);</span><br><span class="line"></span><br><span class="line">  const kittySchema = new mongoose.Schema(&#123;</span><br><span class="line">    name: String</span><br><span class="line">  &#125;)</span><br><span class="line">  const Kitty = mongoose.model(&apos;Kitty&apos;, kittySchema)</span><br><span class="line">  const huahu = new Kitty(&#123;</span><br><span class="line">    name: &apos;Huahu&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">  huahu.save(function(err, huahu)&#123;</span><br><span class="line">    if (err) return console.error(err);</span><br><span class="line">    console.log(&apos;saved! &apos;, huahu.name)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node app.js</p>
+<blockquote>
+<p> connected :)</p>
+<p> saved!  Huahu</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><a href="https://cloud.mongodb.com/v2" target="_blank" rel="noopener">https://cloud.mongodb.com/v2</a> -&gt; Clustrrs Overview -&gt; COLLECTIONS -&gt; 可以看到  test.kitties 有三条插入的记录</li>
+</ol>
+<h2 id="MongoDB-Atlas-连接问题"><a href="#MongoDB-Atlas-连接问题" class="headerlink" title="MongoDB Atlas 连接问题"></a>MongoDB Atlas 连接问题</h2><p>Q: 如果连接数据库遇到以下问题</p>
+<blockquote>
+<p>➜  h-mongoose node app.js<br>(node:92612) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.<br>connection error: { MongoNetworkError: connection 4 to cluster0-shard-00-01-jzszt.mongodb.net:27017 closed<br>    at TLSSocket.<anonymous> (/Users/bob/Documents/learn/h-mongoose/node_modules/mongodb-core/lib/connection/connection.js:276:9)<br>    at Object.onceWrapper (events.js:315:30)<br>    at emitOne (events.js:121:20)<br>    at TLSSocket.emit (events.js:211:7)<br>    at _handle.close (net.js:557:12)<br>    at TCP.done [as _onclose] (_tls_wrap.js:356:7)<br>  name: ‘MongoNetworkError’,<br>  errorLabels: [ ‘TransientTransactionError’ ],<br>  [Symbol(mongoErrorContextSymbol)]: {} }</anonymous></p>
+</blockquote>
+<p>A: 请在atlas 添加你本机的白名单</p>
+<p>cloud.mongodb.com/v2 -&gt; clusters -&gt; security -&gt; IP Whitelist -&gt; Add IP ADDRESS -&gt; 你的ip地址，百度搜索IP可见 -&gt; Confirm</p>
+<h2 id="更多-Mongoose-内容"><a href="#更多-Mongoose-内容" class="headerlink" title="更多 Mongoose 内容"></a>更多 Mongoose 内容</h2><p><a href="https://mongoosejs.com/docs/index.html" target="_blank" rel="noopener">https://mongoosejs.com/docs/index.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjr7kpcdm000065cpfhb6o96g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-mongodb" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/16/hello-mongodb/" class="article-date">
+  <time datetime="2019-01-16T11:26:45.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/16/hello-mongodb/">你好Mongodb</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MongoDB-概念"><a href="#MongoDB-概念" class="headerlink" title="MongoDB 概念"></a>MongoDB 概念</h2><table>
+<thead>
+<tr>
+<th>SQL术语/概念</th>
+<th>MongoDB术语/概念</th>
+<th>解释/说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>database</td>
+<td>database</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>table</td>
+<td>collection</td>
+<td>数据库表/集合</td>
+</tr>
+<tr>
+<td>row</td>
+<td>document</td>
+<td>数据记录行/文档</td>
+</tr>
+<tr>
+<td>column</td>
+<td>field</td>
+<td>数据字段/域</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+<td>索引</td>
+</tr>
+<tr>
+<td>table joins</td>
+<td></td>
+<td>表连接,MongoDB不支持</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>primary key</td>
+<td>主键,MongoDB自动将_id字段设置为主键</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="MongoDB-Atlas"><a href="#MongoDB-Atlas" class="headerlink" title="MongoDB Atlas"></a>MongoDB Atlas</h2><p>MongoDB 的云服务，免费哦</p>
+<ol>
+<li><p>打开官网， 点击 Start free<br><a href="https://www.mongodb.com/cloud/atlas?jmp=nav" target="_blank" rel="noopener">https://www.mongodb.com/cloud/atlas?jmp=nav</a></p>
+</li>
+<li><p>右上角点击用户名称下拉菜单 -&gt; Organizations -&gt; +New Organization -&gt; (Name=rest-api) Next -&gt; Create Organization -&gt; New Project -&gt; (Name=rest-api) Next -&gt; Create Project -&gt; Build A Cluster -&gt; Cloud Provider &amp; Region 选择<br>AWS, Singapore (ap-southeast-1)  -&gt; Create Cluster -&gt; 等待5分钟 -&gt; 创建成功后，从Overview 切换到 Security Tab -&gt; ADD NEW USER -&gt; 切回Overview Tab -&gt; CONNECT -&gt; ADD Your current IP Address -&gt; Choose a connection Method -&gt; Connect Your Applictioan -&gt; Standard connection string -&gt; Copy String -&gt; close</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodb://admin:&lt;PASSWORD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true</span><br></pre></td></tr></table></figure>
+<h2 id="Node-js-连接-MongoDB"><a href="#Node-js-连接-MongoDB" class="headerlink" title="Node.js 连接 MongoDB"></a>Node.js 连接 MongoDB</h2><ol>
+<li>mkdir h-mongodb &amp;&amp; cd $_</li>
+<li>npm init -y</li>
+<li>npm install mongodb –save</li>
+<li><p>vi app.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">const mongodb = require(&apos;mongodb&apos;)</span><br><span class="line">const MongoClient = mongodb.MongoClient</span><br><span class="line">const assert = require(&apos;assert&apos;)</span><br><span class="line"></span><br><span class="line">const URL = &apos;mongodb://admin:&lt;PASSWORD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line">const DB_NAME = &apos;firstdb&apos;</span><br><span class="line">const client = new MongoClient(URL)</span><br><span class="line"></span><br><span class="line">const insertDocuments = function(db, callback) &#123;</span><br><span class="line">  // Get the documents collection</span><br><span class="line">  const collection = db.collection(&apos;documents&apos;);</span><br><span class="line">  // Insert some documents</span><br><span class="line">  collection.insertMany([</span><br><span class="line">    &#123;a : 1&#125;, &#123;a : 2&#125;, &#123;a : 3&#125;</span><br><span class="line">  ], function(err, result) &#123;</span><br><span class="line">    assert.equal(err, null);</span><br><span class="line">    assert.equal(3, result.result.n);</span><br><span class="line">    assert.equal(3, result.ops.length);</span><br><span class="line">    console.log(&quot;Inserted 3 documents into the collection&quot;);</span><br><span class="line">    callback(result);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">client.connect(function(err)&#123;</span><br><span class="line">  assert.equal(err, null)</span><br><span class="line">  console.log(&quot;Connected successfully to server&quot;);</span><br><span class="line">  </span><br><span class="line">  const db = client.db(DB_NAME)</span><br><span class="line">  </span><br><span class="line">  insertDocuments(db, function() &#123;</span><br><span class="line">    client.close();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>➜  h-mongodb node app.js</p>
+<blockquote>
+<p>(node:60512) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.<br> Connected successfully to server<br> Inserted 3 documents into the collection</p>
+</blockquote>
+</li>
+<li><p><a href="https://cloud.mongodb.com/v2" target="_blank" rel="noopener">https://cloud.mongodb.com/v2</a> -&gt; Clustrrs Overview -&gt; COLLECTIONS -&gt; 可以看到  firstdb.documents 有三条插入的记录</p>
+</li>
+</ol>
+<h2 id="更多-MongoDB-的操作"><a href="#更多-MongoDB-的操作" class="headerlink" title="更多 MongoDB 的操作"></a>更多 MongoDB 的操作</h2><p><a href="http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/" target="_blank" rel="noopener">http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/</a></p>
+<h2 id="MongoDB-CLI-相关命令"><a href="#MongoDB-CLI-相关命令" class="headerlink" title="MongoDB CLI 相关命令"></a>MongoDB CLI 相关命令</h2><p><a href="http://www.runoob.com/mongodb/mongodb-create-database.html" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-create-database.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/16/hello-mongodb/" data-id="cjr7knqxa000a3ncpuko0z0qj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-serverless-front-end" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/16/serverless-front-end/" class="article-date">
@@ -146,7 +754,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjqwamqwb00048bcphdc05cc9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjr7knqxk000m3ncptcuipq3h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -158,361 +766,12 @@
 
 
   
-    <article id="post-小酌Serverless" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/15/小酌Serverless/" class="article-date">
-  <time datetime="2019-01-15T08:59:53.000Z" itemprop="datePublished">2019-01-15</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/15/小酌Serverless/">小酌Serverless</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  Serverless 的概念很不错，但真的动手实现一个 Serverless 架构的服务是不是有点没头绪？<br>  不怕，你可以站在巨人的肩膀上。本文基于 <a href="https://www.npmjs.com/package/serverless" target="_blank" rel="noopener">Serverless Framework</a> 和 AWS 来实现你的 Serverless Hello world!</p>
-<h2 id="首先安装"><a href="#首先安装" class="headerlink" title="首先安装"></a>首先安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g serverless</span><br></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless config credentials --provider aws --key AKIAIUF3B****DAVCDTA --secret YAh****FhmWNwlNaIESt6l6Zo5n8HLTP9lLDbktA</span><br></pre></td></tr></table></figure>
-<h2 id="用模板生成"><a href="#用模板生成" class="headerlink" title="用模板生成"></a>用模板生成</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless create --template aws-nodejs --path my-service</span><br></pre></td></tr></table></figure>
-<h2 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">serverless deploy -v</span><br><span class="line"></span><br><span class="line">➜  </span><br><span class="line">Serverless: Stack update finished...</span><br><span class="line">Service Information</span><br><span class="line">service: my-service</span><br><span class="line">stage: dev</span><br><span class="line">region: us-east-1</span><br><span class="line">stack: my-service-dev</span><br><span class="line">api keys:</span><br><span class="line">  None</span><br><span class="line">endpoints:</span><br><span class="line">  GET - https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</span><br><span class="line">functions:</span><br><span class="line">  hello: my-service-dev-hello</span><br><span class="line">layers:</span><br><span class="line">  None</span><br></pre></td></tr></table></figure>
-<h2 id="访问-EndPoint"><a href="#访问-EndPoint" class="headerlink" title="访问 EndPoint"></a>访问 EndPoint</h2><p>方式一：直接浏览器</p>
-<p><a href="https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob" target="_blank" rel="noopener">https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</a></p>
-<p>方式二： CLI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless invoke -f hello -l</span><br></pre></td></tr></table></figure></p>
-<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>每次都要deploy才能访问太麻烦怎么办？ <a href="https://www.npmjs.com/package/serverless-offline" target="_blank" rel="noopener">serverless-offline</a> 来救场！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install serverless-offline --save-dev</span><br><span class="line"></span><br><span class="line">serverless offline start</span><br></pre></td></tr></table></figure></p>
-<h2 id="AWS-设置问题？"><a href="#AWS-设置问题？" class="headerlink" title="AWS 设置问题？"></a>AWS 设置问题？</h2><p><a href="https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44" target="_blank" rel="noopener">点击此处</a></p>
-<h2 id="Serverless-deploy-失败？"><a href="#Serverless-deploy-失败？" class="headerlink" title="Serverless deploy 失败？"></a>Serverless deploy 失败？</h2><p>my-service serverless deploy -v<br>Serverless: Packaging service…<br>Serverless: Excluding development dependencies…</p>
-<p>  Serverless Error —————————————</p>
-<p>  ServerlessError: The AWS Access Key Id needs a subscription for the service</p>
-<h3 id="解决办法：-绑定信用卡"><a href="#解决办法：-绑定信用卡" class="headerlink" title="解决办法： 绑定信用卡"></a>解决办法： 绑定信用卡</h3><p>Resolve “You are not subscribed to this service” or “The AWS Access Key Id needs a subscription for the service” errors<br>If you’re using an account that was created in or after 2011, then update your account status （<a href="https://portal.aws.amazon.com/billing/signup?type=resubscribe#/resubscribed）" target="_blank" rel="noopener">https://portal.aws.amazon.com/billing/signup?type=resubscribe#/resubscribed）</a>.
-  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjqwamqwh00078bcp13y5n532" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-the-good-and-the-bad-of-serverless-architecture" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" class="article-date">
-  <time datetime="2019-01-14T07:38:30.000Z" itemprop="datePublished">2019-01-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">Serverless 架构的优劣</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>你能打开这篇文章，说明你已经在关注 serverless 了，没错，它是云发展的下一个大事件。<br>你可能会问，我们业务已经上云了，不再拥有任何实体硬件了，这和 serverless 有什么区别？<br>serverless 的架构下，开发者选中一个语言（Node.js Python C#等）开发对应的服务，上传代码后会被系统自动部署。通过云服务商的生态，你可以描述这些服务之间如何通信，并获取数据。 这是一种接近 NoOps 的方法，因为运维工作外包给了云服务商。</p>
-<h2 id="Serverless-101"><a href="#Serverless-101" class="headerlink" title="Serverless 101"></a>Serverless 101</h2><h3 id="Function-as-a-Service"><a href="#Function-as-a-Service" class="headerlink" title="Function-as-a-Service"></a>Function-as-a-Service</h3><p><img src="https://www.altexsoft.com/media/2018/03/monolith.png" alt="Microservices vs serverless"><br>Microservices vs serverless</p>
-<h3 id="Event-driven-coding"><a href="#Event-driven-coding" class="headerlink" title="Event-driven coding"></a>Event-driven coding</h3><p>如果你家中有安装安防摄像头的话，你不会希望它7*24 小时的运转，而是设定一个动作检测来侦测可疑行为。 serverless 也是类似的机制，只有当预设的事件被触发，它才开始工作。同时 serverless 是无状态的，意味着它只执行任务，不保存或者重用请求。</p>
-<h3 id="Scalable-services"><a href="#Scalable-services" class="headerlink" title="Scalable services"></a>Scalable services</h3><p>serverless 架构对于复杂的对可扩展性要求高的应用是理想选择。一个  Fass 提供商可以自动高效无上限的扩容你的函数。</p>
-<h3 id="Billing-per-invocation"><a href="#Billing-per-invocation" class="headerlink" title="Billing per invocation"></a>Billing per invocation</h3><p>serverless 架构是按请求调用实际使用的资源来收费的。</p>
-<h2 id="Serverless-优势"><a href="#Serverless-优势" class="headerlink" title="Serverless 优势"></a>Serverless 优势</h2><ol>
-<li>比传统云服务更便宜（按需付费）</li>
-<li>可扩展性更强</li>
-<li>更低的人力成本  （省掉运维人员的成本支出）</li>
-<li>聚焦用户体验 （不再关注服务器的部分）</li>
-</ol>
-<h2 id="Serverless-劣势"><a href="#Serverless-劣势" class="headerlink" title="Serverless 劣势"></a>Serverless 劣势</h2><ol>
-<li>绑定服务商。你必须遵守服务商的规则。并且想在不同服务商之间切换可没那么容易</li>
-<li>学习曲线陡峭。从单体应用转向微服务有很多复杂的任务，最好的办法是使用相关的 serverless 工具来自动完成 </li>
-<li>不适合长期运行的任务。Lambda 要求任务在5分钟内完成，如果超过需要调用另外一个 function。所以 serverless 适合即时，或者准即时应用。像视频上传这样耗时的任务并不适合</li>
-</ol>
-<h2 id="Serverless-适合的-Cases"><a href="#Serverless-适合的-Cases" class="headerlink" title="Serverless 适合的 Cases"></a>Serverless 适合的 Cases</h2><ol>
-<li>IoT</li>
-<li>虚拟助手 或 聊天机器人</li>
-<li>富图片应用</li>
-<li>敏捷或者 CI 的 pipeline</li>
-</ol>
-<h2 id="Serverless-是未来吗？"><a href="#Serverless-是未来吗？" class="headerlink" title="Serverless 是未来吗？"></a>Serverless 是未来吗？</h2><p>有这个势头，预计2-5年内会达到生产率的高峰。现在唯一的问题是扩大适应的范围，增加更多的语言支持，和各服务商扩大自己的函数池！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjqwamqwc00058bcp0o54wr2x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hexo博客搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/13/Hexo博客搭建/" class="article-date">
-  <time datetime="2019-01-13T03:39:14.000Z" itemprop="datePublished">2019-01-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
-<li>使用hexo</li>
-<li>项目在本地<ul>
-<li>hexo new xxx 创建文章</li>
-<li>hexo server 本地启服务看效果</li>
-<li>hexo generate -w 本地即时生成静态文件</li>
-</ul>
-</li>
-<li>静态文件在github<ul>
-<li>hexo deploy 上传静态文件到 github</li>
-</ul>
-</li>
-<li>ecs 上运行静态网站<ul>
-<li>git pull (crontab)</li>
-<li>http-server -p 8080</li>
-</ul>
-</li>
-</ul>
-<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="本地硬盘安装-hexo"><a href="#本地硬盘安装-hexo" class="headerlink" title="本地硬盘安装 hexo"></a>本地硬盘安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a></h3><ul>
-<li>npm install hexo-cli -g</li>
-<li>hexo init blog</li>
-<li>cd blog</li>
-<li>npm install</li>
-<li>hexo server</li>
-</ul>
-<h3 id="本地硬盘配置-deploy"><a href="#本地硬盘配置-deploy" class="headerlink" title="本地硬盘配置 deploy"></a>本地硬盘配置 <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">deploy</a></h3><ul>
-<li>npm install hexo-deployer-git –save</li>
-<li>修改_config.yml文件:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:blueken/your.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="ECS-装-node、http-server、git"><a href="#ECS-装-node、http-server、git" class="headerlink" title="ECS 装 node、http-server、git"></a>ECS 装 node、http-server、git</h3><ul>
-<li>yum install -y nodejs</li>
-<li>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li>
-<li>npm install -g http-server</li>
-<li>yum install -y git</li>
-<li>mkdir blog &amp; cd $_</li>
-<li>git glone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:blueken/your_blog.git</li>
-<li>cd your_blog_folder</li>
-<li>nohup http-server -p 8080 &amp;    ( 或者setsid http-server -p 80 &amp;)</li>
-<li><a href="http://47.99.246.178:8080/" target="_blank" rel="noopener">http://47.99.246.178:8080/</a></li>
-</ul>
-<h3 id="可能遇到问题"><a href="#可能遇到问题" class="headerlink" title="可能遇到问题"></a>可能遇到问题</h3><ol>
-<li><p>问题： </p>
-<p> git clone 报 Permission denied (publickey).</p>
-<p> 解决办法 ：</p>
-<p> <a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">https://help.github.com/articles/error-permission-denied-publickey/</a></p>
-</li>
-<li><p>问题： </p>
-<p> http-server 运行后访问页面报 This site can’t be reached</p>
-<p> 解决办法 ：</p>
-<p> 确保 ECS 对应端口处于打开状态。以打开端口 4000 为例： </p>
-<p> <a href="https://ecs.console.aliyun.com" target="_blank" rel="noopener">https://ecs.console.aliyun.com</a></p>
-<p> 左侧列表-网络和安全-安全组-找到对应的实例-操作-配置规则-入方向-添加安全组规则-端口范围写4000，授权对象写0.0.0.0/0</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjqwamqw500018bcptysmrh3d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SSH连接阿里云ECS" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/13/SSH连接阿里云ECS/" class="article-date">
-  <time datetime="2019-01-13T03:05:08.000Z" itemprop="datePublished">2019-01-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ol>
-<li>登录 console.aliyun.com -&gt; 云服务器ECS -&gt; 网络和安全 -&gt; 密钥对 -&gt; 创建密钥对 -&gt; 绑定密钥对 -&gt; 下载密钥对</li>
-<li>下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem <a href="mailto:root@47.99" target="_blank" rel="noopener">root@47.99</a>.***.178</li>
-<li>为了安全不使用 root 登录<br>ssh -i ~/.ssh/bob_aliyun_rsa <a href="mailto:bob@47.99" target="_blank" rel="noopener">bob@47.99</a>.***.178</li>
-</ol>
-<h2 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h2><p>更多详情可以参考下面 或 <a href="https://blog.csdn.net/m0_38128647/article/details/80204739" target="_blank" rel="noopener">点击此处</a></p>
-<ol>
-<li><p>先在阿里云网站创建一个密钥对，这里他会让你输入一个密钥的名称，随便输入一个就好，比如输入的是aliyun，那系统就会生成一个aliyun.pem文件，这个文件是私钥，把他下载下来，公钥阿里云会自动放到你买的服务器里面</p>
-</li>
-<li><p>下载完之后，在终端进入到你下载的私钥的同一级目录下，输入：ssh -i aliyun.pem root@你的服务器的公网ip地址，你的服务器的ip地址是阿里云分配的，在你购买的页面应该能找到。执行完那个命令，不出意外地话，应该就是连上了</p>
-</li>
-<li><p>ssh -i aliyun.pem root@你的服务器的公网ip地址这个命令能让你连上你的阿里云服务器地址，但是你是不是觉得很麻烦，每次都得到私钥所在的目录，执行这个命令。这里有个更好的方法：将私钥aliyun.pem文件，复制到你的home文件夹下的.ssh文件夹下，.ssh文件夹的目录是~/.ssh，然后将aliyun.pem改名为id_rsa,注意没有任何后缀。然后你就可以在任何地方执行下面这个命令了：ssh root@你的服务器的公网ip地址，这条命令不管在哪执行都会让你连上你的服务器</p>
-</li>
-<li><p>干什么都在ROOT用户下做的话，我觉得你的系统可能撑不过一个月就挂了，又要重装系统。为了安全起见，还是新建一个普通用户好，连上服务器后，执行命令：adduser xxx，即可新建一个用户，xxx代表你的用户名</p>
-</li>
-<li><p>建完普通用户后，你肯定想从本地直接ssh连接你的服务器的上普通用户了吧。首先在本地生成一对密钥对,执行ssh-keygen命令，它会默认在~/.ssh文件夹下生成一对密钥对id_rsa id_rsa.pub， id_rsa是私钥，id_rsa.pub是公钥。但是你会发现他生成的id_rsa文件和前面你改名的文件重复了，Ubuntu默认会覆盖你前边改名的文件，所以在生成的时候你要手动输入一个生成的文件名，前边的目录最好不要改，只改他提示的最后的文件名，然后一路回车就行了，假如你输入的文件名是id_rsa1，那就会在你的.ssh文件夹下生成id_rsa1 和 id_rsa1.pub两个文件</p>
-</li>
-<li><p>接下来要把你刚生成的公钥上传到你新建的用户目录下去，在你的本地的.ssh文件夹下，执行命令：scp -p $aliyun_perm_path id_rsa1.pub root@你的服务器的公网ip地址:，注意最后面多了一个冒号</p>
-</li>
-<li><p>然后root用户登录你的服务器，你刚才上传的公钥文件就在现在你在的目录下，执行ls就可看到，然后在你的普通用户的目录下新建一个.ssh文件夹，接着将这个公钥文件复制到你新建的用户的目录下的.ssh文件夹下，并更名为authorized_keys，然后退出登录服务器，回到本地.ssh文件夹下</p>
-</li>
-<li><p>现在你可以连接你的服务器的普通用户了，执行命令：ssh -i id_rsa1 xxx@你的服务器的公网ip地址，就可以登陆啦，xxx为你的普通用户名。注意：不管你用什么用户，ip地址是不会变的</p>
-</li>
-<li><p>像我上面说的你要是觉得每次都要到.ssh文件夹下输入命令，并且要指定文件名麻烦的话，把你前面改名的id_rsa改名为root或其好记的名字，然后把你的id_rsa1改名为id_rsa，这样你可以在任何地方都ssh xxx@你的服务器的公网ip地址，登陆你的服务器的普通用户了，xxx为你的普通用户名</p>
-</li>
-<li><p>这个时候如果你要登录root用户的话，那就只能到.ssh文件夹下ssh -i root root@你的服务器的公网ip地址，第一个root为密钥，是由先前的id_rsa文件更名过来的，第二个是你的root用户名。因为登录root用户的次数比较少，我觉得上面的方法还是比较靠谱的，你觉得呢</p>
-</li>
-<li><p>其实还有更懒得方法，当你把上面的都设置到之后，在你的.ssh文件夹下新建一个文件，比如叫aliyun，然后执行命令：echo “ssh xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，然后赋予执行权限：chmod 700 aliyun，然后在.bashrc文件中添加export PATH=”/home/xxx/.ssh/:$PATH”，然后另开一个终端，输入：aliyun， 你就会发现你已经连上服务器啦。但是这个方法仅适用与你的服务器上的用户的密钥在本地恰好是id_rsa，如果不是的话， 则需要修改一下前面写入文件的内容：echo “ssh -i ~/.ssh/私钥 xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，这样就可以运行啦，注意：一定要赋予文件执行权限</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjqwamqw800028bcpwzc0j6ki" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-FirstPost" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/FirstPost/" class="article-date">
-  <time datetime="2019-01-09T13:11:40.000Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/FirstPost/">FirstPost</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p># </p>
-<p>2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjqwamqw100008bcp6ulqwdsu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/hello-world/" class="article-date">
-  <time datetime="2019-01-09T12:45:39.893Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjqwamqw900038bcpn75pdqei" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -525,7 +784,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -535,7 +794,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a>
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -557,23 +816,23 @@
       <ul>
         
           <li>
-            <a href="/2019/01/16/serverless-front-end/">前端 Serverless</a>
+            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/小酌Serverless/">小酌Serverless</a>
+            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
           </li>
         
           <li>
-            <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">Serverless 架构的优劣</a>
+            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
           </li>
         
           <li>
-            <a href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
+            <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
           </li>
         
           <li>
-            <a href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
+            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
           </li>
         
       </ul>

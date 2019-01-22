@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-小酌Serverless" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/15/小酌Serverless/" class="article-date">
+  <time datetime="2019-01-15T08:59:53.000Z" itemprop="datePublished">2019-01-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/15/小酌Serverless/">小酌Serverless</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  Serverless 的概念很不错，但真的动手实现一个 Serverless 架构的服务是不是有点没头绪？<br>  不怕，你可以站在巨人的肩膀上。本文基于 <a href="https://www.npmjs.com/package/serverless" target="_blank" rel="noopener">Serverless Framework</a> 和 AWS 来实现你的 Serverless Hello world!</p>
+<h2 id="首先安装"><a href="#首先安装" class="headerlink" title="首先安装"></a>首先安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g serverless</span><br></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless config credentials --provider aws --key AKIAIUF3B****DAVCDTA --secret YAh****FhmWNwlNaIESt6l6Zo5n8HLTP9lLDbktA</span><br></pre></td></tr></table></figure>
+<h2 id="用模板生成"><a href="#用模板生成" class="headerlink" title="用模板生成"></a>用模板生成</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless create --template aws-nodejs --path my-service</span><br></pre></td></tr></table></figure>
+<h2 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">serverless deploy -v</span><br><span class="line"></span><br><span class="line">➜  </span><br><span class="line">Serverless: Stack update finished...</span><br><span class="line">Service Information</span><br><span class="line">service: my-service</span><br><span class="line">stage: dev</span><br><span class="line">region: us-east-1</span><br><span class="line">stack: my-service-dev</span><br><span class="line">api keys:</span><br><span class="line">  None</span><br><span class="line">endpoints:</span><br><span class="line">  GET - https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</span><br><span class="line">functions:</span><br><span class="line">  hello: my-service-dev-hello</span><br><span class="line">layers:</span><br><span class="line">  None</span><br></pre></td></tr></table></figure>
+<h2 id="访问-EndPoint"><a href="#访问-EndPoint" class="headerlink" title="访问 EndPoint"></a>访问 EndPoint</h2><p>方式一：直接浏览器</p>
+<p><a href="https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob" target="_blank" rel="noopener">https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</a></p>
+<p>方式二： CLI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless invoke -f hello -l</span><br></pre></td></tr></table></figure></p>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>每次都要deploy才能访问太麻烦怎么办？ <a href="https://www.npmjs.com/package/serverless-offline" target="_blank" rel="noopener">serverless-offline</a> 来救场！</p>
+<blockquote>
+<p>npm install serverless-offline –save-dev</p>
+<p>vi serverless.yml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-offline</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>serverless offline start</p>
+</blockquote>
+<h2 id="AWS-设置问题？"><a href="#AWS-设置问题？" class="headerlink" title="AWS 设置问题？"></a>AWS 设置问题？</h2><p><a href="https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44" target="_blank" rel="noopener">点击此处</a></p>
+<h2 id="Serverless-deploy-失败？"><a href="#Serverless-deploy-失败？" class="headerlink" title="Serverless deploy 失败？"></a>Serverless deploy 失败？</h2><p>my-service serverless deploy -v<br>Serverless: Packaging service…<br>Serverless: Excluding development dependencies…</p>
+<p>  Serverless Error —————————————</p>
+<p>  ServerlessError: The AWS Access Key Id needs a subscription for the service</p>
+<h3 id="解决办法：-绑定信用卡"><a href="#解决办法：-绑定信用卡" class="headerlink" title="解决办法： 绑定信用卡"></a>解决办法： 绑定信用卡</h3><p>Resolve “You are not subscribed to this service” or “The AWS Access Key Id needs a subscription for the service” errors<br>If you’re using an account that was created in or after 2011, then update your account status （<a href="https://portal.aws.amazon.com/billing/signup?type=resubscribe#/resubscribed）" target="_blank" rel="noopener">https://portal.aws.amazon.com/billing/signup?type=resubscribe#/resubscribed）</a>.
+  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjr7knqxh000k3ncpbzs1ao34" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-the-good-and-the-bad-of-serverless-architecture" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" class="article-date">
+  <time datetime="2019-01-14T07:38:30.000Z" itemprop="datePublished">2019-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">Serverless 架构的优劣</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>你能打开这篇文章，说明你已经在关注 serverless 了，没错，它是云发展的下一个大事件。<br>你可能会问，我们业务已经上云了，不再拥有任何实体硬件了，这和 serverless 有什么区别？<br>serverless 的架构下，开发者选中一个语言（Node.js Python C#等）开发对应的服务，上传代码后会被系统自动部署。通过云服务商的生态，你可以描述这些服务之间如何通信，并获取数据。 这是一种接近 NoOps 的方法，因为运维工作外包给了云服务商。</p>
+<h2 id="Serverless-101"><a href="#Serverless-101" class="headerlink" title="Serverless 101"></a>Serverless 101</h2><h3 id="Function-as-a-Service"><a href="#Function-as-a-Service" class="headerlink" title="Function-as-a-Service"></a>Function-as-a-Service</h3><p><img src="https://www.altexsoft.com/media/2018/03/monolith.png" alt="Microservices vs serverless"><br>Microservices vs serverless</p>
+<h3 id="Event-driven-coding"><a href="#Event-driven-coding" class="headerlink" title="Event-driven coding"></a>Event-driven coding</h3><p>如果你家中有安装安防摄像头的话，你不会希望它7*24 小时的运转，而是设定一个动作检测来侦测可疑行为。 serverless 也是类似的机制，只有当预设的事件被触发，它才开始工作。同时 serverless 是无状态的，意味着它只执行任务，不保存或者重用请求。</p>
+<h3 id="Scalable-services"><a href="#Scalable-services" class="headerlink" title="Scalable services"></a>Scalable services</h3><p>serverless 架构对于复杂的对可扩展性要求高的应用是理想选择。一个  Fass 提供商可以自动高效无上限的扩容你的函数。</p>
+<h3 id="Billing-per-invocation"><a href="#Billing-per-invocation" class="headerlink" title="Billing per invocation"></a>Billing per invocation</h3><p>serverless 架构是按请求调用实际使用的资源来收费的。</p>
+<h2 id="Serverless-优势"><a href="#Serverless-优势" class="headerlink" title="Serverless 优势"></a>Serverless 优势</h2><ol>
+<li>比传统云服务更便宜（按需付费）</li>
+<li>可扩展性更强</li>
+<li>更低的人力成本  （省掉运维人员的成本支出）</li>
+<li>聚焦用户体验 （不再关注服务器的部分）</li>
+</ol>
+<h2 id="Serverless-劣势"><a href="#Serverless-劣势" class="headerlink" title="Serverless 劣势"></a>Serverless 劣势</h2><ol>
+<li>绑定服务商。你必须遵守服务商的规则。并且想在不同服务商之间切换可没那么容易</li>
+<li>学习曲线陡峭。从单体应用转向微服务有很多复杂的任务，最好的办法是使用相关的 serverless 工具来自动完成 </li>
+<li>不适合长期运行的任务。Lambda 要求任务在5分钟内完成，如果超过需要调用另外一个 function。所以 serverless 适合即时，或者准即时应用。像视频上传这样耗时的任务并不适合</li>
+</ol>
+<h2 id="Serverless-适合的-Cases"><a href="#Serverless-适合的-Cases" class="headerlink" title="Serverless 适合的 Cases"></a>Serverless 适合的 Cases</h2><ol>
+<li>IoT</li>
+<li>虚拟助手 或 聊天机器人</li>
+<li>富图片应用</li>
+<li>敏捷或者 CI 的 pipeline</li>
+</ol>
+<h2 id="Serverless-是未来吗？"><a href="#Serverless-是未来吗？" class="headerlink" title="Serverless 是未来吗？"></a>Serverless 是未来吗？</h2><p>有这个势头，预计2-5年内会达到生产率的高峰。现在唯一的问题是扩大适应的范围，增加更多的语言支持，和各服务商扩大自己的函数池！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjr7knqxg000h3ncpvo7we2xe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hexo博客搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/Hexo博客搭建/" class="article-date">
+  <time datetime="2019-01-13T03:39:14.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
+<li>使用hexo</li>
+<li>项目在本地<ul>
+<li>hexo new xxx 创建文章</li>
+<li>hexo server 本地启服务看效果</li>
+<li>hexo generate -w 本地即时生成静态文件</li>
+</ul>
+</li>
+<li>静态文件在github<ul>
+<li>hexo deploy 上传静态文件到 github</li>
+</ul>
+</li>
+<li>ecs 上运行静态网站<ul>
+<li>git pull (crontab)</li>
+<li>http-server -p 8080</li>
+</ul>
+</li>
+</ul>
+<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="本地硬盘安装-hexo"><a href="#本地硬盘安装-hexo" class="headerlink" title="本地硬盘安装 hexo"></a>本地硬盘安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a></h3><ul>
+<li>npm install hexo-cli -g</li>
+<li>hexo init blog</li>
+<li>cd blog</li>
+<li>npm install</li>
+<li>hexo server</li>
+</ul>
+<h3 id="本地硬盘配置-deploy"><a href="#本地硬盘配置-deploy" class="headerlink" title="本地硬盘配置 deploy"></a>本地硬盘配置 <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">deploy</a></h3><ul>
+<li>npm install hexo-deployer-git –save</li>
+<li>修改_config.yml文件:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:blueken/your.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ECS-装-node、http-server、git"><a href="#ECS-装-node、http-server、git" class="headerlink" title="ECS 装 node、http-server、git"></a>ECS 装 node、http-server、git</h3><ul>
+<li>yum install -y nodejs</li>
+<li>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li>
+<li>npm install -g http-server</li>
+<li>yum install -y git</li>
+<li>mkdir blog &amp; cd $_</li>
+<li>git glone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:blueken/your_blog.git</li>
+<li>cd your_blog_folder</li>
+<li>npm install -g forever </li>
+<li>forever start http-server /home/bob/blog -p 80 <blockquote>
+<p>(nohup http-server -p 8080 &amp; </p>
+<p> setsid http-server -p 80 &amp; </p>
+<p>在 ECS 上无效，工单已提交阿里云，原因不明)</p>
+</blockquote>
+</li>
+<li><a href="http://47.99.246.178/" target="_blank" rel="noopener">http://47.99.246.178/</a></li>
+</ul>
+<h3 id="定时自动拉取-github-最新内容"><a href="#定时自动拉取-github-最新内容" class="headerlink" title="定时自动拉取 github 最新内容"></a>定时自动拉取 github 最新内容</h3><p>$ vi git.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line"></span><br><span class="line">cd /home/bob/blog</span><br><span class="line">git pull &amp;&amp; echo &quot;git pull done&quot;</span><br></pre></td></tr></table></figure></p>
+<p>#chmod +x git.sh</p>
+<p>每天凌晨1点执行</p>
+<p>$ crontab -e<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 1 * * * /root/git.sh</span><br></pre></td></tr></table></figure></p>
+<p>$ crontab -l</p>
+<h3 id="可能遇到问题"><a href="#可能遇到问题" class="headerlink" title="可能遇到问题"></a>可能遇到问题</h3><ol>
+<li><p>问题： </p>
+<p> git clone 报 Permission denied (publickey).</p>
+<p> 解决办法 ：</p>
+<p> <a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">https://help.github.com/articles/error-permission-denied-publickey/</a></p>
+</li>
+<li><p>问题： </p>
+<p> http-server 运行后访问页面报 This site can’t be reached</p>
+<p> 解决办法 ：</p>
+<p> 确保 ECS 对应端口处于打开状态。以打开端口 4000 为例： </p>
+<p> <a href="https://ecs.console.aliyun.com" target="_blank" rel="noopener">https://ecs.console.aliyun.com</a></p>
+<p> 左侧列表-网络和安全-安全组-找到对应的实例-操作-配置规则-入方向-添加安全组规则-端口范围写4000，授权对象写0.0.0.0/0</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjr7knqwy00013ncpe93tiz7c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SSH连接阿里云ECS" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/SSH连接阿里云ECS/" class="article-date">
+  <time datetime="2019-01-13T03:05:08.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ol>
+<li>登录 console.aliyun.com -&gt; 云服务器ECS -&gt; 网络和安全 -&gt; 密钥对 -&gt; 创建密钥对 -&gt; 绑定密钥对 -&gt; 下载密钥对</li>
+<li>下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem <a href="mailto:root@47.99" target="_blank" rel="noopener">root@47.99</a>.***.178</li>
+<li>为了安全不使用 root 登录<br>ssh -i ~/.ssh/bob_aliyun_rsa <a href="mailto:bob@47.99" target="_blank" rel="noopener">bob@47.99</a>.***.178</li>
+</ol>
+<h2 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h2><p>更多详情可以参考下面 或 <a href="https://blog.csdn.net/m0_38128647/article/details/80204739" target="_blank" rel="noopener">点击此处</a></p>
+<ol>
+<li><p>先在阿里云网站创建一个密钥对，这里他会让你输入一个密钥的名称，随便输入一个就好，比如输入的是aliyun，那系统就会生成一个aliyun.pem文件，这个文件是私钥，把他下载下来，公钥阿里云会自动放到你买的服务器里面</p>
+</li>
+<li><p>下载完之后，在终端进入到你下载的私钥的同一级目录下，输入：ssh -i aliyun.pem root@你的服务器的公网ip地址，你的服务器的ip地址是阿里云分配的，在你购买的页面应该能找到。执行完那个命令，不出意外地话，应该就是连上了</p>
+</li>
+<li><p>ssh -i aliyun.pem root@你的服务器的公网ip地址这个命令能让你连上你的阿里云服务器地址，但是你是不是觉得很麻烦，每次都得到私钥所在的目录，执行这个命令。这里有个更好的方法：将私钥aliyun.pem文件，复制到你的home文件夹下的.ssh文件夹下，.ssh文件夹的目录是~/.ssh，然后将aliyun.pem改名为id_rsa,注意没有任何后缀。然后你就可以在任何地方执行下面这个命令了：ssh root@你的服务器的公网ip地址，这条命令不管在哪执行都会让你连上你的服务器</p>
+</li>
+<li><p>干什么都在ROOT用户下做的话，我觉得你的系统可能撑不过一个月就挂了，又要重装系统。为了安全起见，还是新建一个普通用户好，连上服务器后，执行命令：adduser xxx，即可新建一个用户，xxx代表你的用户名</p>
+</li>
+<li><p>建完普通用户后，你肯定想从本地直接ssh连接你的服务器的上普通用户了吧。首先在本地生成一对密钥对,执行ssh-keygen命令，它会默认在~/.ssh文件夹下生成一对密钥对id_rsa id_rsa.pub， id_rsa是私钥，id_rsa.pub是公钥。但是你会发现他生成的id_rsa文件和前面你改名的文件重复了，Ubuntu默认会覆盖你前边改名的文件，所以在生成的时候你要手动输入一个生成的文件名，前边的目录最好不要改，只改他提示的最后的文件名，然后一路回车就行了，假如你输入的文件名是id_rsa1，那就会在你的.ssh文件夹下生成id_rsa1 和 id_rsa1.pub两个文件</p>
+</li>
+<li><p>接下来要把你刚生成的公钥上传到你新建的用户目录下去，在你的本地的.ssh文件夹下，执行命令：scp -p $aliyun_perm_path id_rsa1.pub root@你的服务器的公网ip地址:，注意最后面多了一个冒号</p>
+</li>
+<li><p>然后root用户登录你的服务器，你刚才上传的公钥文件就在现在你在的目录下，执行ls就可看到，然后在你的普通用户的目录下新建一个.ssh文件夹，接着将这个公钥文件复制到你新建的用户的目录下的.ssh文件夹下，并更名为authorized_keys，然后退出登录服务器，回到本地.ssh文件夹下</p>
+</li>
+<li><p>现在你可以连接你的服务器的普通用户了，执行命令：ssh -i id_rsa1 xxx@你的服务器的公网ip地址，就可以登陆啦，xxx为你的普通用户名。注意：不管你用什么用户，ip地址是不会变的</p>
+</li>
+<li><p>像我上面说的你要是觉得每次都要到.ssh文件夹下输入命令，并且要指定文件名麻烦的话，把你前面改名的id_rsa改名为root或其好记的名字，然后把你的id_rsa1改名为id_rsa，这样你可以在任何地方都ssh xxx@你的服务器的公网ip地址，登陆你的服务器的普通用户了，xxx为你的普通用户名</p>
+</li>
+<li><p>这个时候如果你要登录root用户的话，那就只能到.ssh文件夹下ssh -i root root@你的服务器的公网ip地址，第一个root为密钥，是由先前的id_rsa文件更名过来的，第二个是你的root用户名。因为登录root用户的次数比较少，我觉得上面的方法还是比较靠谱的，你觉得呢</p>
+</li>
+<li><p>其实还有更懒得方法，当你把上面的都设置到之后，在你的.ssh文件夹下新建一个文件，比如叫aliyun，然后执行命令：echo “ssh xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，然后赋予执行权限：chmod 700 aliyun，然后在.bashrc文件中添加export PATH=”/home/xxx/.ssh/:$PATH”，然后另开一个终端，输入：aliyun， 你就会发现你已经连上服务器啦。但是这个方法仅适用与你的服务器上的用户的密钥在本地恰好是id_rsa，如果不是的话， 则需要修改一下前面写入文件的内容：echo “ssh -i ~/.ssh/私钥 xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，这样就可以运行啦，注意：一定要赋予文件执行权限</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjr7knqx500053ncpxuxzryf2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FirstPost" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/09/FirstPost/" class="article-date">
+  <time datetime="2019-01-09T13:11:40.000Z" itemprop="datePublished">2019-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/09/FirstPost/">FirstPost</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p># </p>
+<p>2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjr7knqx200033ncpp9by181t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/09/hello-world/" class="article-date">
+  <time datetime="2019-01-09T12:45:39.893Z" itemprop="datePublished">2019-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/09/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjr7knqxd000f3ncpjoy8gh15" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

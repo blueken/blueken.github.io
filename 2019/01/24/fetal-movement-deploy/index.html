@@ -5,19 +5,20 @@
   
 
   
-  <title>FirstPost | Hexo</title>
+  <title>fetal-movement-deploy | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#  2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。">
+  <meta name="description" content="目标使用 serverless Framework 将前后端分别上线 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev region: us-east-1 stack: piglet-back-dev e">
+<meta name="keywords" content="serverless,getsby,frontend">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FirstPost">
-<meta property="og:url" content="http://yoursite.com/2019/01/09/FirstPost/index.html">
+<meta property="og:title" content="fetal-movement-deploy">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/fetal-movement-deploy/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#  2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。">
+<meta property="og:description" content="目标使用 serverless Framework 将前后端分别上线 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev region: us-east-1 stack: piglet-back-dev e">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-13T03:03:39.033Z">
+<meta property="og:updated_time" content="2019-01-21T11:49:48.096Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FirstPost">
-<meta name="twitter:description" content="#  2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。">
+<meta name="twitter:title" content="fetal-movement-deploy">
+<meta name="twitter:description" content="目标使用 serverless Framework 将前后端分别上线 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev region: us-east-1 stack: piglet-back-dev e">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -64,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-FirstPost" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-fetal-movement-deploy" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/01/09/FirstPost/" class="article-date">
-  <time datetime="2019-01-09T13:11:40.000Z" itemprop="datePublished">2019-01-09</time>
+    <a href="/2019/01/24/fetal-movement-deploy/" class="article-date">
+  <time datetime="2019-01-24T11:35:54.000Z" itemprop="datePublished">2019-01-24</time>
 </a>
     
   </div>
@@ -78,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      FirstPost
+      fetal-movement-deploy
     </h1>
   
 
@@ -86,34 +87,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p># </p>
-<p>2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。</p>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用 serverless Framework 将前后端分别上线</p>
+<h2 id="后端-deploy"><a href="#后端-deploy" class="headerlink" title="后端 deploy"></a>后端 deploy</h2><blockquote>
+<p>➜  piglet-back git:(master) serverless deploy</p>
+<p>Serverless: Stack update finished…</p>
+<p>service: piglet-back</p>
+<p>stage: dev</p>
+<p>region: us-east-1</p>
+<p>stack: piglet-back-dev</p>
+<p>endpoints:<br>  GET - &gt; <a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms</a></p>
+<p>  POST - &gt; <a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms</a></p>
+<p>functions:</p>
+<p>  getAll: piglet-back-dev-getAll</p>
+<p>  addOne: piglet-back-dev-addOne</p>
+</blockquote>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><blockquote>
+<p>vi FChart.js </p>
+<p>vi Form.js</p>
+<p>将 API 相关接口从 localhost:3000/fms改为</p>
+<p>const URL = ‘<a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;</a></p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjr7knqx200033ncpp9by181t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjr7knqx400043ncp6zjhuewy" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/01/13/SSH连接阿里云ECS/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          SSH连接阿里云ECS
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/01/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/01/23/fetal-movement-join/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">小猪胎动联调篇</div>
     </a>
   
 </nav>

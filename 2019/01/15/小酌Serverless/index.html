@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Serverless 的概念很不错，但真的动手实现一个 Serverless 架构的服务是不是有点没头绪？  不怕，你可以站在巨人的肩膀上。本文基于 Serverless Framework 和 AWS 来实现你的 Serverless Hello world! 首先安装1npm install -g serverless 配置1serverless config credentials -">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-14T11:25:16.384Z">
+<meta property="og:updated_time" content="2019-01-17T16:30:46.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小酌Serverless">
 <meta name="twitter:description" content="Serverless 的概念很不错，但真的动手实现一个 Serverless 架构的服务是不是有点没头绪？  不怕，你可以站在巨人的肩膀上。本文基于 Serverless Framework 和 AWS 来实现你的 Serverless Hello world! 首先安装1npm install -g serverless 配置1serverless config credentials -">
@@ -95,7 +95,15 @@
 <h2 id="访问-EndPoint"><a href="#访问-EndPoint" class="headerlink" title="访问 EndPoint"></a>访问 EndPoint</h2><p>方式一：直接浏览器</p>
 <p><a href="https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob" target="_blank" rel="noopener">https://x3f1jml0z1.execute-api.us-east-1.amazonaws.com/dev/hello/bob</a></p>
 <p>方式二： CLI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless invoke -f hello -l</span><br></pre></td></tr></table></figure></p>
-<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>每次都要deploy才能访问太麻烦怎么办？ <a href="https://www.npmjs.com/package/serverless-offline" target="_blank" rel="noopener">serverless-offline</a> 来救场！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install serverless-offline --save-dev</span><br><span class="line"></span><br><span class="line">serverless offline start</span><br></pre></td></tr></table></figure></p>
+<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>每次都要deploy才能访问太麻烦怎么办？ <a href="https://www.npmjs.com/package/serverless-offline" target="_blank" rel="noopener">serverless-offline</a> 来救场！</p>
+<blockquote>
+<p>npm install serverless-offline –save-dev</p>
+<p>vi serverless.yml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-offline</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>serverless offline start</p>
+</blockquote>
 <h2 id="AWS-设置问题？"><a href="#AWS-设置问题？" class="headerlink" title="AWS 设置问题？"></a>AWS 设置问题？</h2><p><a href="https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44" target="_blank" rel="noopener">点击此处</a></p>
 <h2 id="Serverless-deploy-失败？"><a href="#Serverless-deploy-失败？" class="headerlink" title="Serverless deploy 失败？"></a>Serverless deploy 失败？</h2><p>my-service serverless deploy -v<br>Serverless: Packaging service…<br>Serverless: Excluding development dependencies…</p>
 <p>  Serverless Error —————————————</p>
@@ -106,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjqwamqwh00078bcp13y5n532" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjr7knqxh000k3ncpbzs1ao34" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -148,7 +156,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -158,7 +166,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a>
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -180,23 +188,23 @@
       <ul>
         
           <li>
-            <a href="/2019/01/16/serverless-front-end/">前端 Serverless</a>
+            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/小酌Serverless/">小酌Serverless</a>
+            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
           </li>
         
           <li>
-            <a href="/2019/01/14/the-good-and-the-bad-of-serverless-architecture/">Serverless 架构的优劣</a>
+            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
           </li>
         
           <li>
-            <a href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
+            <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
           </li>
         
           <li>
-            <a href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
+            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
           </li>
         
       </ul>
