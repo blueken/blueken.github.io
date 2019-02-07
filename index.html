@@ -62,6 +62,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-nginx" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/07/nginx/" class="article-date">
+  <time datetime="2019-02-07T07:50:44.000Z" itemprop="datePublished">2019-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/07/nginx/">nginx</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不好意思，教程迟到了很多。 春节放假在家给猪坚强胎教：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">小猪</span><br><span class="line"></span><br><span class="line">小小猪 胖乎乎</span><br><span class="line"></span><br><span class="line">圆圆的肚子，短短的腿</span><br><span class="line"></span><br><span class="line">走起路来摇尾巴</span><br><span class="line"></span><br><span class="line">唱起歌来呼噜噜！</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><p>什么 ？ 本期不是应该讲 前端部分的 部署么？ 怎么变成 nginx 了？</p>
+<p>是的，原本打算使用 <a href="https://surge.sh/" target="_blank" rel="noopener">surge</a> 来部署前端应用，surge 提供子域名 和 https 支持，非常的方便。</p>
+<p>改变主意是因为笔者在阿里云购买了域名  <a href="http://www.jiafeifei.xyz" target="_blank" rel="noopener">www.jiafeifei.xyz</a> 索性把前端部署在 ECS 上好了。 </p>
+<p>之前已经有博客在 ECS 上了，故使用 Nginx 做为反向代理。</p>
+<p>以下所有内容参考自 <a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="noopener">Nginx Beginner’s Guide
+</a><br>  | <a href="https://cloud.tencent.com/developer/article/1004669" target="_blank" rel="noopener">中文版在此</a></p>
+<h2 id="最终-nginx-config"><a href="#最终-nginx-config" class="headerlink" title="最终 nginx.config"></a>最终 nginx.config</h2><blockquote>
+<p>vi /etc/nginx/nginx.conf</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">user root  root; </span><br><span class="line">daemon on;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">  worker_connections  4096;  ## Default: 1024</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include /etc/nginx/mime.types;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 8080;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root /home/bob/blog/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">        location /blog &#123;</span><br><span class="line">            root /home/bob/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">        location /fe &#123;</span><br><span class="line">            root /home/bob/gatsby/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">        error_log logs/error_blog.log error;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 443;</span><br><span class="line">        ssl on;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">        ssl_certificate   /etc/nginx/cert/www.jiafeifei.xyz.pem;</span><br><span class="line">        ssl_certificate_key  /etc/nginx/cert/www.jiafeifei.xyz.key;</span><br><span class="line">        ssl_session_timeout 5m;</span><br><span class="line">        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_prefer_server_ciphers on;</span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">        location /fe &#123;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p><a href="https://www.jiafeifei.xyz/" target="_blank" rel="noopener">https域名访问blog</a></p>
+<p><a href="https://www.jiafeifei.xyz/fe" target="_blank" rel="noopener">https域名访问胎动serverless小应用</a></p>
+<h2 id="没了？"><a href="#没了？" class="headerlink" title="没了？"></a>没了？</h2><p>好吧，其实中间遇到了好多问题。 具体过程已经记不清楚了，统一罗列到这里，如果大家看不明白，可以加我 <a href="17841919">QQ</a></p>
+<hr>
+<p>Q: 域名备案带幕布的图片被打回?</p>
+<p>A: 不要使用前置摄像头，使用后置摄像头，最好手持身份证</p>
+<hr>
+<p>Q: gatsby 路由如何加前缀？</p>
+<p>A: 官方有 <a href="https://www.gatsbyjs.org/docs/path-prefix/" target="_blank" rel="noopener">path-prefix</a></p>
+<blockquote>
+<p>vi gatsby-config.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  pathPrefix: `/fe`,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>gatsby build –prefix-paths</p>
+</blockquote>
+<hr>
+<p>Q: 如果上传 gatsby 静态文件夹 public 到 ecs？</p>
+<p>A:<br>本机:</p>
+<blockquote>
+<p>scp -r ./public <a href="mailto:root@47.99.246.178" target="_blank" rel="noopener">root@47.99.246.178</a>:/home/bob/gatsby/public</p>
+</blockquote>
+<p>ecs:</p>
+<blockquote>
+<p>cd /home/bob/gatsby<br>rm -fr public/ &amp;&amp; mv public fe</p>
+</blockquote>
+<hr>
+<p>Q: nginx 日志哪里看？</p>
+<p>A: /etc/nginx/nginx.conf 里给server 配置好 error_log logs/error_blog.log error; 后日志路径在 /usr/share/nginx/logs/error_blog.log </p>
+<hr>
+<p>Q: nginx 路径配置好了，有时页面报 403 forbidden</p>
+<p>A: 是因为路由对应的路径当前用户没有权限。 笔者遇到的问题是nginx.conf 中 user nginx  root;</p>
+<p>没有 /home/bob/blog访问权限。 改成了 user root root; </p>
+<p>当然也可以 chmod 给 nginx 添加对应的权限 </p>
+<hr>
+<p>Q: 使用 nginx 代理 hexo 博客后出现 css 样式失灵</p>
+<p>A: nginx 中的 mimetype 丢失了， 添加 include /etc/nginx/mime.types;</p>
+<hr>
+<p>Q: 如何给网站添加 https 证书？</p>
+<p>A: <a href="https://help.aliyun.com/knowledge_detail/95491.html?spm=a2c4g.11186623.2.12.12204c073B2hp6" target="_blank" rel="noopener">https://help.aliyun.com/knowledge_detail/95491.html?spm=a2c4g.11186623.2.12.12204c073B2hp6</a></p>
+<p>console.aliyun.com-&gt;ssl 证书-&gt;已签发-下载<br>右边公告-        SSL证书安装指南(包含多种服务器)</p>
+<hr>
+<p>Q: 证书已经添加， nginx 配置也添加好了，为何还是显示网站 unsafe?</p>
+<p>A: ECS 上安全组要打开 443 端口</p>
+<hr>
+<p>Q: 接口不安全？</p>
+<p>A: 是的，即没限制域名白名单，也没做鉴权，请大家在做自己的业务里做好对应安全工作。</p>
+<hr>
+<p>Q: 页面和API加载有点慢?</p>
+<p>A: AWS S3 us-east-2 区访问是有点慢。大家可以选择 asian pacific 并且做好前端性能优化工作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjrumhcb1000czhjg72vebdde" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-fetal-movement-deploy" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/24/fetal-movement-deploy/" class="article-date">
@@ -84,7 +184,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用 serverless Framework 将前后端分别上线</p>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用 serverless Framework 将前后端分别上线。</p>
+<p>本期的任务很简单，但是需要处理的细节很多，请系好安全带，飞机要起飞了。</p>
 <h2 id="后端-deploy"><a href="#后端-deploy" class="headerlink" title="后端 deploy"></a>后端 deploy</h2><blockquote>
 <p>➜  piglet-back git:(master) serverless deploy</p>
 <p>Serverless: Stack update finished…</p>
@@ -98,17 +199,75 @@
 <p>  getAll: piglet-back-dev-getAll</p>
 <p>  addOne: piglet-back-dev-addOne</p>
 </blockquote>
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><blockquote>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p> 将 API 相关接口从 localhost:3000/fms改为后端serverless 部署的URL</p>
+<blockquote>
 <p>vi FChart.js </p>
 <p>vi Form.js</p>
-<p>将 API 相关接口从 localhost:3000/fms改为</p>
 <p>const URL = ‘<a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;</a></p>
 </blockquote>
+<blockquote>
+<p>gatsby server</p>
+</blockquote>
+<p>好了，浏览器访问 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 不出所料， http 页面调用 https 接口是不通的。</p>
+<h2 id="localhost-添加-https"><a href="#localhost-添加-https" class="headerlink" title="localhost 添加 https"></a>localhost 添加 https</h2><p>找到了 <a href="https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec" target="_blank" rel="noopener">medium的相关文章</a></p>
+<p>还找到了 <a href="https://letsencrypt.org/docs/certificates-for-localhost/" target="_blank" rel="noopener">letsencrypt相关文章</a></p>
+<p>甚至还有 <a href="https://github.com/jsha/minica" target="_blank" rel="noopener">github相关工具</a></p>
+<p>但是， chotto ma tte， gatsby 要是有支持https就好了，去官网睢一眼</p>
+<p><a href="https://www.gatsbyjs.org/docs/local-https/" target="_blank" rel="noopener">https://www.gatsbyjs.org/docs/local-https/</a></p>
+<p>很好一个参数 –https or -S 搞定</p>
+<blockquote>
+<p>$ gatsby develop –https</p>
+</blockquote>
+<p>访问 <a href="https://localhost:8000/" target="_blank" rel="noopener">https://localhost:8000/</a> </p>
+<p>太好了，页面出来了。</p>
+<h2 id="等下，还有问题"><a href="#等下，还有问题" class="headerlink" title="等下，还有问题"></a>等下，还有问题</h2><p>页面中数据还是没有。 F12 看下：</p>
+<p>原来 <a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms</a> 报错了：</p>
+<blockquote>
+<p>access to XMLHttpRequest at ‘<a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;</a> from origin ‘<a href="https://localhost:8000&#39;" target="_blank" rel="noopener">https://localhost:8000&#39;</a> has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+</blockquote>
+<h2 id="解决Sercerless-API-CORS-问题"><a href="#解决Sercerless-API-CORS-问题" class="headerlink" title="解决Sercerless API CORS 问题"></a>解决Sercerless API CORS 问题</h2><ol>
+<li><p>step1</p>
+<p> 参考<a href="https://www.altcademy.com/questions/amazon-aws-s3-error-no-access-control-allow-origin-header-is-present-on-the-requested-resource" target="_blank" rel="noopener">https://www.altcademy.com/questions/amazon-aws-s3-error-no-access-control-allow-origin-header-is-present-on-the-requested-resource</a></p>
+</li>
+</ol>
+<pre><code>https://console.aws.amazon.com/s3 -&gt; piglet-back-dev-serverlessdeploymentbucket-1tbvuksuf7cct  -&gt; permissions -&gt; CORS configuration
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;CORSConfiguration&gt;</span><br><span class="line">    &lt;CORSRule&gt;</span><br><span class="line">        &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;</span><br><span class="line">        &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;</span><br><span class="line">        &lt;AllowedMethod&gt;HEAD&lt;/AllowedMethod&gt;</span><br><span class="line">        &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;</span><br><span class="line">        &lt;AllowedHeader&gt;Authorization&lt;/AllowedHeader&gt;</span><br><span class="line">    &lt;/CORSRule&gt;</span><br><span class="line">&lt;/CORSConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+保存后，发现问题依旧
+</code></pre><ol>
+<li><p>step2</p>
+<p> 参考 : <a href="https://stackoverflow.com/questions/35190615/api-gateway-cors-no-access-control-allow-origin-header" target="_blank" rel="noopener">https://stackoverflow.com/questions/35190615/api-gateway-cors-no-access-control-allow-origin-header</a></p>
+</li>
+</ol>
+<pre><code>&gt; vi piglet-back/handler.js
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports.hello = function(event, context, callback) &#123;</span><br><span class="line"></span><br><span class="line">  const response = &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &quot;Access-Control-Allow-Origin&quot; : &quot;*&quot;, // Required for CORS support to work</span><br><span class="line">      &quot;Access-Control-Allow-Credentials&quot; : true // Required for cookies, authorization headers with HTTPS </span><br><span class="line">    &#125;,</span><br><span class="line">    body: JSON.stringify(&#123; &quot;message&quot;: &quot;Hello World!&quot; &#125;)</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  callback(null, response);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直接使用 step2 来尝试解决问题。
+</code></pre><ol>
+<li><p>step3</p>
+<p> 打开页面，终于可以GET拿到数据了, 但是还有问题， POST 数据时还是报  No ‘Access-Control-Allow-Origin’ header is present， 即使给 POST 对应的接口添加 headers 也不行</p>
+<blockquote>
+<p>vi piglet-back/handler.js</p>
+</blockquote>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const db = await connectToDatabase()</span><br><span class="line">    const fm = await FmModel.create(JSON.parse(event.body))</span><br><span class="line">    return &#123;</span><br><span class="line">      statusCode: 200,</span><br><span class="line">      headers: &#123;</span><br><span class="line">        &quot;Access-Control-Allow-Origin&quot; : &quot;*&quot;, // Required for CORS support to work</span><br><span class="line">        &quot;Access-Control-Allow-Credentials&quot; : true // Required for cookies, authorization headers with HTTPS </span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>想到 serverless 不可能 不支持CORS 的，去官网一看，果然有方案:</p>
+<p><a href="https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors" target="_blank" rel="noopener">https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors</a></p>
+<blockquote>
+<p>vi piglet-back/serverless.yml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">functions:</span><br><span class="line">  addOne:</span><br><span class="line">    handler: handler.addOne</span><br><span class="line">    events:</span><br><span class="line">      - http:</span><br><span class="line">          path: fms</span><br><span class="line">          method: post</span><br><span class="line">          cors: true</span><br></pre></td></tr></table></figure>
+<p>加上 cors: true 搞定。 </p>
+<p>PS: 前面 getAll 接口是不是也可能直接 通过 step3 这一个 cors: true 来解决，笔者也没有尝试，读者可以尝试一下。</p>
+</li>
+</ol>
+<p>  今天的内容比较多了，下一次再说前端部署吧。 收工!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjr7knqx400043ncp6zjhuewy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjrumhcak0002zhjgysbuwacf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -197,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjr7knqx700073ncp6ht1ddsl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjrumhcar0006zhjg4o9rxq8y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -275,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjr7knqws00003ncpnf3ustwc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjrumhcaq0005zhjgdqck0ij8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -328,7 +487,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjr7knqx800083ncp7cspc1s5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjrumhcat0007zhjgt00osevs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -383,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjr7knqxc000c3ncpdh0smafz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjrumhcau0009zhjgnkdnv6op" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -428,7 +587,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjr7knqxo000r3ncpux1sjucn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjrumhcbf000pzhjgulvnl0bh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -481,7 +640,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjr7knqxm000p3ncpmudi3lli" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjrumhcbg000rzhjgl0vmw9d0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -545,7 +704,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjr7kpcdm000065cpfhb6o96g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjrumhcb5000fzhjg5gjzfxnd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
@@ -658,106 +817,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/hello-mongodb/" data-id="cjr7knqxa000a3ncpuko0z0qj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/hello-mongodb/" data-id="cjrumhcb2000dzhjg1022056j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-serverless-front-end" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/16/serverless-front-end/" class="article-date">
-  <time datetime="2019-01-16T11:26:12.000Z" itemprop="datePublished">2019-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/16/serverless-front-end/">前端 Serverless</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。</p>
-<p>别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 <a href="https://github.com/fernando-mc/serverless-finch" target="_blank" rel="noopener">serverless-finch</a> 来实现前端资源部署到 S3 的功能。</p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤;"></a>操作步骤;</h2><ol start="0">
-<li><p>创建项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless create --template hello-world --path h-sls</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 serverless-finch</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd h-sls</span><br><span class="line">npm install --save serverless-finch</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>2.通过serverless.yml配置S3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-finch</span><br><span class="line"></span><br><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    bucketName: your-unique-s3-bucketname</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><p>添加index.html &amp; error.html<br>插件默认目录为 client/dis</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd $your_project_folder</span><br><span class="line">mkdir -p client/dist</span><br><span class="line">touch client/dist/index.html client/dist/error.html</span><br><span class="line">echo &quot;Go Serverless&quot; &gt;&gt; client/dist/index.html</span><br><span class="line">echo &quot;Sorry! This is an error page&quot; &gt;&gt; client/dist/error.html</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>部署</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">Serverless: Uploading client files to bucket...</span><br><span class="line"></span><br><span class="line">Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>浏览器访问</p>
-</li>
-</ol>
-<p><a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/</a><br>你就可以看到index.html的内容啦</p>
-<p><a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/something-not-exist" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/something-not-exist</a><br>你就可以看到error.html的内容啦</p>
-<h2 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h2><h3 id="自定义部署目录（不要client-dist）"><a href="#自定义部署目录（不要client-dist）" class="headerlink" title="自定义部署目录（不要client/dist）"></a>自定义部署目录（不要client/dist）</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    distributionFolder: location/of/files</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
-<h3 id="自定义index-error-文件名"><a href="#自定义index-error-文件名" class="headerlink" title="自定义index, error 文件名"></a>自定义index, error 文件名</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    indexDocument: custom-index.html</span><br><span class="line">    errorDocument: custom-error.html</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
-<h3 id="更多自定义"><a href="#更多自定义" class="headerlink" title="更多自定义"></a>更多自定义</h3><p><a href="https://github.com/fernando-mc/serverless-finch#configuration-parameters" target="_blank" rel="noopener">点击github</a></p>
-<h2 id="遇到问题？"><a href="#遇到问题？" class="headerlink" title="遇到问题？"></a>遇到问题？</h2><p>也许你会遇到以下问题</p>
-<hr>
-<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy </span><br><span class="line"></span><br><span class="line">  ServerlessError: Access Denied</span><br></pre></td></tr></table></figure>
-<p><strong> 解决办法：</strong><br><a href="https://console.aws.amazon.com/s3" target="_blank" rel="noopener">https://console.aws.amazon.com/s3</a> -&gt;<br>点击你欲部署的bucket-&gt;permissions-&gt;public access settings-&gt;edit-&gt;uncheck Block new public bucket policies (Recommended)</p>
-<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-bucket.html" target="_blank" rel="noopener">方案来源参考</a></p>
-<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>serverless client deploy显示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure></p>
-<p>但是浏览器打开 <a href="http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</a></p>
-<p>却显示：</p>
-<blockquote>
-<p>400 Bad Request</p>
-<ul>
-<li>Code: IncorrectEndpoint</li>
-<li>Message: The specified bucket exists &gt;in another region. Please direct &gt;requests to the specified endpoint.</li>
-<li>Endpoint: &gt;front-end-bob-alan-green.s3-website-ap-s&gt;outheast-1.amazonaws.com</li>
-<li>RequestId: 66B0FBF5ACB93057</li>
-<li>HostId: QQn2FlYi2nET4H9ddJ3O+GsGzB&gt;+GW5kBAa/+6IGs/o5uCxnIGjyuI&gt;+LXeXS3Wbx2zptWwX6DTO4=</li>
-</ul>
-</blockquote>
-<p>解决方案：</p>
-<p>因为默念发的是 us-east region 而创建的bucket 实际在 southeast 区，所以按提示访问对应的region即可<a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a></p>
-<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p>访问对应的区 <a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a> 浏览器显示：  403 Forbidden</p>
-<ul>
-<li>Code: AccessDenied</li>
-<li>Message: Access Denied</li>
-<li>RequestId: 7D7D0F61E7337BB0</li>
-<li>HostId: NWuTC94hqPbQJYg2lsLjrCyvAlHGfoG+GWdI9swItzqg4fqPOCWkIXbmPT0XmIGAgaon4H600nw=<br>An Error Occurred While Attempting to Retrieve a Custom Error Document</li>
-<li>Code: AccessDenied</li>
-<li>Message: Access Denied</li>
-</ul>
-<p>解决办法：</p>
-<p><a href="https://console.aws.amazon.com/s3/home-&gt;点击对应的bucket" target="_blank" rel="noopener">https://console.aws.amazon.com/s3/home-&gt;点击对应的bucket</a> -&gt;permissions-&gt;public access settings-&gt;edit-&gt;uncheck Block new public bucket policies (Recommended)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjr7knqxk000m3ncptcuipq3h" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
 
     </footer>
   </div>
@@ -784,7 +847,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -794,7 +857,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -803,7 +866,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
     </div>
   </div>
 
@@ -814,6 +877,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/02/07/nginx/">nginx</a>
+          </li>
         
           <li>
             <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
@@ -829,10 +896,6 @@
         
           <li>
             <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
           </li>
         
       </ul>

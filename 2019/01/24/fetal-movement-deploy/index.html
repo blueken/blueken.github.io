@@ -7,18 +7,18 @@
   
   <title>fetal-movement-deploy | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目标使用 serverless Framework 将前后端分别上线 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev region: us-east-1 stack: piglet-back-dev e">
+  <meta name="description" content="目标使用 serverless Framework 将前后端分别上线。 本期的任务很简单，但是需要处理的细节很多，请系好安全带，飞机要起飞了。 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev regio">
 <meta name="keywords" content="serverless,getsby,frontend">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fetal-movement-deploy">
 <meta property="og:url" content="http://yoursite.com/2019/01/24/fetal-movement-deploy/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="目标使用 serverless Framework 将前后端分别上线 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev region: us-east-1 stack: piglet-back-dev e">
+<meta property="og:description" content="目标使用 serverless Framework 将前后端分别上线。 本期的任务很简单，但是需要处理的细节很多，请系好安全带，飞机要起飞了。 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev regio">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-21T11:49:48.096Z">
+<meta property="og:updated_time" content="2019-02-07T07:48:50.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fetal-movement-deploy">
-<meta name="twitter:description" content="目标使用 serverless Framework 将前后端分别上线 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev region: us-east-1 stack: piglet-back-dev e">
+<meta name="twitter:description" content="目标使用 serverless Framework 将前后端分别上线。 本期的任务很简单，但是需要处理的细节很多，请系好安全带，飞机要起飞了。 后端 deploy ➜  piglet-back git:(master) serverless deploy Serverless: Stack update finished… service: piglet-back stage: dev regio">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -87,7 +87,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用 serverless Framework 将前后端分别上线</p>
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>使用 serverless Framework 将前后端分别上线。</p>
+<p>本期的任务很简单，但是需要处理的细节很多，请系好安全带，飞机要起飞了。</p>
 <h2 id="后端-deploy"><a href="#后端-deploy" class="headerlink" title="后端 deploy"></a>后端 deploy</h2><blockquote>
 <p>➜  piglet-back git:(master) serverless deploy</p>
 <p>Serverless: Stack update finished…</p>
@@ -101,17 +102,75 @@
 <p>  getAll: piglet-back-dev-getAll</p>
 <p>  addOne: piglet-back-dev-addOne</p>
 </blockquote>
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><blockquote>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p> 将 API 相关接口从 localhost:3000/fms改为后端serverless 部署的URL</p>
+<blockquote>
 <p>vi FChart.js </p>
 <p>vi Form.js</p>
-<p>将 API 相关接口从 localhost:3000/fms改为</p>
 <p>const URL = ‘<a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;</a></p>
 </blockquote>
+<blockquote>
+<p>gatsby server</p>
+</blockquote>
+<p>好了，浏览器访问 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 不出所料， http 页面调用 https 接口是不通的。</p>
+<h2 id="localhost-添加-https"><a href="#localhost-添加-https" class="headerlink" title="localhost 添加 https"></a>localhost 添加 https</h2><p>找到了 <a href="https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec" target="_blank" rel="noopener">medium的相关文章</a></p>
+<p>还找到了 <a href="https://letsencrypt.org/docs/certificates-for-localhost/" target="_blank" rel="noopener">letsencrypt相关文章</a></p>
+<p>甚至还有 <a href="https://github.com/jsha/minica" target="_blank" rel="noopener">github相关工具</a></p>
+<p>但是， chotto ma tte， gatsby 要是有支持https就好了，去官网睢一眼</p>
+<p><a href="https://www.gatsbyjs.org/docs/local-https/" target="_blank" rel="noopener">https://www.gatsbyjs.org/docs/local-https/</a></p>
+<p>很好一个参数 –https or -S 搞定</p>
+<blockquote>
+<p>$ gatsby develop –https</p>
+</blockquote>
+<p>访问 <a href="https://localhost:8000/" target="_blank" rel="noopener">https://localhost:8000/</a> </p>
+<p>太好了，页面出来了。</p>
+<h2 id="等下，还有问题"><a href="#等下，还有问题" class="headerlink" title="等下，还有问题"></a>等下，还有问题</h2><p>页面中数据还是没有。 F12 看下：</p>
+<p>原来 <a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms</a> 报错了：</p>
+<blockquote>
+<p>access to XMLHttpRequest at ‘<a href="https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;" target="_blank" rel="noopener">https://6xj4j9nu7j.execute-api.us-east-1.amazonaws.com/dev/fms&#39;</a> from origin ‘<a href="https://localhost:8000&#39;" target="_blank" rel="noopener">https://localhost:8000&#39;</a> has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+</blockquote>
+<h2 id="解决Sercerless-API-CORS-问题"><a href="#解决Sercerless-API-CORS-问题" class="headerlink" title="解决Sercerless API CORS 问题"></a>解决Sercerless API CORS 问题</h2><ol>
+<li><p>step1</p>
+<p> 参考<a href="https://www.altcademy.com/questions/amazon-aws-s3-error-no-access-control-allow-origin-header-is-present-on-the-requested-resource" target="_blank" rel="noopener">https://www.altcademy.com/questions/amazon-aws-s3-error-no-access-control-allow-origin-header-is-present-on-the-requested-resource</a></p>
+</li>
+</ol>
+<pre><code>https://console.aws.amazon.com/s3 -&gt; piglet-back-dev-serverlessdeploymentbucket-1tbvuksuf7cct  -&gt; permissions -&gt; CORS configuration
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;CORSConfiguration&gt;</span><br><span class="line">    &lt;CORSRule&gt;</span><br><span class="line">        &lt;AllowedOrigin&gt;*&lt;/AllowedOrigin&gt;</span><br><span class="line">        &lt;AllowedMethod&gt;GET&lt;/AllowedMethod&gt;</span><br><span class="line">        &lt;AllowedMethod&gt;HEAD&lt;/AllowedMethod&gt;</span><br><span class="line">        &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;</span><br><span class="line">        &lt;AllowedHeader&gt;Authorization&lt;/AllowedHeader&gt;</span><br><span class="line">    &lt;/CORSRule&gt;</span><br><span class="line">&lt;/CORSConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+保存后，发现问题依旧
+</code></pre><ol>
+<li><p>step2</p>
+<p> 参考 : <a href="https://stackoverflow.com/questions/35190615/api-gateway-cors-no-access-control-allow-origin-header" target="_blank" rel="noopener">https://stackoverflow.com/questions/35190615/api-gateway-cors-no-access-control-allow-origin-header</a></p>
+</li>
+</ol>
+<pre><code>&gt; vi piglet-back/handler.js
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports.hello = function(event, context, callback) &#123;</span><br><span class="line"></span><br><span class="line">  const response = &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &quot;Access-Control-Allow-Origin&quot; : &quot;*&quot;, // Required for CORS support to work</span><br><span class="line">      &quot;Access-Control-Allow-Credentials&quot; : true // Required for cookies, authorization headers with HTTPS </span><br><span class="line">    &#125;,</span><br><span class="line">    body: JSON.stringify(&#123; &quot;message&quot;: &quot;Hello World!&quot; &#125;)</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  callback(null, response);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直接使用 step2 来尝试解决问题。
+</code></pre><ol>
+<li><p>step3</p>
+<p> 打开页面，终于可以GET拿到数据了, 但是还有问题， POST 数据时还是报  No ‘Access-Control-Allow-Origin’ header is present， 即使给 POST 对应的接口添加 headers 也不行</p>
+<blockquote>
+<p>vi piglet-back/handler.js</p>
+</blockquote>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const db = await connectToDatabase()</span><br><span class="line">    const fm = await FmModel.create(JSON.parse(event.body))</span><br><span class="line">    return &#123;</span><br><span class="line">      statusCode: 200,</span><br><span class="line">      headers: &#123;</span><br><span class="line">        &quot;Access-Control-Allow-Origin&quot; : &quot;*&quot;, // Required for CORS support to work</span><br><span class="line">        &quot;Access-Control-Allow-Credentials&quot; : true // Required for cookies, authorization headers with HTTPS </span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>想到 serverless 不可能 不支持CORS 的，去官网一看，果然有方案:</p>
+<p><a href="https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors" target="_blank" rel="noopener">https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors</a></p>
+<blockquote>
+<p>vi piglet-back/serverless.yml</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">functions:</span><br><span class="line">  addOne:</span><br><span class="line">    handler: handler.addOne</span><br><span class="line">    events:</span><br><span class="line">      - http:</span><br><span class="line">          path: fms</span><br><span class="line">          method: post</span><br><span class="line">          cors: true</span><br></pre></td></tr></table></figure>
+<p>加上 cors: true 搞定。 </p>
+<p>PS: 前面 getAll 接口是不是也可能直接 通过 step3 这一个 cors: true 来解决，笔者也没有尝试，读者可以尝试一下。</p>
+</li>
+</ol>
+<p>  今天的内容比较多了，下一次再说前端部署吧。 收工!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjr7knqx400043ncp6zjhuewy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjrumhcak0002zhjgysbuwacf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -121,6 +180,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/02/07/nginx/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nginx
+        
+      </div>
+    </a>
   
   
     <a href="/2019/01/23/fetal-movement-join/" id="article-nav-older" class="article-nav-link-wrap">
@@ -144,7 +212,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -154,7 +222,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -163,7 +231,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
     </div>
   </div>
 
@@ -174,6 +242,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/02/07/nginx/">nginx</a>
+          </li>
         
           <li>
             <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
@@ -189,10 +261,6 @@
         
           <li>
             <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
           </li>
         
       </ul>

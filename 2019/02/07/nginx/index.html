@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>nginx | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="不好意思，教程迟到了很多。 春节放假在家给猪坚强胎教： 123456789小猪小小猪 胖乎乎圆圆的肚子，短短的腿走起路来摇尾巴唱起歌来呼噜噜！ Nginx什么 ？ 本期不是应该讲 前端部分的 部署么？ 怎么变成 nginx 了？ 是的，原本打算使用 surge 来部署前端应用，surge 提供子域名 和 https 支持，非常的方便。 改变主意是因为笔者在阿里云购买了域名  www.jiaf">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx">
+<meta property="og:url" content="http://yoursite.com/2019/02/07/nginx/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="不好意思，教程迟到了很多。 春节放假在家给猪坚强胎教： 123456789小猪小小猪 胖乎乎圆圆的肚子，短短的腿走起路来摇尾巴唱起歌来呼噜噜！ Nginx什么 ？ 本期不是应该讲 前端部分的 部署么？ 怎么变成 nginx 了？ 是的，原本打算使用 surge 来部署前端应用，surge 提供子域名 和 https 支持，非常的方便。 改变主意是因为笔者在阿里云购买了域名  www.jiaf">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-07T12:27:25.011Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx">
+<meta name="twitter:description" content="不好意思，教程迟到了很多。 春节放假在家给猪坚强胎教： 123456789小猪小小猪 胖乎乎圆圆的肚子，短短的腿走起路来摇尾巴唱起歌来呼噜噜！ Nginx什么 ？ 本期不是应该讲 前端部分的 部署么？ 怎么变成 nginx 了？ 是的，原本打算使用 surge 来部署前端应用，surge 提供子域名 和 https 支持，非常的方便。 改变主意是因为笔者在阿里云购买了域名  www.jiaf">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/07/nginx/" class="article-date">
+  <time datetime="2019-02-07T07:50:44.000Z" itemprop="datePublished">2019-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nginx
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不好意思，教程迟到了很多。 春节放假在家给猪坚强胎教：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">小猪</span><br><span class="line"></span><br><span class="line">小小猪 胖乎乎</span><br><span class="line"></span><br><span class="line">圆圆的肚子，短短的腿</span><br><span class="line"></span><br><span class="line">走起路来摇尾巴</span><br><span class="line"></span><br><span class="line">唱起歌来呼噜噜！</span><br></pre></td></tr></table></figure>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><p>什么 ？ 本期不是应该讲 前端部分的 部署么？ 怎么变成 nginx 了？</p>
+<p>是的，原本打算使用 <a href="https://surge.sh/" target="_blank" rel="noopener">surge</a> 来部署前端应用，surge 提供子域名 和 https 支持，非常的方便。</p>
+<p>改变主意是因为笔者在阿里云购买了域名  <a href="http://www.jiafeifei.xyz" target="_blank" rel="noopener">www.jiafeifei.xyz</a> 索性把前端部署在 ECS 上好了。 </p>
+<p>之前已经有博客在 ECS 上了，故使用 Nginx 做为反向代理。</p>
+<p>以下所有内容参考自 <a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="noopener">Nginx Beginner’s Guide
+</a><br>  | <a href="https://cloud.tencent.com/developer/article/1004669" target="_blank" rel="noopener">中文版在此</a></p>
+<h2 id="最终-nginx-config"><a href="#最终-nginx-config" class="headerlink" title="最终 nginx.config"></a>最终 nginx.config</h2><blockquote>
+<p>vi /etc/nginx/nginx.conf</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">user root  root; </span><br><span class="line">daemon on;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">  worker_connections  4096;  ## Default: 1024</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include /etc/nginx/mime.types;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 8080;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root /home/bob/blog/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">        location /blog &#123;</span><br><span class="line">            root /home/bob/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">        location /fe &#123;</span><br><span class="line">            root /home/bob/gatsby/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line">        error_log logs/error_blog.log error;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 443;</span><br><span class="line">        ssl on;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">        ssl_certificate   /etc/nginx/cert/www.jiafeifei.xyz.pem;</span><br><span class="line">        ssl_certificate_key  /etc/nginx/cert/www.jiafeifei.xyz.key;</span><br><span class="line">        ssl_session_timeout 5m;</span><br><span class="line">        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_prefer_server_ciphers on;</span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">        location /fe &#123;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass http://localhost:8080;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p><a href="https://www.jiafeifei.xyz/" target="_blank" rel="noopener">https域名访问blog</a></p>
+<p><a href="https://www.jiafeifei.xyz/fe" target="_blank" rel="noopener">https域名访问胎动serverless小应用</a></p>
+<h2 id="没了？"><a href="#没了？" class="headerlink" title="没了？"></a>没了？</h2><p>好吧，其实中间遇到了好多问题。 具体过程已经记不清楚了，统一罗列到这里，如果大家看不明白，可以加我 <a href="17841919">QQ</a></p>
+<hr>
+<p>Q: 域名备案带幕布的图片被打回?</p>
+<p>A: 不要使用前置摄像头，使用后置摄像头，最好手持身份证</p>
+<hr>
+<p>Q: gatsby 路由如何加前缀？</p>
+<p>A: 官方有 <a href="https://www.gatsbyjs.org/docs/path-prefix/" target="_blank" rel="noopener">path-prefix</a></p>
+<blockquote>
+<p>vi gatsby-config.js</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  pathPrefix: `/fe`,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>gatsby build –prefix-paths</p>
+</blockquote>
+<hr>
+<p>Q: 如果上传 gatsby 静态文件夹 public 到 ecs？</p>
+<p>A:<br>本机:</p>
+<blockquote>
+<p>scp -r ./public <a href="mailto:root@47.99.246.178" target="_blank" rel="noopener">root@47.99.246.178</a>:/home/bob/gatsby/public</p>
+</blockquote>
+<p>ecs:</p>
+<blockquote>
+<p>cd /home/bob/gatsby<br>rm -fr public/ &amp;&amp; mv public fe</p>
+</blockquote>
+<hr>
+<p>Q: nginx 日志哪里看？</p>
+<p>A: /etc/nginx/nginx.conf 里给server 配置好 error_log logs/error_blog.log error; 后日志路径在 /usr/share/nginx/logs/error_blog.log </p>
+<hr>
+<p>Q: nginx 路径配置好了，有时页面报 403 forbidden</p>
+<p>A: 是因为路由对应的路径当前用户没有权限。 笔者遇到的问题是nginx.conf 中 user nginx  root;</p>
+<p>没有 /home/bob/blog访问权限。 改成了 user root root; </p>
+<p>当然也可以 chmod 给 nginx 添加对应的权限 </p>
+<hr>
+<p>Q: 使用 nginx 代理 hexo 博客后出现 css 样式失灵</p>
+<p>A: nginx 中的 mimetype 丢失了， 添加 include /etc/nginx/mime.types;</p>
+<hr>
+<p>Q: 如何给网站添加 https 证书？</p>
+<p>A: <a href="https://help.aliyun.com/knowledge_detail/95491.html?spm=a2c4g.11186623.2.12.12204c073B2hp6" target="_blank" rel="noopener">https://help.aliyun.com/knowledge_detail/95491.html?spm=a2c4g.11186623.2.12.12204c073B2hp6</a></p>
+<p>console.aliyun.com-&gt;ssl 证书-&gt;已签发-下载<br>右边公告-        SSL证书安装指南(包含多种服务器)</p>
+<hr>
+<p>Q: 证书已经添加， nginx 配置也添加好了，为何还是显示网站 unsafe?</p>
+<p>A: ECS 上安全组要打开 443 端口</p>
+<hr>
+<p>Q: 接口不安全？</p>
+<p>A: 是的，即没限制域名白名单，也没做鉴权，请大家在做自己的业务里做好对应安全工作。</p>
+<hr>
+<p>Q: 页面和API加载有点慢?</p>
+<p>A: AWS S3 us-east-2 区访问是有点慢。大家可以选择 asian pacific 并且做好前端性能优化工作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjrumhcb1000czhjg72vebdde" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/24/fetal-movement-deploy/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">fetal-movement-deploy</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/07/nginx/">nginx</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

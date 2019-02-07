@@ -62,6 +62,102 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-serverless-front-end" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/16/serverless-front-end/" class="article-date">
+  <time datetime="2019-01-16T11:26:12.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/16/serverless-front-end/">前端 Serverless</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇文章我们使用了 serverless 来部署我们的第一个 AWS 服务。开心之余，你发现你应用中前端相关的部分也需要部署但却没有包括。</p>
+<p>别急，Serverless 框架本身支持使用插件来进行扩展，本文我们将使用 <a href="https://github.com/fernando-mc/serverless-finch" target="_blank" rel="noopener">serverless-finch</a> 来实现前端资源部署到 S3 的功能。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤;"></a>操作步骤;</h2><ol start="0">
+<li><p>创建项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverless create --template hello-world --path h-sls</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 serverless-finch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd h-sls</span><br><span class="line">npm install --save serverless-finch</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.通过serverless.yml配置S3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-finch</span><br><span class="line"></span><br><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    bucketName: your-unique-s3-bucketname</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>添加index.html &amp; error.html<br>插件默认目录为 client/dis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd $your_project_folder</span><br><span class="line">mkdir -p client/dist</span><br><span class="line">touch client/dist/index.html client/dist/error.html</span><br><span class="line">echo &quot;Go Serverless&quot; &gt;&gt; client/dist/index.html</span><br><span class="line">echo &quot;Sorry! This is an error page&quot; &gt;&gt; client/dist/error.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">Serverless: Uploading client files to bucket...</span><br><span class="line"></span><br><span class="line">Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浏览器访问</p>
+</li>
+</ol>
+<p><a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/</a><br>你就可以看到index.html的内容啦</p>
+<p><a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/something-not-exist" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com/something-not-exist</a><br>你就可以看到error.html的内容啦</p>
+<h2 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h2><h3 id="自定义部署目录（不要client-dist）"><a href="#自定义部署目录（不要client-dist）" class="headerlink" title="自定义部署目录（不要client/dist）"></a>自定义部署目录（不要client/dist）</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    distributionFolder: location/of/files</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义index-error-文件名"><a href="#自定义index-error-文件名" class="headerlink" title="自定义index, error 文件名"></a>自定义index, error 文件名</h3><p>修改 servereless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">custom:</span><br><span class="line">  client:</span><br><span class="line">    ...</span><br><span class="line">    indexDocument: custom-index.html</span><br><span class="line">    errorDocument: custom-error.html</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="更多自定义"><a href="#更多自定义" class="headerlink" title="更多自定义"></a>更多自定义</h3><p><a href="https://github.com/fernando-mc/serverless-finch#configuration-parameters" target="_blank" rel="noopener">点击github</a></p>
+<h2 id="遇到问题？"><a href="#遇到问题？" class="headerlink" title="遇到问题？"></a>遇到问题？</h2><p>也许你会遇到以下问题</p>
+<hr>
+<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">serverless client deploy </span><br><span class="line"></span><br><span class="line">  ServerlessError: Access Denied</span><br></pre></td></tr></table></figure>
+<p><strong> 解决办法：</strong><br><a href="https://console.aws.amazon.com/s3" target="_blank" rel="noopener">https://console.aws.amazon.com/s3</a> -&gt;<br>点击你欲部署的bucket-&gt;permissions-&gt;public access settings-&gt;edit-&gt;uncheck Block new public bucket policies (Recommended)</p>
+<p><a href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access-bucket.html" target="_blank" rel="noopener">方案来源参考</a></p>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><p>serverless client deploy显示成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> Serverless: Success! Your site should be available at http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</span><br></pre></td></tr></table></figure></p>
+<p>但是浏览器打开 <a href="http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-us-east-1.amazonaws.com/</a></p>
+<p>却显示：</p>
+<blockquote>
+<p>400 Bad Request</p>
+<ul>
+<li>Code: IncorrectEndpoint</li>
+<li>Message: The specified bucket exists &gt;in another region. Please direct &gt;requests to the specified endpoint.</li>
+<li>Endpoint: &gt;front-end-bob-alan-green.s3-website-ap-s&gt;outheast-1.amazonaws.com</li>
+<li>RequestId: 66B0FBF5ACB93057</li>
+<li>HostId: QQn2FlYi2nET4H9ddJ3O+GsGzB&gt;+GW5kBAa/+6IGs/o5uCxnIGjyuI&gt;+LXeXS3Wbx2zptWwX6DTO4=</li>
+</ul>
+</blockquote>
+<p>解决方案：</p>
+<p>因为默念发的是 us-east region 而创建的bucket 实际在 southeast 区，所以按提示访问对应的region即可<a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a></p>
+<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><p>访问对应的区 <a href="http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com" target="_blank" rel="noopener">http://front-end-bob-alan-green.s3-website-ap-southeast-1.amazonaws.com</a> 浏览器显示：  403 Forbidden</p>
+<ul>
+<li>Code: AccessDenied</li>
+<li>Message: Access Denied</li>
+<li>RequestId: 7D7D0F61E7337BB0</li>
+<li>HostId: NWuTC94hqPbQJYg2lsLjrCyvAlHGfoG+GWdI9swItzqg4fqPOCWkIXbmPT0XmIGAgaon4H600nw=<br>An Error Occurred While Attempting to Retrieve a Custom Error Document</li>
+<li>Code: AccessDenied</li>
+<li>Message: Access Denied</li>
+</ul>
+<p>解决办法：</p>
+<p><a href="https://console.aws.amazon.com/s3/home-&gt;点击对应的bucket" target="_blank" rel="noopener">https://console.aws.amazon.com/s3/home-&gt;点击对应的bucket</a> -&gt;permissions-&gt;public access settings-&gt;edit-&gt;uncheck Block new public bucket policies (Recommended)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjrumhcb7000hzhjgcgi8jmle" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-小酌Serverless" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/15/小酌Serverless/" class="article-date">
@@ -111,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjr7knqxh000k3ncpbzs1ao34" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjrumhcbc000kzhjg90qfp7zx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -172,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjr7knqxg000h3ncpvo7we2xe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjrumhcbe000mzhjgf0wt7ogg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -276,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjr7knqwy00013ncpe93tiz7c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjrumhcac0000zhjgb9sgraaj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -342,7 +438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjr7knqx500053ncpxuxzryf2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjrumhcal0003zhjgzbczob8n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -380,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjr7knqx200033ncpp9by181t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjrumhcah0001zhjgv7235hnf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -425,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjr7knqxd000f3ncpjoy8gh15" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjrumhcaz000azhjg2fu5b7qj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -453,7 +549,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -463,7 +559,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -472,7 +568,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
     </div>
   </div>
 
@@ -483,6 +579,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/02/07/nginx/">nginx</a>
+          </li>
         
           <li>
             <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
@@ -498,10 +598,6 @@
         
           <li>
             <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
           </li>
         
       </ul>
