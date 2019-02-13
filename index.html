@@ -62,6 +62,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-custom-event" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/13/custom-event/" class="article-date">
+  <time datetime="2019-02-13T12:15:40.000Z" itemprop="datePublished">2019-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/13/custom-event/">custom-event</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="如何模拟一个键盘事件-shift-a"><a href="#如何模拟一个键盘事件-shift-a" class="headerlink" title="如何模拟一个键盘事件 shift + a?"></a>如何模拟一个键盘事件 shift + a?</h2><h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let evt = new KeyboardEvent(&quot;keydown&quot;, &#123;</span><br><span class="line">          shiftKey: true,</span><br><span class="line">          key: &quot;A&quot;,</span><br><span class="line">          keyCode: 65</span><br><span class="line">        &#125;);</span><br><span class="line">document.dispatchEvent(evt);</span><br></pre></td></tr></table></figure>
+<h3 id="原委"><a href="#原委" class="headerlink" title="原委"></a>原委</h3><p>今天团队一个小伙伴问，怎么模拟一个 shift + a 事件，于是扔给了他一个 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events" target="_blank" rel="noopener">链接</a></p>
+<p>后来有时间了，自己也试了一把，结果还是遇到了一些小问题。</p>
+<p>详细内容写到了 <a href="https://codesandbox.io/s/jln0zz096w" target="_blank" rel="noopener">codesandbox</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/13/custom-event/" data-id="cjs3641890000akcpq5ko416h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-nginx" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/07/nginx/" class="article-date">
@@ -150,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjrumhcb1000czhjg72vebdde" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjs36418z000kakcp9gckbj3w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -267,7 +309,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjrumhcak0002zhjgysbuwacf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjs36418n0008akcp44ekw7hk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -356,7 +398,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjrumhcar0006zhjg4o9rxq8y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjs36418p000aakcpo5nvhxod" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -434,7 +476,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjrumhcaq0005zhjgdqck0ij8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjs36418k0005akcpgzdpmmqv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -487,7 +529,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjrumhcat0007zhjgt00osevs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjs36418v000gakcp5iqd2tgm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -542,7 +584,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjrumhcau0009zhjgnkdnv6op" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjs36418m0007akcpi1sc8e4o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -587,7 +629,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjrumhcbf000pzhjgulvnl0bh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjs36419a000xakcp0bqah7y0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -640,7 +682,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjrumhcbg000rzhjgl0vmw9d0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjs364199000uakcp7p8pidvc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -704,123 +746,10 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjrumhcb5000fzhjg5gjzfxnd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjs36418w000iakcp2z2bass7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-mongodb" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/16/hello-mongodb/" class="article-date">
-  <time datetime="2019-01-16T11:26:45.000Z" itemprop="datePublished">2019-01-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/16/hello-mongodb/">你好Mongodb</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MongoDB-概念"><a href="#MongoDB-概念" class="headerlink" title="MongoDB 概念"></a>MongoDB 概念</h2><table>
-<thead>
-<tr>
-<th>SQL术语/概念</th>
-<th>MongoDB术语/概念</th>
-<th>解释/说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>database</td>
-<td>database</td>
-<td>数据库</td>
-</tr>
-<tr>
-<td>table</td>
-<td>collection</td>
-<td>数据库表/集合</td>
-</tr>
-<tr>
-<td>row</td>
-<td>document</td>
-<td>数据记录行/文档</td>
-</tr>
-<tr>
-<td>column</td>
-<td>field</td>
-<td>数据字段/域</td>
-</tr>
-<tr>
-<td>index</td>
-<td>index</td>
-<td>索引</td>
-</tr>
-<tr>
-<td>table joins</td>
-<td></td>
-<td>表连接,MongoDB不支持</td>
-</tr>
-<tr>
-<td>primary key</td>
-<td>primary key</td>
-<td>主键,MongoDB自动将_id字段设置为主键</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="MongoDB-Atlas"><a href="#MongoDB-Atlas" class="headerlink" title="MongoDB Atlas"></a>MongoDB Atlas</h2><p>MongoDB 的云服务，免费哦</p>
-<ol>
-<li><p>打开官网， 点击 Start free<br><a href="https://www.mongodb.com/cloud/atlas?jmp=nav" target="_blank" rel="noopener">https://www.mongodb.com/cloud/atlas?jmp=nav</a></p>
-</li>
-<li><p>右上角点击用户名称下拉菜单 -&gt; Organizations -&gt; +New Organization -&gt; (Name=rest-api) Next -&gt; Create Organization -&gt; New Project -&gt; (Name=rest-api) Next -&gt; Create Project -&gt; Build A Cluster -&gt; Cloud Provider &amp; Region 选择<br>AWS, Singapore (ap-southeast-1)  -&gt; Create Cluster -&gt; 等待5分钟 -&gt; 创建成功后，从Overview 切换到 Security Tab -&gt; ADD NEW USER -&gt; 切回Overview Tab -&gt; CONNECT -&gt; ADD Your current IP Address -&gt; Choose a connection Method -&gt; Connect Your Applictioan -&gt; Standard connection string -&gt; Copy String -&gt; close</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodb://admin:&lt;PASSWORD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true</span><br></pre></td></tr></table></figure>
-<h2 id="Node-js-连接-MongoDB"><a href="#Node-js-连接-MongoDB" class="headerlink" title="Node.js 连接 MongoDB"></a>Node.js 连接 MongoDB</h2><ol>
-<li>mkdir h-mongodb &amp;&amp; cd $_</li>
-<li>npm init -y</li>
-<li>npm install mongodb –save</li>
-<li><p>vi app.js</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">const mongodb = require(&apos;mongodb&apos;)</span><br><span class="line">const MongoClient = mongodb.MongoClient</span><br><span class="line">const assert = require(&apos;assert&apos;)</span><br><span class="line"></span><br><span class="line">const URL = &apos;mongodb://admin:&lt;PASSWORD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line">const DB_NAME = &apos;firstdb&apos;</span><br><span class="line">const client = new MongoClient(URL)</span><br><span class="line"></span><br><span class="line">const insertDocuments = function(db, callback) &#123;</span><br><span class="line">  // Get the documents collection</span><br><span class="line">  const collection = db.collection(&apos;documents&apos;);</span><br><span class="line">  // Insert some documents</span><br><span class="line">  collection.insertMany([</span><br><span class="line">    &#123;a : 1&#125;, &#123;a : 2&#125;, &#123;a : 3&#125;</span><br><span class="line">  ], function(err, result) &#123;</span><br><span class="line">    assert.equal(err, null);</span><br><span class="line">    assert.equal(3, result.result.n);</span><br><span class="line">    assert.equal(3, result.ops.length);</span><br><span class="line">    console.log(&quot;Inserted 3 documents into the collection&quot;);</span><br><span class="line">    callback(result);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">client.connect(function(err)&#123;</span><br><span class="line">  assert.equal(err, null)</span><br><span class="line">  console.log(&quot;Connected successfully to server&quot;);</span><br><span class="line">  </span><br><span class="line">  const db = client.db(DB_NAME)</span><br><span class="line">  </span><br><span class="line">  insertDocuments(db, function() &#123;</span><br><span class="line">    client.close();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>➜  h-mongodb node app.js</p>
-<blockquote>
-<p>(node:60512) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.<br> Connected successfully to server<br> Inserted 3 documents into the collection</p>
-</blockquote>
-</li>
-<li><p><a href="https://cloud.mongodb.com/v2" target="_blank" rel="noopener">https://cloud.mongodb.com/v2</a> -&gt; Clustrrs Overview -&gt; COLLECTIONS -&gt; 可以看到  firstdb.documents 有三条插入的记录</p>
-</li>
-</ol>
-<h2 id="更多-MongoDB-的操作"><a href="#更多-MongoDB-的操作" class="headerlink" title="更多 MongoDB 的操作"></a>更多 MongoDB 的操作</h2><p><a href="http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/" target="_blank" rel="noopener">http://mongodb.github.io/node-mongodb-native/3.1/quick-start/quick-start/</a></p>
-<h2 id="MongoDB-CLI-相关命令"><a href="#MongoDB-CLI-相关命令" class="headerlink" title="MongoDB CLI 相关命令"></a>MongoDB CLI 相关命令</h2><p><a href="http://www.runoob.com/mongodb/mongodb-create-database.html" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-create-database.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/hello-mongodb/" data-id="cjrumhcb2000dzhjg1022056j" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
 
     </footer>
   </div>
@@ -847,7 +776,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -857,7 +786,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -879,6 +808,10 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       <ul>
         
           <li>
+            <a href="/2019/02/13/custom-event/">custom-event</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/07/nginx/">nginx</a>
           </li>
         
@@ -892,10 +825,6 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
         
           <li>
             <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
           </li>
         
       </ul>
