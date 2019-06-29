@@ -62,6 +62,297 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-regexp" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/20/regexp/" class="article-date">
+  <time datetime="2019-02-20T08:34:42.000Z" itemprop="datePublished">2019-02-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/20/regexp/">regexp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一道传统老题"><a href="#一道传统老题" class="headerlink" title="一道传统老题"></a>一道传统老题</h2><p>给数字加千分位逗号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;1234567890&quot;.replace(/\B(?=(?:\d&#123;3&#125;)+(?!\d))/g,&quot;,&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>\b 是单词边界 - 单词（中文字符,英文字符,数字）和符号（中文符号,英文符号,空格,制表符,换行）之间的边界</li>
+<li>\B [^\b] 是非单词边界 - 符号与符号,单词与单词的边界</li>
+<li>这边是后 abcd 这边是前</li>
+<li>(?=) 前看</li>
+<li>(?!) 负前看</li>
+<li>(?&lt;=) 后看</li>
+<li>(?&lt;!) 负后看</li>
+</ul>
+<p><a href="https://blog.csdn.net/nicajonh/article/details/78815869" target="_blank" rel="noopener">\b与\B</a><br><a href="https://blog.csdn.net/csm0912/article/details/81206848" target="_blank" rel="noopener">0宽断言</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/20/regexp/" data-id="cjxh71x6u000l5kcpuy660otb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regexp/">regexp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-tips" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/14/linux-tips/" class="article-date">
+  <time datetime="2019-02-14T12:29:16.000Z" itemprop="datePublished">2019-02-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/14/linux-tips/">linux-tips</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常用-Linux-命令"><a href="#常用-Linux-命令" class="headerlink" title="常用 Linux 命令"></a>常用 Linux 命令</h2><h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><h4 id="列模式"><a href="#列模式" class="headerlink" title="列模式"></a>列模式</h4><ul>
+<li>Ctrl + v </li>
+</ul>
+<h4 id="record"><a href="#record" class="headerlink" title="record"></a>record</h4><ul>
+<li>q[a-z,0-9] 开始录制，字母或者数字表示存储区名称 </li>
+<li>一顿操作猛如虎</li>
+<li><p>q   结束录制</p>
+</li>
+<li><p>@[a-z,0-9] 运行录制好的操作</p>
+</li>
+</ul>
+<h3 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h3><h4 id="修改用户名"><a href="#修改用户名" class="headerlink" title="修改用户名"></a>修改用户名</h4><ul>
+<li><p>Su</p>
+</li>
+<li><p>Password $your_account</p>
+</li>
+</ul>
+<h4 id="su-与-sudo-区别"><a href="#su-与-sudo-区别" class="headerlink" title="su 与 sudo 区别"></a>su 与 sudo 区别</h4><ul>
+<li>su 要输入 root 密码</li>
+<li>sudo 要输入 自己密码，更安全</li>
+<li>不是所有人都可以执行 sudo, 配置在 /etc/sudoers</li>
+</ul>
+<h4 id="su-与-su"><a href="#su-与-su" class="headerlink" title="su 与  su -"></a>su 与  su -</h4><ul>
+<li>su 的完整写法是 su - username</li>
+<li>su - 等于  su - root</li>
+<li>su 与 su - 区别， su 不改变 pwd 和 $PATH , su - 改变</li>
+<li>su -c 运行一次管理员权限后自动退回至原用户</li>
+</ul>
+<h3 id="network"><a href="#network" class="headerlink" title="network"></a>network</h3><h4 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h4><blockquote>
+<p>ssh -i ~/Documents/bob/aliyun/first_key_pair.pem  <a href="mailto:root@47.99.246.178" target="_blank" rel="noopener">root@47.99.246.178</a></p>
+</blockquote>
+<h4 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h4><blockquote>
+<p>scp -r ./public <a href="mailto:root@47.99.246.178" target="_blank" rel="noopener">root@47.99.246.178</a>:/home/bob/gatsby</p>
+</blockquote>
+<h4 id="查端口占用"><a href="#查端口占用" class="headerlink" title="查端口占用"></a>查端口占用</h4><ul>
+<li>macOS: <code>lsof -i:80</code></li>
+<li>centOS: <code>netstat -nlt | grep 80</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/14/linux-tips/" data-id="cjxh71x72000n5kcpuwhg07q2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-serverless-stack-cn" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/14/serverless-stack-cn/" class="article-date">
+  <time datetime="2019-02-14T11:19:05.000Z" itemprop="datePublished">2019-02-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/14/serverless-stack-cn/">serverless-stack-cn</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="serverless-stack-cn"><a href="#serverless-stack-cn" class="headerlink" title="serverless-stack.cn"></a>serverless-stack.cn</h2><p>发现国外的 serverless-stack 如火如荼，国内暂时没有找到一家专注 serverless 的网站或者论坛，干脆注册了 serverless-stack.cn </p>
+<h2 id="为什么不是-serverless-stack-com-cn"><a href="#为什么不是-serverless-stack-com-cn" class="headerlink" title="为什么不是 serverless-stack.com.cn"></a>为什么不是 serverless-stack.com.cn</h2><p>目标不仅仅是把 serverless-stack 上的好内容翻译一下。以后的以后还要为基于 Aliyun, Azure 等其它云服务商做对应的学习和教程</p>
+<h2 id="短期目标"><a href="#短期目标" class="headerlink" title="短期目标"></a>短期目标</h2><p>暂时不会花精力去专门创建 Serverless-stack.cn 的网站， 会继续在本博客写关于 serverless 的内容 （包括serverless-stack上关于 AWS 的相关内容）</p>
+<p>那么新的域名怎么办？ CNAME 到 jiafeifei.xyz/serverless-stack来</p>
+<h3 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h3><blockquote>
+<p>mkdir /home/bob/serverless-stack &amp;&amp; cd $_</p>
+<p>vim index.html</p>
+</blockquote>
+<h3 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h3><blockquote>
+<p>vim /etc/nginx/nginx.conf</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">location /serverless-stack &#123;</span><br><span class="line">            root /home/bob/;</span><br><span class="line">            index index.html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>nginx -s reload</p>
+</blockquote>
+<h3 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h3><p>解决 <a href="https://www.cnblogs.com/hfyfpga/p/5451918.html" target="_blank" rel="noopener">vim 乱码问题</a></p>
+<blockquote>
+<p>vim /etc/vimrc </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set fileencodings=ucs-bom,utf-8,gbk,gb2312,cp936,gb18030,big5,latin-1</span><br><span class="line">set encoding=utf-8</span><br><span class="line">set termencoding=utf-8</span><br><span class="line">set fileencoding=utf-8</span><br></pre></td></tr></table></figure>
+<h3 id="步骤四"><a href="#步骤四" class="headerlink" title="步骤四"></a>步骤四</h3><p>解决 页面 乱码问题</p>
+<blockquote>
+<p>vim /home/bob/serverless-stack/index.html </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>收工！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/14/serverless-stack-cn/" data-id="cjxh71x75000u5kcpr6ik8w7n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless-stack/">serverless-stack</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-deeper-in-object" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/13/deeper-in-object/" class="article-date">
+  <time datetime="2019-02-13T12:29:33.000Z" itemprop="datePublished">2019-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/13/deeper-in-object/">deeper-in-object</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家对于 JS 中的 Ojbect 都见的很多了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  name: &apos;bob&apos;,</span><br><span class="line">  sex: &apos;male&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="问几个问题"><a href="#问几个问题" class="headerlink" title="问几个问题"></a>问几个问题</h2><ol>
+<li>如何把对象属性设为“不可删除”？</li>
+<li>accessor 属性是什么，有什么功能？</li>
+<li>如何把对象属性设置成“不可更改”或者“隐藏属性”？</li>
+<li>为什么在 for-in 循环和 Object.keys中 有的属性会出现，而有的不出现？</li>
+<li>如何实现如下代码？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj.id = 5</span><br><span class="line">console.log(obj.id) </span><br><span class="line">// 输出5的二进制字符串 101</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="属性的各类"><a href="#属性的各类" class="headerlink" title="属性的各类"></a>属性的各类</h2><h3 id="Data-Property"><a href="#Data-Property" class="headerlink" title="Data Property"></a>Data Property</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  name: &apos;bob&apos;,</span><br><span class="line">  sex: &apos;male&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，name, sex 叫做数据属性(Data property)</p>
+<h3 id="Accessor-Property"><a href="#Accessor-Property" class="headerlink" title="Accessor Property"></a>Accessor Property</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  _age: 0,</span><br><span class="line">  get age () &#123;</span><br><span class="line">    return this._age</span><br><span class="line">  &#125;,</span><br><span class="line">  set age (n) &#123;</span><br><span class="line">    this._age = n</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，get, set 叫做获取器属性(Accessor property)</p>
+<p>为何需要这么麻烦搞一个setter getter? 因为他给了我们很强大的能力，即在返回一个属性之前对他进行逻辑修改。</p>
+<h3 id="Property-‘s-Attribute"><a href="#Property-‘s-Attribute" class="headerlink" title="Property ‘s Attribute"></a>Property ‘s Attribute</h3><p>这中文翻译成 属性的属性？。。。。</p>
+<p>每一个 property  包含 6 个 attributes</p>
+<ul>
+<li>[[value]]</li>
+<li>[[get]]</li>
+<li>[[set]]</li>
+<li>[[Writable]]</li>
+<li>[[Enumerable]]</li>
+<li>[[Configurable]]</li>
+</ul>
+<p>如何查看这些 Descriptor?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const object = &#123;</span><br><span class="line">  x: 5,</span><br><span class="line">  y: 6</span><br><span class="line">&#125;;</span><br><span class="line">Object.getOwnPropertyDescriptor(object, &apos;x&apos;);</span><br><span class="line">/* </span><br><span class="line">&#123; </span><br><span class="line">  value: 5, </span><br><span class="line">  writable: true, </span><br><span class="line">  enumerable: true, </span><br><span class="line">  configurable: true </span><br><span class="line">&#125;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>如何设置这些 Descriptor?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">Object.defineProperty(obj, &apos;id&apos;, &#123;</span><br><span class="line">  value: 42</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(obj);</span><br><span class="line">// =&gt; &#123; &#125;</span><br><span class="line"></span><br><span class="line">console.log(obj.id);</span><br><span class="line">// =&gt; 42</span><br><span class="line"></span><br><span class="line">Object.defineProperty(obj, &apos;name&apos;, &#123;</span><br><span class="line">  value: &apos;Arfat&apos;,</span><br><span class="line">  writable: false,</span><br><span class="line">  enumerable: true,</span><br><span class="line">  configurable: true</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(obj.name);</span><br><span class="line">// =&gt; &apos;Arfat&apos;</span><br><span class="line"></span><br><span class="line">obj.name = &apos;Arfat Salman&apos;</span><br><span class="line"></span><br><span class="line">console.log(obj.name);</span><br><span class="line">// =&gt; &apos;Arfat&apos; </span><br><span class="line">// (instead of &apos;Arfat Salman&apos;)</span><br><span class="line"></span><br><span class="line">Object.defineProperty(obj, &apos;lastName&apos;, &#123;</span><br><span class="line">  value: &apos;Salman&apos;,</span><br><span class="line">  enumerable: false,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(Object.keys(obj));</span><br><span class="line">// =&gt; [ &apos;name&apos; ]</span><br><span class="line"></span><br><span class="line">delete obj.id;</span><br><span class="line"></span><br><span class="line">console.log(obj.id);</span><br><span class="line">// =&gt; 42</span><br><span class="line"></span><br><span class="line">Object.defineProperties(obj, &#123;</span><br><span class="line">  property1: &#123;</span><br><span class="line">    value: 42,</span><br><span class="line">    writable: true</span><br><span class="line">  &#125;,</span><br><span class="line">  property2: &#123;&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(obj.property1)</span><br><span class="line">// =&gt; 42</span><br></pre></td></tr></table></figure>
+<h3 id="保护对象"><a href="#保护对象" class="headerlink" title="保护对象"></a>保护对象</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>CREATE</th>
+<th>READ</th>
+<th>UPDATE</th>
+<th>DELETE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object.preventExtensions</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Object.seal</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Object.freeze</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><p>文章开头提出的问题，心中应该有思路了吧，加油自己实现一遍！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/13/deeper-in-object/" data-id="cjxh71x6800015kcpooejhc2u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object/">object</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-custom-event" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/13/custom-event/" class="article-date">
@@ -92,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/13/custom-event/" data-id="cjs3641890000akcpq5ko416h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/13/custom-event/" data-id="cjxh71x6i00055kcpyahkm7hv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -192,7 +483,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjs36418z000kakcp9gckbj3w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjxh71x74000q5kcp34b2zz65" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -309,7 +600,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjs36418n0008akcp44ekw7hk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjxh71x6m00085kcp0jzqs4zm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -398,7 +689,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjs36418p000aakcpo5nvhxod" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjxh71x6n00095kcp2uvmwzxi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -476,7 +767,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjs36418k0005akcpgzdpmmqv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjxh71x6k00065kcpm35l3opd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
@@ -529,227 +820,10 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjs36418v000gakcp5iqd2tgm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjxh71x6o000b5kcpzu3y9lnp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fetal-movement-ui" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/20/fetal-movement-ui/" class="article-date">
-  <time datetime="2019-01-20T11:03:34.000Z" itemprop="datePublished">2019-01-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="设计篇"><a href="#设计篇" class="headerlink" title="设计篇"></a>设计篇</h2><p>本人不是设计出身，只能白板徒手出稿了，见笑</p>
-<h2 id="配色"><a href="#配色" class="headerlink" title="配色"></a>配色</h2><p>本人不是设计出身，只能借用大师的一个 <a href="https://www.smashingmagazine.com/2016/04/web-developer-guide-color/" target="_blank" rel="noopener">demo</a> 设计了 </p>
-<p>基色 #30CBE8</p>
-<p>强调色 #FF4430</p>
-<p>深灰 #3A4A4D</p>
-<p>浅灰 #F9FBFB</p>
-<p>白色 #FFFFFF</p>
-<h2 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h2><p>components下新加两个组件</p>
-<p>FChart.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">const FChart = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      Here is a beautiful chart</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FChart</span><br></pre></td></tr></table></figure>
-<p>Form.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">const Form = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      datepicker, options, slider, ok</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Form</span><br></pre></td></tr></table></figure>
-<p>index.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">import FChart from &apos;../components/FChart&apos;</span><br><span class="line">import Form from &apos;../components/Form&apos;</span><br><span class="line"></span><br><span class="line">const IndexPage = () =&gt; (</span><br><span class="line">  &lt;Layout&gt;</span><br><span class="line">    &lt;SEO title=&quot;Home&quot; keywords=&#123;[`gatsby`, `application`, `react`]&#125; /&gt;</span><br><span class="line">    &lt;FChart /&gt;</span><br><span class="line">    &lt;Form /&gt;</span><br><span class="line">  &lt;/Layout&gt;</span><br><span class="line">)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>components/header.js 里换成我们的主色 #30CBE8</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">const Header = (&#123; siteTitle &#125;) =&gt; (</span><br><span class="line">  &lt;div</span><br><span class="line">    style=&#123;&#123;</span><br><span class="line">      background: `#30CBE8`,</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>好了，今天就这么多了，收工！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjs36418m0007akcpi1sc8e4o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-小猪胎动前端篇" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/19/小猪胎动前端篇/" class="article-date">
-  <time datetime="2019-01-19T14:30:06.000Z" itemprop="datePublished">2019-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/19/小猪胎动前端篇/">小猪胎动前端篇之网站搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="创建应用整体目录（包含前后端）"><a href="#创建应用整体目录（包含前后端）" class="headerlink" title="创建应用整体目录（包含前后端）"></a>创建应用整体目录（包含前后端）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir strong-piglet &amp;&amp; cd $_</span><br></pre></td></tr></table></figure>
-<h3 id="安装了不起的盖次比"><a href="#安装了不起的盖次比" class="headerlink" title="安装了不起的盖次比"></a>安装了不起的盖次比</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global gatsby-cli</span><br></pre></td></tr></table></figure>
-<h3 id="使用盖次比创建项目并本地运行"><a href="#使用盖次比创建项目并本地运行" class="headerlink" title="使用盖次比创建项目并本地运行"></a>使用盖次比创建项目并本地运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gatsby new piglet-front --verbose </span><br><span class="line"></span><br><span class="line">cd piglet-front </span><br><span class="line"></span><br><span class="line">gatsby develop</span><br><span class="line"></span><br><span class="line">visit http://localhost:8000/</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>遇到过 gatsby new 一直 waiting…无法完成的情况，换了公司的网络好了。原因不明</p>
-</blockquote>
-<h3 id="盖次比build-production-amp-amp-本地serve-跑production"><a href="#盖次比build-production-amp-amp-本地serve-跑production" class="headerlink" title="盖次比build production &amp;&amp; 本地serve 跑production"></a>盖次比build production &amp;&amp; 本地serve 跑production</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gatsby build</span><br><span class="line">gatsby serve</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjs36419a000xakcp0bqah7y0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-猪坚强的胎动" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/18/猪坚强的胎动/" class="article-date">
-  <time datetime="2019-01-18T12:27:13.000Z" itemprop="datePublished">2019-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/18/猪坚强的胎动/">猪坚强的胎动</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="猪坚强是谁？"><a href="#猪坚强是谁？" class="headerlink" title="猪坚强是谁？"></a>猪坚强是谁？</h2><p>  老婆怀孕28周了，按照医生的说法，从本周开始要正式数胎动了，以便观察胎儿的健康情况。</p>
-<p>  所以猪坚强是还未出生的小盆友，这是她妈妈给他起的非正式名字。</p>
-<h2 id="胎动记录"><a href="#胎动记录" class="headerlink" title="胎动记录"></a>胎动记录</h2><p>  老婆每天会记录3次胎动，微信发给我，我记在 Magic2 的 WPS Office 里。最近对 Serverless 比较感兴趣，索兴用 Serverless 来实现一个简单的 WebApp</p>
-<h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><ul>
-<li>UI: AntDesign + Recharts</li>
-<li><p>前端： GatsBy + Serverless + Finch + S3 </p>
-<blockquote>
-<p>如果不在乎上传第三方平台的话，大力推荐 <a href="https://surge.sh/" target="_blank" rel="noopener">Surge</a> = ServerlessFramework + Finch Plugin + S3。有工具，送域名，还送 https ，童叟无欺！</p>
-</blockquote>
-</li>
-<li>后端:  NodeJs + Serverless + AWS Lambda</li>
-<li><p>数据库：MongoDB + Mongoose + MongoDB Atlas</p>
-<p>开工大吉</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjs364199000uakcp7p8pidvc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-mongoose" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/17/hello-mongoose/" class="article-date">
-  <time datetime="2019-01-17T11:55:02.000Z" itemprop="datePublished">2019-01-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/17/hello-mongoose/">hello Mongoose</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是-Mongoose"><a href="#什么是-Mongoose" class="headerlink" title="什么是 Mongoose"></a>什么是 Mongoose</h2><p>Mongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。</p>
-<p>说人话</p>
-<p>其实就是 MongoDB NodeJS 版本的 ORM</p>
-<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><ol>
-<li>mkdir h-mongoose &amp;&amp; cd $_        </li>
-<li>npm init -y &amp;&amp; npm install mongoose –save</li>
-<li><p>vi app.js</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const URL = &apos;mongodb://admin:&lt;PASSWOD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line">mongoose.connect(URL, &#123; useNewUrlParser: true &#125;)</span><br><span class="line"></span><br><span class="line">const db = mongoose.connection;</span><br><span class="line">db.on(&apos;error&apos;, console.error.bind(console, &apos;connection error:&apos;));</span><br><span class="line">db.once(&apos;open&apos;, function() &#123;</span><br><span class="line">  // we&apos;re connected!</span><br><span class="line">  console.log(&apos;connected :)&apos;);</span><br><span class="line"></span><br><span class="line">  const kittySchema = new mongoose.Schema(&#123;</span><br><span class="line">    name: String</span><br><span class="line">  &#125;)</span><br><span class="line">  const Kitty = mongoose.model(&apos;Kitty&apos;, kittySchema)</span><br><span class="line">  const huahu = new Kitty(&#123;</span><br><span class="line">    name: &apos;Huahu&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">  huahu.save(function(err, huahu)&#123;</span><br><span class="line">    if (err) return console.error(err);</span><br><span class="line">    console.log(&apos;saved! &apos;, huahu.name)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>node app.js</p>
-<blockquote>
-<p> connected :)</p>
-<p> saved!  Huahu</p>
-</blockquote>
-</li>
-</ol>
-<ol>
-<li><a href="https://cloud.mongodb.com/v2" target="_blank" rel="noopener">https://cloud.mongodb.com/v2</a> -&gt; Clustrrs Overview -&gt; COLLECTIONS -&gt; 可以看到  test.kitties 有三条插入的记录</li>
-</ol>
-<h2 id="MongoDB-Atlas-连接问题"><a href="#MongoDB-Atlas-连接问题" class="headerlink" title="MongoDB Atlas 连接问题"></a>MongoDB Atlas 连接问题</h2><p>Q: 如果连接数据库遇到以下问题</p>
-<blockquote>
-<p>➜  h-mongoose node app.js<br>(node:92612) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.<br>connection error: { MongoNetworkError: connection 4 to cluster0-shard-00-01-jzszt.mongodb.net:27017 closed<br>    at TLSSocket.<anonymous> (/Users/bob/Documents/learn/h-mongoose/node_modules/mongodb-core/lib/connection/connection.js:276:9)<br>    at Object.onceWrapper (events.js:315:30)<br>    at emitOne (events.js:121:20)<br>    at TLSSocket.emit (events.js:211:7)<br>    at _handle.close (net.js:557:12)<br>    at TCP.done [as _onclose] (_tls_wrap.js:356:7)<br>  name: ‘MongoNetworkError’,<br>  errorLabels: [ ‘TransientTransactionError’ ],<br>  [Symbol(mongoErrorContextSymbol)]: {} }</anonymous></p>
-</blockquote>
-<p>A: 请在atlas 添加你本机的白名单</p>
-<p>cloud.mongodb.com/v2 -&gt; clusters -&gt; security -&gt; IP Whitelist -&gt; Add IP ADDRESS -&gt; 你的ip地址，百度搜索IP可见 -&gt; Confirm</p>
-<h2 id="更多-Mongoose-内容"><a href="#更多-Mongoose-内容" class="headerlink" title="更多 Mongoose 内容"></a>更多 Mongoose 内容</h2><p><a href="https://mongoosejs.com/docs/index.html" target="_blank" rel="noopener">https://mongoosejs.com/docs/index.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjs36418w000iakcp2z2bass7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
 
     </footer>
   </div>
@@ -762,7 +836,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -776,7 +850,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless-stack/">serverless-stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -786,7 +860,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/serverless-stack/" style="font-size: 10px;">serverless-stack</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -808,23 +882,23 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       <ul>
         
           <li>
+            <a href="/2019/02/20/regexp/">regexp</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/14/linux-tips/">linux-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/14/serverless-stack-cn/">serverless-stack-cn</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/13/deeper-in-object/">deeper-in-object</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/13/custom-event/">custom-event</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/07/nginx/">nginx</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
           </li>
         
       </ul>

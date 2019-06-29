@@ -62,6 +62,223 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fetal-movement-ui" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/20/fetal-movement-ui/" class="article-date">
+  <time datetime="2019-01-20T11:03:34.000Z" itemprop="datePublished">2019-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/20/fetal-movement-ui/">小猪胎动前端篇之UI设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设计篇"><a href="#设计篇" class="headerlink" title="设计篇"></a>设计篇</h2><p>本人不是设计出身，只能白板徒手出稿了，见笑</p>
+<h2 id="配色"><a href="#配色" class="headerlink" title="配色"></a>配色</h2><p>本人不是设计出身，只能借用大师的一个 <a href="https://www.smashingmagazine.com/2016/04/web-developer-guide-color/" target="_blank" rel="noopener">demo</a> 设计了 </p>
+<p>基色 #30CBE8</p>
+<p>强调色 #FF4430</p>
+<p>深灰 #3A4A4D</p>
+<p>浅灰 #F9FBFB</p>
+<p>白色 #FFFFFF</p>
+<h2 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h2><p>components下新加两个组件</p>
+<p>FChart.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">const FChart = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      Here is a beautiful chart</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FChart</span><br></pre></td></tr></table></figure>
+<p>Form.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">const Form = () =&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      datepicker, options, slider, ok</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Form</span><br></pre></td></tr></table></figure>
+<p>index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">import FChart from &apos;../components/FChart&apos;</span><br><span class="line">import Form from &apos;../components/Form&apos;</span><br><span class="line"></span><br><span class="line">const IndexPage = () =&gt; (</span><br><span class="line">  &lt;Layout&gt;</span><br><span class="line">    &lt;SEO title=&quot;Home&quot; keywords=&#123;[`gatsby`, `application`, `react`]&#125; /&gt;</span><br><span class="line">    &lt;FChart /&gt;</span><br><span class="line">    &lt;Form /&gt;</span><br><span class="line">  &lt;/Layout&gt;</span><br><span class="line">)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>components/header.js 里换成我们的主色 #30CBE8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">const Header = (&#123; siteTitle &#125;) =&gt; (</span><br><span class="line">  &lt;div</span><br><span class="line">    style=&#123;&#123;</span><br><span class="line">      background: `#30CBE8`,</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>好了，今天就这么多了，收工！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/20/fetal-movement-ui/" data-id="cjxh71x6r000d5kcpkxxg6tz7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-小猪胎动前端篇" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/19/小猪胎动前端篇/" class="article-date">
+  <time datetime="2019-01-19T14:30:06.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/19/小猪胎动前端篇/">小猪胎动前端篇之网站搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="创建应用整体目录（包含前后端）"><a href="#创建应用整体目录（包含前后端）" class="headerlink" title="创建应用整体目录（包含前后端）"></a>创建应用整体目录（包含前后端）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir strong-piglet &amp;&amp; cd $_</span><br></pre></td></tr></table></figure>
+<h3 id="安装了不起的盖次比"><a href="#安装了不起的盖次比" class="headerlink" title="安装了不起的盖次比"></a>安装了不起的盖次比</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global gatsby-cli</span><br></pre></td></tr></table></figure>
+<h3 id="使用盖次比创建项目并本地运行"><a href="#使用盖次比创建项目并本地运行" class="headerlink" title="使用盖次比创建项目并本地运行"></a>使用盖次比创建项目并本地运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gatsby new piglet-front --verbose </span><br><span class="line"></span><br><span class="line">cd piglet-front </span><br><span class="line"></span><br><span class="line">gatsby develop</span><br><span class="line"></span><br><span class="line">visit http://localhost:8000/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>遇到过 gatsby new 一直 waiting…无法完成的情况，换了公司的网络好了。原因不明</p>
+</blockquote>
+<h3 id="盖次比build-production-amp-amp-本地serve-跑production"><a href="#盖次比build-production-amp-amp-本地serve-跑production" class="headerlink" title="盖次比build production &amp;&amp; 本地serve 跑production"></a>盖次比build production &amp;&amp; 本地serve 跑production</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gatsby build</span><br><span class="line">gatsby serve</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/19/小猪胎动前端篇/" data-id="cjxh71x77000x5kcpwwl02ptq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-猪坚强的胎动" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/18/猪坚强的胎动/" class="article-date">
+  <time datetime="2019-01-18T12:27:13.000Z" itemprop="datePublished">2019-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/18/猪坚强的胎动/">猪坚强的胎动</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="猪坚强是谁？"><a href="#猪坚强是谁？" class="headerlink" title="猪坚强是谁？"></a>猪坚强是谁？</h2><p>  老婆怀孕28周了，按照医生的说法，从本周开始要正式数胎动了，以便观察胎儿的健康情况。</p>
+<p>  所以猪坚强是还未出生的小盆友，这是她妈妈给他起的非正式名字。</p>
+<h2 id="胎动记录"><a href="#胎动记录" class="headerlink" title="胎动记录"></a>胎动记录</h2><p>  老婆每天会记录3次胎动，微信发给我，我记在 Magic2 的 WPS Office 里。最近对 Serverless 比较感兴趣，索兴用 Serverless 来实现一个简单的 WebApp</p>
+<h2 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h2><ul>
+<li>UI: AntDesign + Recharts</li>
+<li><p>前端： GatsBy + Serverless + Finch + S3 </p>
+<blockquote>
+<p>如果不在乎上传第三方平台的话，大力推荐 <a href="https://surge.sh/" target="_blank" rel="noopener">Surge</a> = ServerlessFramework + Finch Plugin + S3。有工具，送域名，还送 https ，童叟无欺！</p>
+</blockquote>
+</li>
+<li>后端:  NodeJs + Serverless + AWS Lambda</li>
+<li><p>数据库：MongoDB + Mongoose + MongoDB Atlas</p>
+<p>开工大吉</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/18/猪坚强的胎动/" data-id="cjxh71x7900125kcp2lledzwz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-mongoose" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/17/hello-mongoose/" class="article-date">
+  <time datetime="2019-01-17T11:55:02.000Z" itemprop="datePublished">2019-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/17/hello-mongoose/">hello Mongoose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是-Mongoose"><a href="#什么是-Mongoose" class="headerlink" title="什么是 Mongoose"></a>什么是 Mongoose</h2><p>Mongoose 是为 Node.js 提供的优雅 MongoDB 对象模型。</p>
+<p>说人话</p>
+<p>其实就是 MongoDB NodeJS 版本的 ORM</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><ol>
+<li>mkdir h-mongoose &amp;&amp; cd $_        </li>
+<li>npm init -y &amp;&amp; npm install mongoose –save</li>
+<li><p>vi app.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const URL = &apos;mongodb://admin:&lt;PASSWOD&gt;@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line">mongoose.connect(URL, &#123; useNewUrlParser: true &#125;)</span><br><span class="line"></span><br><span class="line">const db = mongoose.connection;</span><br><span class="line">db.on(&apos;error&apos;, console.error.bind(console, &apos;connection error:&apos;));</span><br><span class="line">db.once(&apos;open&apos;, function() &#123;</span><br><span class="line">  // we&apos;re connected!</span><br><span class="line">  console.log(&apos;connected :)&apos;);</span><br><span class="line"></span><br><span class="line">  const kittySchema = new mongoose.Schema(&#123;</span><br><span class="line">    name: String</span><br><span class="line">  &#125;)</span><br><span class="line">  const Kitty = mongoose.model(&apos;Kitty&apos;, kittySchema)</span><br><span class="line">  const huahu = new Kitty(&#123;</span><br><span class="line">    name: &apos;Huahu&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">  huahu.save(function(err, huahu)&#123;</span><br><span class="line">    if (err) return console.error(err);</span><br><span class="line">    console.log(&apos;saved! &apos;, huahu.name)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node app.js</p>
+<blockquote>
+<p> connected :)</p>
+<p> saved!  Huahu</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><a href="https://cloud.mongodb.com/v2" target="_blank" rel="noopener">https://cloud.mongodb.com/v2</a> -&gt; Clustrrs Overview -&gt; COLLECTIONS -&gt; 可以看到  test.kitties 有三条插入的记录</li>
+</ol>
+<h2 id="MongoDB-Atlas-连接问题"><a href="#MongoDB-Atlas-连接问题" class="headerlink" title="MongoDB Atlas 连接问题"></a>MongoDB Atlas 连接问题</h2><p>Q: 如果连接数据库遇到以下问题</p>
+<blockquote>
+<p>➜  h-mongoose node app.js<br>(node:92612) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.<br>connection error: { MongoNetworkError: connection 4 to cluster0-shard-00-01-jzszt.mongodb.net:27017 closed<br>    at TLSSocket.<anonymous> (/Users/bob/Documents/learn/h-mongoose/node_modules/mongodb-core/lib/connection/connection.js:276:9)<br>    at Object.onceWrapper (events.js:315:30)<br>    at emitOne (events.js:121:20)<br>    at TLSSocket.emit (events.js:211:7)<br>    at _handle.close (net.js:557:12)<br>    at TCP.done [as _onclose] (_tls_wrap.js:356:7)<br>  name: ‘MongoNetworkError’,<br>  errorLabels: [ ‘TransientTransactionError’ ],<br>  [Symbol(mongoErrorContextSymbol)]: {} }</anonymous></p>
+</blockquote>
+<p>A: 请在atlas 添加你本机的白名单</p>
+<p>cloud.mongodb.com/v2 -&gt; clusters -&gt; security -&gt; IP Whitelist -&gt; Add IP ADDRESS -&gt; 你的ip地址，百度搜索IP可见 -&gt; Confirm</p>
+<h2 id="更多-Mongoose-内容"><a href="#更多-Mongoose-内容" class="headerlink" title="更多 Mongoose 内容"></a>更多 Mongoose 内容</h2><p><a href="https://mongoosejs.com/docs/index.html" target="_blank" rel="noopener">https://mongoosejs.com/docs/index.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/17/hello-mongoose/" data-id="cjxh71x6t000i5kcpcsqrojax" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-mongodb" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/16/hello-mongodb/" class="article-date">
@@ -163,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/hello-mongodb/" data-id="cjs36418t000fakcpjvyqbru5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/hello-mongodb/" data-id="cjxh71x6s000g5kcpfy5cih9o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nosql/">nosql</a></li></ul>
@@ -259,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjs364191000nakcpjizovmad" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/16/serverless-front-end/" data-id="cjxh71x74000s5kcpnshby7ii" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -320,7 +537,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjs364198000sakcp87rmswop" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/15/小酌Serverless/" data-id="cjxh71x78000z5kcpdy5aiiha" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -381,7 +598,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjs364197000pakcp56xid2uu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/14/the-good-and-the-bad-of-serverless-architecture/" data-id="cjxh71x76000v5kcp9ak1gjni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -485,7 +702,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjs36418h0003akcprbrs5k3g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="cjxh71x6a00025kcpppz0oanv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -551,90 +768,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjs36418j0004akcpuh7row38" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-FirstPost" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/FirstPost/" class="article-date">
-  <time datetime="2019-01-09T13:11:40.000Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/FirstPost/">FirstPost</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p># </p>
-<p>2018年双11，99元买入一年的ECS, 因为便宜买来随便玩一下。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjs36418d0001akcp959hws46" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/hello-world/" class="article-date">
-  <time datetime="2019-01-09T12:45:39.893Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjs36418r000cakcpe6go84oq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="cjxh71x6g00045kcpmdmus5tk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -648,7 +782,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -662,7 +796,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getsby/">getsby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object/">object</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless/">serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serverless-stack/">serverless-stack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
     </div>
   </div>
 
@@ -672,7 +806,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/serverless-stack/" style="font-size: 10px;">serverless-stack</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -694,23 +828,23 @@
       <ul>
         
           <li>
+            <a href="/2019/02/20/regexp/">regexp</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/14/linux-tips/">linux-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/14/serverless-stack-cn/">serverless-stack-cn</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/13/deeper-in-object/">deeper-in-object</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/13/custom-event/">custom-event</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/07/nginx/">nginx</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/24/fetal-movement-deploy/">fetal-movement-deploy</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/23/fetal-movement-join/">小猪胎动联调篇</a>
-          </li>
-        
-          <li>
-            <a href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
           </li>
         
       </ul>
