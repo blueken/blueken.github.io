@@ -62,6 +62,266 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-serverless-aliyun" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/23/serverless-aliyun/" class="article-date">
+  <time datetime="2020-06-23T07:18:52.000Z" itemprop="datePublished">2020-06-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/23/serverless-aliyun/">serverless-aliyun</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="2020新文章"><a href="#2020新文章" class="headerlink" title="2020新文章"></a>2020新文章</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/23/serverless-aliyun/" data-id="ckbrlnz5i000q18cp5j6zn6bi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-severless-green-hand" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/29/severless-green-hand/" class="article-date">
+  <time datetime="2019-06-29T07:59:27.000Z" itemprop="datePublished">2019-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/29/severless-green-hand/">severless-green-hand</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="serverless-green-hand"><a href="#serverless-green-hand" class="headerlink" title="serverless-green-hand"></a>serverless-green-hand</h2><p>白驹过隙，一晃小猪已经出生了。妈妈取名：昱珩</p>
+<p>这期间经历了陪产，打针，终于到下个月10号要百天了。</p>
+<p>忽然发现好久没有写 serverless 相关的文章了。再看以前写的的小猪胎动发现竟然自己都快看不懂了。真的是要拳不离手，曲不离口才行。</p>
+<p>于是本篇我做为一个新手再次踏上 serverless 的探索之路，目标是把 servreless-stack 上的文章翻译给国内的小伙伴们</p>
+<p>如果您感兴趣的话，那就快跟上吧。common on~</p>
+<h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h2><h3 id="PREFACE"><a href="#PREFACE" class="headerlink" title="PREFACE"></a>PREFACE</h3><ul>
+<li>Who is this guide for?</li>
+<li>What does this guide cover?</li>
+<li>How to get help?<h2 id="Part-I-The-Basics"><a href="#Part-I-The-Basics" class="headerlink" title="Part I - The Basics"></a>Part I - The Basics</h2><h3 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h3></li>
+<li>What is Serverless?</li>
+<li>What is AWS Lambda?</li>
+<li>Why create Serverless apps?<h3 id="SET-UP-YOUR-AWS-ACCOUNT"><a href="#SET-UP-YOUR-AWS-ACCOUNT" class="headerlink" title="SET UP YOUR AWS ACCOUNT"></a>SET UP YOUR AWS ACCOUNT</h3></li>
+<li>Create an AWS account</li>
+<li>Create an IAM user<ul>
+<li>What is IAM</li>
+<li>What is an ARN</li>
+</ul>
+</li>
+<li>Configure the AWS CLI<h3 id="SETTING-UP-THE-SERVERLESS-BACKEND"><a href="#SETTING-UP-THE-SERVERLESS-BACKEND" class="headerlink" title="SETTING UP THE SERVERLESS BACKEND"></a>SETTING UP THE SERVERLESS BACKEND</h3></li>
+<li>Create a DynamoDB table</li>
+<li>Create an S3 bucket for file uploads</li>
+<li>Create a Cognito user pool<ul>
+<li>Create a Cognito test user</li>
+</ul>
+</li>
+<li>Set up the Serverless Framework<ul>
+<li>Add support for ES6/ES7 JavaScript<h3 id="BUILDING-A-SERVERLESS-REST-API"><a href="#BUILDING-A-SERVERLESS-REST-API" class="headerlink" title="BUILDING A SERVERLESS REST API"></a>BUILDING A SERVERLESS REST API</h3></li>
+</ul>
+</li>
+<li>Add a create note API</li>
+<li>Add a get note API</li>
+<li>Add a list all the notes API</li>
+<li>Add an update note API</li>
+<li>Add a delete note API</li>
+<li>Handle API Gateway CORS errors<h3 id="DEPLOYING-THE-BACKEND"><a href="#DEPLOYING-THE-BACKEND" class="headerlink" title="DEPLOYING THE BACKEND"></a>DEPLOYING THE BACKEND</h3></li>
+<li>Deploy the APIs</li>
+<li>Create a Cognito identity pool<ul>
+<li>Cognito user pool vs identity pool</li>
+</ul>
+</li>
+<li>Test the APIs<h3 id="SETTING-UP-A-REACT-APP"><a href="#SETTING-UP-A-REACT-APP" class="headerlink" title="SETTING UP A REACT APP"></a>SETTING UP A REACT APP</h3></li>
+<li>Create a new React.js app<ul>
+<li>Add app favicons</li>
+<li>Set up custom fonts</li>
+<li>Set up Bootstrap</li>
+</ul>
+</li>
+<li>Handle routes with React Router<ul>
+<li>Create containers</li>
+<li>Adding links in the navbar</li>
+<li>Handle 404s</li>
+</ul>
+</li>
+<li>Configure AWS Amplify<h3 id="BUILDING-A-REACT-APP"><a href="#BUILDING-A-REACT-APP" class="headerlink" title="BUILDING A REACT APP"></a>BUILDING A REACT APP</h3></li>
+<li>Create a login page<ul>
+<li>Login with AWS Cognito</li>
+<li>Add the session to the state</li>
+<li>Load the state from the session</li>
+<li>Clear the session on logout</li>
+<li>Redirect on login and logout</li>
+<li>Give feedback while logging in</li>
+</ul>
+</li>
+<li>Create a signup page<ul>
+<li>Create the signup form</li>
+<li>Signup with AWS Cognito</li>
+</ul>
+</li>
+<li>Add the create note page<ul>
+<li>Call the create API</li>
+<li>Upload a file to S3</li>
+</ul>
+</li>
+<li>List all the notes<ul>
+<li>Call the list API</li>
+</ul>
+</li>
+<li>Display a note<ul>
+<li>Render the note form</li>
+<li>Save changes to a note</li>
+<li>Delete a note</li>
+</ul>
+</li>
+<li>Set up secure pages<ul>
+<li>Create a route that redirects</li>
+<li>Use the redirect routes</li>
+<li>Redirect on login<h3 id="EPLOYING-A-REACT-APP-ON-AWS"><a href="#EPLOYING-A-REACT-APP-ON-AWS" class="headerlink" title="EPLOYING A REACT APP ON AWS"></a>EPLOYING A REACT APP ON AWS</h3></li>
+</ul>
+</li>
+<li>Deploy the Frontend<ul>
+<li>Create an S3 bucket</li>
+<li>Deploy to S3</li>
+<li>Create a CloudFront distribution</li>
+<li>Set up your domain with CloudFront</li>
+<li>Set up www domain redirect</li>
+<li>Set up SSL</li>
+</ul>
+</li>
+<li>Deploy updates<ul>
+<li>Update the app</li>
+<li>Deploy again<h2 id="Part-II-Automation"><a href="#Part-II-Automation" class="headerlink" title="Part II - Automation"></a>Part II - Automation</h2><h3 id="INTRODUCTION-1"><a href="#INTRODUCTION-1" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h3>Getting production ready<h3 id="CREATE-A-NEW-BACKEND"><a href="#CREATE-A-NEW-BACKEND" class="headerlink" title="CREATE A NEW BACKEND"></a>CREATE A NEW BACKEND</h3></li>
+</ul>
+</li>
+<li>Initialize the backend repo<ul>
+<li>Organize the backend repo<h3 id="INFRASTRUCTU-RE-AS-CODE"><a href="#INFRASTRUCTU-RE-AS-CODE" class="headerlink" title="INFRASTRUCTU#RE AS CODE"></a>INFRASTRUCTU#RE AS CODE</h3></li>
+</ul>
+</li>
+<li>What is Infrastructure as Code?<ul>
+<li>Configure DynamoDB in Serverless</li>
+<li>Configure S3 in Serverless</li>
+<li>Configure Cognito User Pool in Serverless</li>
+<li>Configure Cognito Identity Pool in Serverless</li>
+</ul>
+</li>
+<li>Use environment variables in Lambda functions</li>
+<li>Deploy your Serverless infrastructure<h3 id="ADDING-A-STRIPE-BILLING-API"><a href="#ADDING-A-STRIPE-BILLING-API" class="headerlink" title="ADDING A STRIPE BILLING API"></a>ADDING A STRIPE BILLING API</h3></li>
+<li>Working with 3rd party APIs<ul>
+<li>Setup a Stripe account</li>
+<li>Add a billing API</li>
+<li>Load secrets from env.yml</li>
+</ul>
+</li>
+<li>Test the billing API<h3 id="ADDING-UNIT-TESTS"><a href="#ADDING-UNIT-TESTS" class="headerlink" title="ADDING UNIT TESTS"></a>ADDING UNIT TESTS</h3></li>
+<li>Unit tests in Serverless<h3 id="AUTOMATING-SERVERLESS-DEPLOYMENTS"><a href="#AUTOMATING-SERVERLESS-DEPLOYMENTS" class="headerlink" title="AUTOMATING SERVERLESS DEPLOYMENTS"></a>AUTOMATING SERVERLESS DEPLOYMENTS</h3></li>
+<li>Automating Serverless deployments<ul>
+<li>Setting up your project on Seed</li>
+<li>Configure secrets in Seed</li>
+<li>Deploying through Seed</li>
+<li>Set custom domains through Seed</li>
+</ul>
+</li>
+<li>Test the configured APIs</li>
+<li>Monitoring deployments in Seed<h3 id="CONNECT-TO-THE-NEW-BACKEND"><a href="#CONNECT-TO-THE-NEW-BACKEND" class="headerlink" title="CONNECT TO THE NEW BACKEND"></a>CONNECT TO THE NEW BACKEND</h3></li>
+<li>Initialize the frontend repo<ul>
+<li>Manage environments in Create React App<h3 id="ADDING-A-BILLING-FORM"><a href="#ADDING-A-BILLING-FORM" class="headerlink" title="ADDING A BILLING FORM"></a>ADDING A BILLING FORM</h3></li>
+</ul>
+</li>
+<li>Create a settings page<ul>
+<li>Add Stripe keys to config</li>
+<li>Create a billing form</li>
+<li>Connect the billing form<h3 id="AUTOMATING-REACT-APP-DEPLOYMENTS"><a href="#AUTOMATING-REACT-APP-DEPLOYMENTS" class="headerlink" title="AUTOMATING REACT APP DEPLOYMENTS"></a>AUTOMATING REACT APP DEPLOYMENTS</h3></li>
+</ul>
+</li>
+<li>Automating React Deployments<ul>
+<li>Create a build script</li>
+<li>Setting up your project on Netlify</li>
+<li>Custom Domains in Netlify</li>
+</ul>
+</li>
+<li>Frontend workflow<h3 id="CONCLUSION"><a href="#CONCLUSION" class="headerlink" title="CONCLUSION"></a>CONCLUSION</h3></li>
+<li>Wrapping up</li>
+<li>Futher reading</li>
+<li>Translations</li>
+<li>Giving back</li>
+<li>Changelog</li>
+<li>Staying up to date</li>
+<li>Extra Credit<h3 id="SERVERLESS-ARCHITECTURE"><a href="#SERVERLESS-ARCHITECTURE" class="headerlink" title="SERVERLESS ARCHITECTURE"></a>SERVERLESS ARCHITECTURE</h3></li>
+<li>Organizing Serverless projects</li>
+<li>Cross-stack references in Serverless<ul>
+<li>DynamoDB as a Serverless service</li>
+<li>S3 as a Serverless service</li>
+<li>API Gateway domains across services</li>
+<li>Cognito as a Serverless service</li>
+</ul>
+</li>
+<li>Deploying multiple services in Serverless<h3 id="BACKEND"><a href="#BACKEND" class="headerlink" title="BACKEND"></a>BACKEND</h3></li>
+<li>API Gateway and Lambda Logs</li>
+<li>Debugging Serverless API Issues</li>
+<li>Serverless environment variables</li>
+<li>Stages in Serverless Framework</li>
+<li>Backups in DynamoDB</li>
+<li>Configure multiple AWS profiles</li>
+<li>Customize the Serverless IAM Policy</li>
+<li>Mapping Cognito Identity Id and User Pool Id</li>
+<li>Connect to API Gateway with IAM auth</li>
+<li>Serverless Node.js Starter<h3 id="USER-MANAGEMENT"><a href="#USER-MANAGEMENT" class="headerlink" title="USER MANAGEMENT"></a>USER MANAGEMENT</h3></li>
+<li>Manage User Accounts in AWS Amplify<ul>
+<li>Handle Forgot and Reset Password</li>
+<li>Allow Users to Change Passwords</li>
+<li>Allow Users to Change Their Email<h3 id="FRONTEND"><a href="#FRONTEND" class="headerlink" title="FRONTEND"></a>FRONTEND</h3></li>
+</ul>
+</li>
+<li>Code Splitting in Create React App</li>
+<li>Environments in Create React App</li>
+<li>Facebook Login with Cognito using AWS Amplify</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/29/severless-green-hand/" data-id="ckbrlnz5l000v18cpsk4pwkrq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless-stack/">serverless-stack</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-regexp" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/02/20/regexp/" class="article-date">
@@ -100,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/20/regexp/" data-id="cjxh71x6u000l5kcpuy660otb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/20/regexp/" data-id="ckbrlnz5h000n18cpux1kk1hr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regexp/">regexp</a></li></ul>
@@ -176,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/14/linux-tips/" data-id="cjxh71x72000n5kcpuwhg07q2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/14/linux-tips/" data-id="ckbrlnz5e000j18cpm28jq80s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
@@ -240,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/14/serverless-stack-cn/" data-id="cjxh71x75000u5kcpr6ik8w7n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/14/serverless-stack-cn/" data-id="ckbrlnz5k000s18cpg0hlqxdl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless-stack/">serverless-stack</a></li></ul>
@@ -341,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/13/deeper-in-object/" data-id="cjxh71x6800015kcpooejhc2u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/13/deeper-in-object/" data-id="ckbrlnz51000618cp9tq2lebd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object/">object</a></li></ul>
@@ -383,7 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/13/custom-event/" data-id="cjxh71x6i00055kcpyahkm7hv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/13/custom-event/" data-id="ckbrlnz4v000318cpfm4yluf3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KeyboardEvent/">KeyboardEvent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -483,7 +743,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="cjxh71x74000q5kcp34b2zz65" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/nginx/" data-id="ckbrlnz5f000l18cpdkc9r1nw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -600,7 +860,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="cjxh71x6m00085kcp0jzqs4zm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/24/fetal-movement-deploy/" data-id="ckbrlnz53000718cpx0x564ee" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
@@ -689,141 +949,10 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="cjxh71x6n00095kcp2uvmwzxi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/23/fetal-movement-join/" data-id="ckbrlnz54000818cpm64xls5r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/frontend/">frontend</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/getsby/">getsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fetal-movement-backend" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/22/fetal-movement-backend/" class="article-date">
-  <time datetime="2019-01-22T11:37:35.000Z" itemprop="datePublished">2019-01-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/22/fetal-movement-backend/">小猪胎动后端篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>今天我们来使用 Serverless Framwork + MongoDB Atlas 来构建后端 serverless 服务</p>
-<h2 id="后端项目搭建"><a href="#后端项目搭建" class="headerlink" title="后端项目搭建"></a>后端项目搭建</h2><p>前端我们已经在 strong-piglet 下完成了前端网站 piglet-front 的工作</p>
-<blockquote>
-<p>➜  strong-piglet tree -L 1</p>
-<p>.<br>└── piglet-front</p>
-</blockquote>
-<p>接下来创建后端工作目录 piglet-back</p>
-<blockquote>
-<p>serverless create –template aws-nodejs –path piglet-back &amp;&amp; cd piglet-back</p>
-<p>vi serverless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">provider:</span><br><span class="line">  name: aws</span><br><span class="line">  runtime: nodejs8.10</span><br><span class="line"></span><br><span class="line">functions:</span><br><span class="line">  getAll:</span><br><span class="line">    handler: handler.getAll</span><br><span class="line">    events:</span><br><span class="line">      - http:</span><br><span class="line">          path: fms</span><br><span class="line">          method: get</span><br><span class="line">  addOne:</span><br><span class="line">    handler: handler.addOne</span><br><span class="line">    events:</span><br><span class="line">      - http:</span><br><span class="line">          path: fms</span><br><span class="line">          method: post</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>vi handler.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    body: JSON.stringify(&#123;</span><br><span class="line">      code: 0,</span><br><span class="line">      data: &#123;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      message: &apos;add done&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports.getAll = async (event, context) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    body: JSON.stringify(&#123;</span><br><span class="line">      code: 0,</span><br><span class="line">      data: &#123;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line">      message: &apos;get all done&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h2><p>上面的例子并没有任何实质性的逻辑，为了增加信息。我们先本地运行一下</p>
-<blockquote>
-<p>npm i -S serverless-offline</p>
-<p>vi serverless.yml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - serverless-offline</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>serverless offline start –skipCacheInvalidation</p>
-<p>访问 <a href="http://localhost:3000/fms" target="_blank" rel="noopener">http://localhost:3000/fms</a> 可以看到 message: ‘get all done’</p>
-</blockquote>
-<h2 id="来点真材实料"><a href="#来点真材实料" class="headerlink" title="来点真材实料"></a>来点真材实料</h2><p>接下来为两个函数添加实际内容, 我喜欢自顶向下的方式</p>
-<blockquote>
-<p>vi handler.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">const connectToDatabase = require(&apos;./connectToDatabase&apos;)</span><br><span class="line">const FmModel = require(&apos;./FmModel&apos;)</span><br><span class="line"></span><br><span class="line">module.exports.addOne = async (event, context) =&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const db = await connectToDatabase()</span><br><span class="line">    const fm = await FmModel.create(&#123;</span><br><span class="line">      date: &apos;1-18&apos;,</span><br><span class="line">      time: &apos;早&apos;,</span><br><span class="line">      count: 11</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    return &#123;</span><br><span class="line">      statusCode: 200,</span><br><span class="line">      body: JSON.stringify(&#123;</span><br><span class="line">        code: 0,</span><br><span class="line">        data: &#123;</span><br><span class="line">          fm</span><br><span class="line">        &#125;,</span><br><span class="line">        message: &apos;add one fetal movement succesfully&apos;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    console.error(&apos;db connect error:&apos;, error);</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports.getAll = async (event, context) =&gt; &#123;</span><br><span class="line">  const db = await connectToDatabase()</span><br><span class="line">  const fms = await FmModel.find()</span><br><span class="line">  </span><br><span class="line">  return &#123;</span><br><span class="line">    statusCode: 200,</span><br><span class="line">    body: JSON.stringify(&#123;</span><br><span class="line">      code: 0,</span><br><span class="line">      data: &#123;</span><br><span class="line">        fms</span><br><span class="line">      &#125;,</span><br><span class="line">      message: &apos;get all done&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>touch connectToDatabase.js</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const DB_URL = &apos;mongodb://admin:adminnimda@cluster0-shard-00-00-jzszt.mongodb.net:27017,cluster0-shard-00-01-jzszt.mongodb.net:27017,cluster0-shard-00-02-jzszt.mongodb.net:27017/test?ssl=true&amp;replicaSet=Cluster0-shard-0&amp;authSource=admin&amp;retryWrites=true&apos;</span><br><span class="line"></span><br><span class="line">module.exports = connectToDatabase = () =&gt; &#123;</span><br><span class="line">  const db = mongoose.connect(DB_URL)</span><br><span class="line">  const connection = mongoose.connection</span><br><span class="line">  connection.once(&apos;open&apos;, function () &#123;</span><br><span class="line">    console.log(&apos;=====mongodb connect sucessfully=====&apos;);</span><br><span class="line">    </span><br><span class="line">  &#125;)</span><br><span class="line">  connection.on(&apos;error&apos;, function (error) &#123;</span><br><span class="line">    console.error(&apos;=====mongodb connect failed=====&apos;, error);</span><br><span class="line">    </span><br><span class="line">  &#125;)</span><br><span class="line">  return db</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>touch FmModel.js</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(&apos;mongoose&apos;)</span><br><span class="line">const FmSchema = new mongoose.Schema(&#123;</span><br><span class="line">  date: String,</span><br><span class="line">  time: String,</span><br><span class="line">  count: Number</span><br><span class="line">&#125;)</span><br><span class="line">const FmModel = mongoose.model(&apos;FmModel&apos;, FmSchema)</span><br><span class="line">module.exports = FmModel</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>curl -X POST localhost:3000/fms</p>
-<p>{“code”:0,”data”:{“fm”:{“_id”:”5c4297781cff08791b6e0826”,”date”:”1-18”,”time”:”早”,”count”:11,”__v”:0}},”message”:”add one fetal movement succesfully”}%  </p>
-</blockquote>
-<p>好了，数据已经成功写入 mongoDB , 收工！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/22/fetal-movement-backend/" data-id="cjxh71x6k00065kcpm35l3opd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fetal-movement-ui-optimization" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/21/fetal-movement-ui-optimization/" class="article-date">
-  <time datetime="2019-01-21T11:37:35.000Z" itemprop="datePublished">2019-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/21/fetal-movement-ui-optimization/">小猪胎动前端篇之UI润色</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>今天使用 <a href="https://ant.design/index-cn" target="_blank" rel="noopener">AntD</a>、<a href="http://recharts.org/en-US/examples/LineChartWithReferenceLines" target="_blank" rel="noopener">Recharts</a> 为网站润色</p>
-<h2 id="图表润色"><a href="#图表润色" class="headerlink" title="图表润色"></a>图表润色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S recharts</span><br></pre></td></tr></table></figure>
-<p>修改 FChart.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123;LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip, Legend&#125; from &apos;recharts&apos;</span><br><span class="line"></span><br><span class="line">const FChart = () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">  const data = [</span><br><span class="line">    &#123;name: &apos;1月11号早&apos;, 胎动: 10&#125;,</span><br><span class="line">    &#123;name: &apos;1月11号中&apos;, 胎动: 11&#125;,</span><br><span class="line">    &#123;name: &apos;1月11号晚&apos;, 胎动: 9&#125;,</span><br><span class="line">    &#123;name: &apos;1月12号早&apos;, 胎动: 8&#125;,</span><br><span class="line">    &#123;name: &apos;1月12号晚&apos;, 胎动: 10&#125;,</span><br><span class="line">    &#123;name: &apos;1月13号早&apos;, 胎动: 12&#125;,</span><br><span class="line">    &#123;name: &apos;1月13号中&apos;, 胎动: 5&#125;,</span><br><span class="line">  ];</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;LineChart width=&#123;600&#125; height=&#123;300&#125; data=&#123;data&#125; margin=&#123;&#123;top: 20, right: 50, left: 20, bottom: 5&#125;&#125;&gt;</span><br><span class="line">       &lt;CartesianGrid strokeDasharray=&quot;3 3&quot;/&gt;</span><br><span class="line">       &lt;XAxis dataKey=&quot;name&quot;/&gt;</span><br><span class="line">       &lt;YAxis/&gt;</span><br><span class="line">       &lt;Tooltip/&gt;</span><br><span class="line">       &lt;Legend /&gt;</span><br><span class="line">       &lt;ReferenceLine y=&#123;5&#125; label=&quot;警界线&quot; stroke=&quot;red&quot;/&gt;</span><br><span class="line">       &lt;Line type=&quot;monotone&quot; dataKey=&quot;胎动&quot; stroke=&quot;#82ca9d&quot; /&gt;</span><br><span class="line">      &lt;/LineChart&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FChart</span><br></pre></td></tr></table></figure>
-<h2 id="表单润色"><a href="#表单润色" class="headerlink" title="表单润色"></a>表单润色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S antd</span><br></pre></td></tr></table></figure>
-<p>修改 Form.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123; DatePicker, Select, Slider, Button &#125; from &apos;antd&apos;</span><br><span class="line">import &apos;antd/dist/antd.css&apos;</span><br><span class="line"></span><br><span class="line">const Form = () =&gt; &#123;</span><br><span class="line">  const Option = Select.Option</span><br><span class="line">  const onDateChange = (date, dateString) =&gt; &#123;</span><br><span class="line">    console.log(date, dateString);</span><br><span class="line">  &#125;</span><br><span class="line">  const onSelectChange = (value) =&gt; &#123;</span><br><span class="line">    console.log(`selected $&#123;value&#125;`);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;DatePicker onChange=&#123;onDateChange&#125; /&gt;</span><br><span class="line">      &lt;Select defaultValue=&quot;早&quot; style=&#123;&#123; width: 120 &#125;&#125; onChange=&#123;onSelectChange&#125;&gt;</span><br><span class="line">        &lt;Option value=&quot;早&quot;&gt;早晨&lt;/Option&gt;</span><br><span class="line">        &lt;Option value=&quot;午&quot;&gt;中午&lt;/Option&gt;</span><br><span class="line">        &lt;Option value=&quot;晚&quot;&gt;晚上&lt;/Option&gt;</span><br><span class="line">      &lt;/Select&gt;</span><br><span class="line">      &lt;Slider min=&#123;0&#125; max=&#123;12&#125; defaultValue=&#123;8&#125;  style=&#123;&#123; width: 300, display: &apos;inline-block&apos; &#125;&#125;/&gt;</span><br><span class="line">      &lt;Button type=&quot;primary&quot;&gt;记录&lt;/Button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Form</span><br></pre></td></tr></table></figure>
-<h2 id="细节问题"><a href="#细节问题" class="headerlink" title="细节问题"></a>细节问题</h2><p>还有一些细节问题 诸如</p>
-<ol>
-<li>按钮没有显示主色</li>
-<li>按钮没有换行</li>
-<li>滑块没有垂直居中</li>
-<li>日历里的字体太大</li>
-</ol>
-<p>等等小问题暂且不修，收工</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/21/fetal-movement-ui-optimization/" data-id="cjxh71x6o000b5kcpzu3y9lnp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/serverless/">serverless</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/猪坚强/">猪坚强</a></li></ul>
 
     </footer>
   </div>
@@ -860,7 +989,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/serverless-stack/" style="font-size: 10px;">serverless-stack</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/serverless-stack/" style="font-size: 12.5px;">serverless-stack</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -869,7 +998,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
     </div>
   </div>
 
@@ -882,6 +1011,14 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
       <ul>
         
           <li>
+            <a href="/2020/06/23/serverless-aliyun/">serverless-aliyun</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/29/severless-green-hand/">severless-green-hand</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/20/regexp/">regexp</a>
           </li>
         
@@ -891,14 +1028,6 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
         
           <li>
             <a href="/2019/02/14/serverless-stack-cn/">serverless-stack-cn</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/13/deeper-in-object/">deeper-in-object</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/13/custom-event/">custom-event</a>
           </li>
         
       </ul>
@@ -913,7 +1042,7 @@ step1 是否是 step2 的必须前置依赖，笔者没有尝试，读者可直�
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 John Doe<br>
+      &copy; 2020 John Doe<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

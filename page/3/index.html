@@ -62,6 +62,174 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hexo博客搭建" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/Hexo博客搭建/" class="article-date">
+  <time datetime="2019-01-13T03:39:14.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/Hexo博客搭建/">Hexo博客搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
+<li>使用hexo</li>
+<li>项目在本地<ul>
+<li>hexo new xxx 创建文章</li>
+<li>hexo server 本地启服务看效果</li>
+<li>hexo generate -w 本地即时生成静态文件</li>
+</ul>
+</li>
+<li>静态文件在github<ul>
+<li>hexo deploy 上传静态文件到 github</li>
+</ul>
+</li>
+<li>ecs 上运行静态网站<ul>
+<li>git pull (crontab)</li>
+<li>http-server -p 8080</li>
+</ul>
+</li>
+</ul>
+<h2 id="详细说明"><a href="#详细说明" class="headerlink" title="详细说明"></a>详细说明</h2><h3 id="本地硬盘安装-hexo"><a href="#本地硬盘安装-hexo" class="headerlink" title="本地硬盘安装 hexo"></a>本地硬盘安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a></h3><ul>
+<li>npm install hexo-cli -g</li>
+<li>hexo init blog</li>
+<li>cd blog</li>
+<li>npm install</li>
+<li>hexo server</li>
+</ul>
+<h3 id="本地硬盘配置-deploy"><a href="#本地硬盘配置-deploy" class="headerlink" title="本地硬盘配置 deploy"></a>本地硬盘配置 <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">deploy</a></h3><ul>
+<li>npm install hexo-deployer-git –save</li>
+<li>修改_config.yml文件:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:blueken/your.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ECS-装-node、http-server、git"><a href="#ECS-装-node、http-server、git" class="headerlink" title="ECS 装 node、http-server、git"></a>ECS 装 node、http-server、git</h3><ul>
+<li>yum install -y nodejs</li>
+<li>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li>
+<li>npm install -g http-server</li>
+<li>yum install -y git</li>
+<li>mkdir blog &amp; cd $_</li>
+<li>git glone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:blueken/your_blog.git</li>
+<li>cd your_blog_folder</li>
+<li>npm install -g forever </li>
+<li>forever start http-server /home/bob/blog -p 80 <blockquote>
+<p>(nohup http-server -p 8080 &amp; </p>
+<p> setsid http-server -p 80 &amp; </p>
+<p>在 ECS 上无效，工单已提交阿里云，原因不明)</p>
+</blockquote>
+</li>
+<li><a href="http://47.99.246.178/" target="_blank" rel="noopener">http://47.99.246.178/</a></li>
+</ul>
+<h3 id="定时自动拉取-github-最新内容"><a href="#定时自动拉取-github-最新内容" class="headerlink" title="定时自动拉取 github 最新内容"></a>定时自动拉取 github 最新内容</h3><p>$ vi git.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/bash</span><br><span class="line"></span><br><span class="line">cd /home/bob/blog</span><br><span class="line">git pull &amp;&amp; echo &quot;git pull done&quot;</span><br></pre></td></tr></table></figure></p>
+<p>#chmod +x git.sh</p>
+<p>每天凌晨1点执行</p>
+<p>$ crontab -e<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 1 * * * /root/git.sh</span><br></pre></td></tr></table></figure></p>
+<p>$ crontab -l</p>
+<h3 id="可能遇到问题"><a href="#可能遇到问题" class="headerlink" title="可能遇到问题"></a>可能遇到问题</h3><ol>
+<li><p>问题： </p>
+<p> git clone 报 Permission denied (publickey).</p>
+<p> 解决办法 ：</p>
+<p> <a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">https://help.github.com/articles/error-permission-denied-publickey/</a></p>
+</li>
+<li><p>问题： </p>
+<p> http-server 运行后访问页面报 This site can’t be reached</p>
+<p> 解决办法 ：</p>
+<p> 确保 ECS 对应端口处于打开状态。以打开端口 4000 为例： </p>
+<p> <a href="https://ecs.console.aliyun.com" target="_blank" rel="noopener">https://ecs.console.aliyun.com</a></p>
+<p> 左侧列表-网络和安全-安全组-找到对应的实例-操作-配置规则-入方向-添加安全组规则-端口范围写4000，授权对象写0.0.0.0/0</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/13/Hexo博客搭建/" data-id="ckbrlnz4r000118cpxyok43m1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SSH连接阿里云ECS" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/13/SSH连接阿里云ECS/" class="article-date">
+  <time datetime="2019-01-13T03:05:08.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/SSH连接阿里云ECS/">SSH连接阿里云ECS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ol>
+<li>登录 console.aliyun.com -&gt; 云服务器ECS -&gt; 网络和安全 -&gt; 密钥对 -&gt; 创建密钥对 -&gt; 绑定密钥对 -&gt; 下载密钥对</li>
+<li>下载的私钥的同一级目录下 ssh -i ~/.ssh/first_key_pair.pem <a href="mailto:root@47.99" target="_blank" rel="noopener">root@47.99</a>.***.178</li>
+<li>为了安全不使用 root 登录<br>ssh -i ~/.ssh/bob_aliyun_rsa <a href="mailto:bob@47.99" target="_blank" rel="noopener">bob@47.99</a>.***.178</li>
+</ol>
+<h2 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤"></a>详细步骤</h2><p>更多详情可以参考下面 或 <a href="https://blog.csdn.net/m0_38128647/article/details/80204739" target="_blank" rel="noopener">点击此处</a></p>
+<ol>
+<li><p>先在阿里云网站创建一个密钥对，这里他会让你输入一个密钥的名称，随便输入一个就好，比如输入的是aliyun，那系统就会生成一个aliyun.pem文件，这个文件是私钥，把他下载下来，公钥阿里云会自动放到你买的服务器里面</p>
+</li>
+<li><p>下载完之后，在终端进入到你下载的私钥的同一级目录下，输入：ssh -i aliyun.pem root@你的服务器的公网ip地址，你的服务器的ip地址是阿里云分配的，在你购买的页面应该能找到。执行完那个命令，不出意外地话，应该就是连上了</p>
+</li>
+<li><p>ssh -i aliyun.pem root@你的服务器的公网ip地址这个命令能让你连上你的阿里云服务器地址，但是你是不是觉得很麻烦，每次都得到私钥所在的目录，执行这个命令。这里有个更好的方法：将私钥aliyun.pem文件，复制到你的home文件夹下的.ssh文件夹下，.ssh文件夹的目录是~/.ssh，然后将aliyun.pem改名为id_rsa,注意没有任何后缀。然后你就可以在任何地方执行下面这个命令了：ssh root@你的服务器的公网ip地址，这条命令不管在哪执行都会让你连上你的服务器</p>
+</li>
+<li><p>干什么都在ROOT用户下做的话，我觉得你的系统可能撑不过一个月就挂了，又要重装系统。为了安全起见，还是新建一个普通用户好，连上服务器后，执行命令：adduser xxx，即可新建一个用户，xxx代表你的用户名</p>
+</li>
+<li><p>建完普通用户后，你肯定想从本地直接ssh连接你的服务器的上普通用户了吧。首先在本地生成一对密钥对,执行ssh-keygen命令，它会默认在~/.ssh文件夹下生成一对密钥对id_rsa id_rsa.pub， id_rsa是私钥，id_rsa.pub是公钥。但是你会发现他生成的id_rsa文件和前面你改名的文件重复了，Ubuntu默认会覆盖你前边改名的文件，所以在生成的时候你要手动输入一个生成的文件名，前边的目录最好不要改，只改他提示的最后的文件名，然后一路回车就行了，假如你输入的文件名是id_rsa1，那就会在你的.ssh文件夹下生成id_rsa1 和 id_rsa1.pub两个文件</p>
+</li>
+<li><p>接下来要把你刚生成的公钥上传到你新建的用户目录下去，在你的本地的.ssh文件夹下，执行命令：scp -p $aliyun_perm_path id_rsa1.pub root@你的服务器的公网ip地址:，注意最后面多了一个冒号</p>
+</li>
+<li><p>然后root用户登录你的服务器，你刚才上传的公钥文件就在现在你在的目录下，执行ls就可看到，然后在你的普通用户的目录下新建一个.ssh文件夹，接着将这个公钥文件复制到你新建的用户的目录下的.ssh文件夹下，并更名为authorized_keys，然后退出登录服务器，回到本地.ssh文件夹下</p>
+</li>
+<li><p>现在你可以连接你的服务器的普通用户了，执行命令：ssh -i id_rsa1 xxx@你的服务器的公网ip地址，就可以登陆啦，xxx为你的普通用户名。注意：不管你用什么用户，ip地址是不会变的</p>
+</li>
+<li><p>像我上面说的你要是觉得每次都要到.ssh文件夹下输入命令，并且要指定文件名麻烦的话，把你前面改名的id_rsa改名为root或其好记的名字，然后把你的id_rsa1改名为id_rsa，这样你可以在任何地方都ssh xxx@你的服务器的公网ip地址，登陆你的服务器的普通用户了，xxx为你的普通用户名</p>
+</li>
+<li><p>这个时候如果你要登录root用户的话，那就只能到.ssh文件夹下ssh -i root root@你的服务器的公网ip地址，第一个root为密钥，是由先前的id_rsa文件更名过来的，第二个是你的root用户名。因为登录root用户的次数比较少，我觉得上面的方法还是比较靠谱的，你觉得呢</p>
+</li>
+<li><p>其实还有更懒得方法，当你把上面的都设置到之后，在你的.ssh文件夹下新建一个文件，比如叫aliyun，然后执行命令：echo “ssh xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，然后赋予执行权限：chmod 700 aliyun，然后在.bashrc文件中添加export PATH=”/home/xxx/.ssh/:$PATH”，然后另开一个终端，输入：aliyun， 你就会发现你已经连上服务器啦。但是这个方法仅适用与你的服务器上的用户的密钥在本地恰好是id_rsa，如果不是的话， 则需要修改一下前面写入文件的内容：echo “ssh -i ~/.ssh/私钥 xxx@你的服务器的公网ip地址”&gt;&gt;aliyun，这样就可以运行啦，注意：一定要赋予文件执行权限</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/13/SSH连接阿里云ECS/" data-id="ckbrlnz4u000218cp7qw34pc2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-FirstPost" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/09/FirstPost/" class="article-date">
@@ -90,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="cjxh71x6400005kcp15lbuqc7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/FirstPost/" data-id="ckbrlnz4n000018cpv80d5m2j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="cjxh71x71000m5kcpxa8tbz59" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/09/hello-world/" data-id="ckbrlnz5c000i18cpan1gitdo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +341,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/serverless-stack/" style="font-size: 10px;">serverless-stack</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
+      <a href="/tags/KeyboardEvent/" style="font-size: 10px;">KeyboardEvent</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/database/" style="font-size: 12.5px;">database</a> <a href="/tags/frontend/" style="font-size: 15px;">frontend</a> <a href="/tags/getsby/" style="font-size: 12.5px;">getsby</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/nosql/" style="font-size: 12.5px;">nosql</a> <a href="/tags/object/" style="font-size: 10px;">object</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/serverless/" style="font-size: 20px;">serverless</a> <a href="/tags/serverless-stack/" style="font-size: 12.5px;">serverless-stack</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/猪坚强/" style="font-size: 17.5px;">猪坚强</a>
     </div>
   </div>
 
@@ -182,7 +350,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li></ul>
     </div>
   </div>
 
@@ -195,6 +363,14 @@
       <ul>
         
           <li>
+            <a href="/2020/06/23/serverless-aliyun/">serverless-aliyun</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/29/severless-green-hand/">severless-green-hand</a>
+          </li>
+        
+          <li>
             <a href="/2019/02/20/regexp/">regexp</a>
           </li>
         
@@ -204,14 +380,6 @@
         
           <li>
             <a href="/2019/02/14/serverless-stack-cn/">serverless-stack-cn</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/13/deeper-in-object/">deeper-in-object</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/13/custom-event/">custom-event</a>
           </li>
         
       </ul>
@@ -226,7 +394,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 John Doe<br>
+      &copy; 2020 John Doe<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
